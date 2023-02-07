@@ -20,10 +20,10 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect('/dashboard')->withToastSuccess('Selamat Datang di Halaman Dashboard');
+            return redirect('/dashboard')->with('success', 'Selamat Datang di Halaman Dashboard');
         }
 
-        return back()->with('toast_error', 'Username dan Password Salah');
+        return back()->with('error', 'Username dan Password Salah');
     }
     
     public function logout(Request $request){
@@ -32,6 +32,6 @@ class LoginController extends Controller
  
         $request->session()->regenerateToken();
      
-        return redirect('/')->with('toast_success', 'Berhasil Logout');
+        return redirect('/')->with('success', 'Berhasil Logout');
     }
 }

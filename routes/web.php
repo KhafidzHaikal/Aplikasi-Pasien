@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KajianPasienController;
 use App\Http\Controllers\PasiensController;
 use App\Http\Controllers\UserController;
 
@@ -38,6 +39,9 @@ Route::resources([
 ]);
 Route::resources([
     'pasiens' => PasiensController::class
+]);
+Route::resources([
+    'kajian-pasiens' => KajianPasienController::class
 ]);
 
 // Route::middleware(['auth'])->group(function () {

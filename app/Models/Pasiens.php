@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use App\Models\KajianPasien;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -32,4 +33,10 @@ class Pasiens extends Model
     {
         return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d-m-Y');
     }
+
+    public function kajian_pasiens()
+    {
+        return $this->hasMany(KajianPasien::class);
+    }
+
 }

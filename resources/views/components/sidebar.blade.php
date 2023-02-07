@@ -9,18 +9,18 @@
                         class="icon icon-app-store"></i><span class="nav-text">Pelayanan Pasien</span></a>
                 <ul aria-expanded="false">
                     <li><a href={{ route('pasiens.index') }}>Pendaftaran Pasien Awal</a></li>
-                    <li><a href="#">Kajian Awal Pasien</a></li>
+                    <li><a href={{ route('kajian-pasiens.index') }}>Kajian Awal Pasien</a></li>
                     <li><a href="#">Aplikasi Pelayanan </a></li>
                     <li><a href="#">Aplikasi Penunjang </a></li>
                 </ul>
             </li>
-            @if (auth()->user()->type == 'admin')
+            {{-- @if (auth()->user()->type == 'admin') --}}
                 <li class="nav-label first">Kontrol User</li>
                 <li><a href={{ route('users.index') }} aria-expanded="false"
                         class="{{ Request::is('users') ? 'active' : '' }}"><i class="icon icon-single-04"></i><span
                             class="nav-text">User</span></a></li>
-            @elseif (auth()->user()->type == 'user')
-            @endif
+            {{-- @elseif (auth()->user()->type == 'user')
+            @endif --}}
         </ul>
     </div>
 </div>

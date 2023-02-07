@@ -7,8 +7,20 @@ $(document).ready(function () {
     $('#tablePasiens').DataTable();
 });
 
-$(document).ready(function() {
+$(document).ready(function () {
     $('#roleSelect2').select2();
+});
+
+$(document).ready(function () {
+    $('#noPasienSelect').select2({
+        placeholder: '---Pilih No.Register Pasien---',
+    });
+});
+
+$(document).ready(function () {
+    $('#noPerawatSelect').select2({
+        placeholder: '---Pilih Nama Petugas---',
+    });
 });
 
 $(function keluhan() {
@@ -35,4 +47,5 @@ togglePassword.addEventListener("click", function () {
     // toggle the icon
     this.classList.toggle("bi-eye");
 });
+
 
