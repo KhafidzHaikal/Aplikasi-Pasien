@@ -8,7 +8,6 @@
     <title>{{ $title }}</title>
     <!-- Favicon icon -->
 
-
     <link href="/css/style.css" rel="stylesheet">
 
     {{-- SweetAlert CSS --}}

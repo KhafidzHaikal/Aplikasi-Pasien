@@ -23,7 +23,7 @@
     <div class="row page-titles mx-0">
         <div class="col-sm-6 p-md-0">
             <div class="welcome-text d-flex align-items-start">
-                <a class="btn btn-primary mr-2" style="color: #fff" href={{ route('pdf-pasien') }}><i class="bi bi-printer"></i> PDF</a>
+                <a class="btn btn-primary mr-2" style="color: #fff" href={{ route('pdf-pasien', $pasien->no_rm) }}><i class="bi bi-printer"></i> PDF</a>
                 <a href={{ route('pasiens.edit', $pasien->no_rm) }} class="btn btn-warning mr-2"><i
                         class="bi bi-pencil-square"></i> Edit</a>
                 <form action={{ route('pasiens.destroy', $pasien->no_rm) }} method="POST">
@@ -54,7 +54,7 @@
                                 <p class="col-sm-3 col-form-label">Tanggal Kunjungan</p>
                                 <div class="col-sm-5">
                                     <strong class="col-sm-3 col-form-label">:
-                                        {{ $pasien->tanggal_kunjungan->format('d/m/Y') }}</strong>
+                                        {{ $pasien->tanggal_kunjungan->format('d-m-Y') }}</strong>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -83,7 +83,7 @@
                                 <p class="col-sm-3 col-form-label">Tanggal Lahir</p>
                                 <div class="col-sm-5">
                                     <strong class="col-sm-3 col-form-label">:
-                                        {{ $pasien->tanggal_lahir->format('d/m/Y') }}</strong>
+                                        {{ $pasien->tanggal_lahir->format('d-m-Y') }}</strong>
                                 </div>
                             </div>
                             <div class="form-group row">

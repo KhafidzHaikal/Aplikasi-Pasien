@@ -39,7 +39,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $pasien->no_rm }}</td>
-                                        <td>{{ $pasien->tanggal_kunjungan->format('d/m/Y') }}</td>
+                                        <td>{{ $pasien->tanggal_kunjungan->format('d-m-Y') }}</td>
                                         <td>{{ $pasien->name }}</td>
                                         <td>{{ $pasien->nik }}</td>
                                         <td>{{ $pasien->nama_kk }}</td>

@@ -37,7 +37,7 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 Route::resources([
     'users' => UserController::class,
 ]);
-Route::get('/pdf-view-pasien', [PasiensController::class, 'pdf'])->name('pdf-pasien');
+Route::get('/pdf-view-pasien/{pasien}', [PasiensController::class, 'pdf'])->name('pdf-pasien');
 
 Route::resources([
     'pasiens' => PasiensController::class

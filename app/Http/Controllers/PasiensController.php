@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pasiens;
+use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Requests\StorePasiensRequest;
 use App\Http\Requests\UpdatePasiensRequest;
-use Illuminate\Http\Request;
 
 class PasiensController extends Controller
 {
@@ -143,8 +144,10 @@ class PasiensController extends Controller
         return redirect()->route('pasiens.index')->with('success', 'Pasien Berhasil Dihapus');
     }
 
-    public function pdf()
+    public function pdf(Pasiens $pasien)
     {
-        
+        $pdf = Pdf::loadView('pasiens.print', ['pasien' => ($pasien)])->setPaper('a4');
+        // return $pdf->download('pasienPDF.pdf');
+        return $pdf->stream('pasienPDF.pdf');
     }
 }
