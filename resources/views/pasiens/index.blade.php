@@ -13,7 +13,7 @@
             </ol>
         </div>
     </div>
-    <a class="btn btn-primary col-2 mb-xl-2" style="color:#ffff" href={{ route('pasiens.create') }}>Tambah Pasien</a>
+    <a class="btn btn-primary col-2 mb-xl-4" style="color:#ffff" href={{ route('pasiens.create') }}><i class="bi bi-person-add mr-2"></i> Tambah Pasien</a>
     <div class="row">
         <div class="col-12">
             <div class="card">

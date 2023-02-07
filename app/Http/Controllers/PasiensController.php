@@ -44,7 +44,7 @@ class PasiensController extends Controller
     {
         // dd($request->all());
         $validatedData = $request->validate([
-            'no_rm' => 'required|unique:pasiens,no_rm',
+            'no_rm' => 'required|unique:pasiens,no_rm|max:8',
             'tanggal_kunjungan' => 'required',
             'nama_petugas' => 'required',
             'name' => 'required',
@@ -98,9 +98,34 @@ class PasiensController extends Controller
      * @param  \App\Models\Pasiens  $pasiens
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePasiensRequest $request, Pasiens $pasiens)
+    public function update(Request $request, Pasiens $pasien)
     {
-        //
+        $rules = [
+            'tanggal_kunjungan' => 'required',
+            'nama_petugas' => 'required',
+            'name' => 'required',
+            'tanggal_lahir' => 'required',
+            'jenis_kelamin' => 'required',
+            'nama_kk' => 'required',
+            'alamat' => 'required',
+            'pekerjaan' => 'required',
+            'pendidikan' => 'required',
+            'agama' => 'required',
+            'status_perkawinan' => 'required',
+            'pembiayaan' => 'required',
+            'status_kunjungan' => 'required',
+            'alergi_obat' => 'required',
+        ];
+        if ($request->no_rm != $pasien->no_rm ){
+            $rules['no_rm'] = 'required|unique:pasiens,no_rm|max:8';
+        }
+        else if ($request->nik != $pasien->nik){
+            $rules['nik'] = 'required|unique:pasiens,nik';
+        }
+        // dd($request->all());
+        $validatedData = $request->validate($rules);
+        Pasiens::where('no_rm', $pasien->no_rm)->update($validatedData);
+        return redirect()->route('pasiens.index')->with('success', 'Pasien berhasil diubah');
     }
 
     /**
@@ -109,8 +134,9 @@ class PasiensController extends Controller
      * @param  \App\Models\Pasiens  $pasiens
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pasiens $pasiens)
+    public function destroy(Pasiens $pasien)
     {
-        //
+        Pasiens::destroy($pasien->no_rm);
+        return redirect()->route('pasiens.index')->with('success', 'Pasien Berhasil Dihapus');
     }
 }

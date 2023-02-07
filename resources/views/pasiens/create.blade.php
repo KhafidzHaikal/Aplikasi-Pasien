@@ -31,14 +31,20 @@
                                     <label class="col-sm-3 col-form-label">No Registrasi</label>
                                     <div class="col-sm-5">
                                         <input type="text" class="form-control" name="no_rm"
-                                            value="{{ old('no_rm') }}" required maxlength="10">
+                                            @error('no_rm') is-invalid @enderror value="{{ old('no_rm') }}" required
+                                            maxlength="8">
+                                        @error('no_rm')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Tanggal Kunjungan</label>
                                     <div class="col-sm-5">
                                         <input type="date" class="form-control" name="tanggal_kunjungan"
-                                            value="{{ old('tanggal_kunjungan') }}" required >
+                                            value="{{ old('tanggal_kunjungan') }}" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -75,10 +81,12 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Jenis Kelamin</label>
                                     <div class="col-sm-5">
-                                        <select class="form-control" name="jenis_kelamin">
-                                            <option selected> --- Pilih Jenis Kelamin ---- </option>
-                                            <option value="Laki-laki">Laki-laki</option>
-                                            <option value="Perempuan">Perempuan</option>
+                                        <select class="form-control" name="jenis_kelamin" required>
+                                            <option> --- Pilih Jenis Kelamin ---- </option>
+                                            <option value="Laki-laki" @if (old('jenis_kelamin') === 'Laki-laki') 'Selected' @endif>
+                                                Laki-laki</option>
+                                            <option value="Perempuan" @if (old('jenis_kelamin') === 'Perempuan') 'Selected' @endif>
+                                                Perempuan</option>
                                         </select>
                                     </div>
                                 </div>
@@ -86,27 +94,33 @@
                                     <label class="col-sm-3 col-form-label">Nomor Induk Keluarga</label>
                                     <div class="col-sm-5">
                                         <input type="text" class="form-control" name="nik"
-                                            value="{{ old('nik') }}" required maxlength="16">
+                                            @error('nik') is-invalid @enderror value="{{ old('nik') }}" required
+                                            maxlength="16">
+                                        @error('nik')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Nama Kepala Keluarga</label>
                                     <div class="col-sm-5">
                                         <input type="text" class="form-control" name="nama_kk"
-                                        value="{{ old('nama_kk') }}" required>
+                                            value="{{ old('nama_kk') }}" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Alamat</label>
                                     <div class="col-sm-5">
-                                        <textarea class="form-control" name="alamat" value="{{ old('alamat') }}"></textarea>
+                                        <textarea class="form-control" name="alamat">{{ old('alamat') }}</textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Pekerjaan</label>
                                     <div class="col-sm-5">
                                         <select class="form-control" name="pekerjaan">
-                                            <option selected> --- Pilih Pekerjaan ---- </option>
+                                            <option> --- Pilih Pekerjaan ---- </option>
                                             <option value="Belum Bekerja">Belum Bekerja</option>
                                             <option value="Tidak Kerja">Tidak Kerja</option>
                                             <option value="Buruh Tani">Buruh Tani</option>
@@ -123,7 +137,7 @@
                                     <label class="col-sm-3 col-form-label">Pendidikan</label>
                                     <div class="col-sm-5">
                                         <select class="form-control" name="pendidikan">
-                                            <option selected> --- Pilih Pendidikan ---- </option>
+                                            <option> --- Pilih Pendidikan ---- </option>
                                             <option value="Tidak Sekolah">Tidak Sekolah</option>
                                             <option value="Tidak Tamat SD">Tidak Tamat SD</option>
                                             <option value="Sekolah Dasar">Sekolah Dasar</option>
@@ -139,7 +153,7 @@
                                     <label class="col-sm-3 col-form-label">Agama</label>
                                     <div class="col-sm-5">
                                         <select class="form-control" name="agama">
-                                            <option selected> --- Pilih Agama ---- </option>
+                                            <option> --- Pilih Agama ---- </option>
                                             <option value="Islam">Islam</option>
                                             <option value="Kristen">Kristen</option>
                                             <option value="Protestan">Protestan</option>
@@ -153,7 +167,7 @@
                                     <label class="col-sm-3 col-form-label">Status Perkawinan</label>
                                     <div class="col-sm-5">
                                         <select class="form-control" name="status_perkawinan">
-                                            <option selected> --- Pilih Status Perkawinan ---- </option>
+                                            <option> --- Pilih Status Perkawinan ---- </option>
                                             <option value="Belum Kawin">Belum Kawin</option>
                                             <option value="Kawin">Kawin</option>
                                             <option value="Janda">Janda</option>
@@ -165,7 +179,7 @@
                                     <label class="col-sm-3 col-form-label">Pembiayaan</label>
                                     <div class="col-sm-5">
                                         <select class="form-control" name="pembiayaan">
-                                            <option selected> --- Pilih Pembiayaan ---- </option>
+                                            <option> --- Pilih Pembiayaan ---- </option>
                                             <option value="Umum">Umum</option>
                                             <option value="BPJS PBI">BPJS PBI</option>
                                             <option value="BPJS NON PBI">BPJS NON PBI</option>
@@ -177,7 +191,7 @@
                                     <label class="col-sm-3 col-form-label">Status Kunjungan</label>
                                     <div class="col-sm-5">
                                         <select class="form-control" name="status_kunjungan">
-                                            <option selected> --- Pilih Status Kunjungan ---- </option>
+                                            <option> --- Pilih Status Kunjungan ---- </option>
                                             <option value="Lama">Lama</option>
                                             <option value="Baru">Baru</option>
                                         </select>
@@ -186,12 +200,13 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Alergi Obat</label>
                                     <div class="col-sm-5">
-                                        <select name="alergi_obat" id="keluhan" class="form-control" >
-                                            <option selected> ---Ada Alergi Obat---</option>
+                                        <select name="alergi_obat" id="keluhan" class="form-control">
+                                            <option> ---Ada Alergi Obat---</option>
                                             <option value="ya">Ya</option>
                                             <option value="Tidak">Tidak</option>
                                         </select>
-                                        <input style="display: none" id="amount_keluhan" class="form-control" disabled="disabled" name="alergi_obat" value="{{ old('alergi_obat') }}">
+                                        <input style="display: none" id="amount_keluhan" class="form-control"
+                                            disabled="disabled" name="alergi_obat" value="{{ old('alergi_obat') }}">
                                     </div>
                                 </div>
                             </div>

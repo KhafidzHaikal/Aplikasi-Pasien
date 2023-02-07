@@ -8,7 +8,8 @@
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                         class="icon icon-app-store"></i><span class="nav-text">Pelayanan Pasien</span></a>
                 <ul aria-expanded="false">
-                    <li><a href={{ route('pasiens.index') }}>Pendaftaran Kajian Awal Pasien</a></li>
+                    <li><a href={{ route('pasiens.index') }}>Pendaftaran Pasien Awal</a></li>
+                    <li><a href="#">Kajian Awal Pasien</a></li>
                     <li><a href="#">Aplikasi Pelayanan </a></li>
                     <li><a href="#">Aplikasi Penunjang </a></li>
                 </ul>

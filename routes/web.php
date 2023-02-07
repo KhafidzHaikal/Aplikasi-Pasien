@@ -27,9 +27,21 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/dashboard', [DashboardController::class, 'index']);
 
-Route::middleware(['auth', 'user-access:admin'])->group(function () {
-    Route::resources([
-        'users' => UserController::class,
-        'pasiens' => PasiensController::class
-    ]);
-});
+// Route::middleware(['auth', 'user-access:admin'])->group(function () {
+//     Route::resources([
+//         'users' => UserController::class,
+//     ]);
+// });
+
+Route::resources([
+    'users' => UserController::class,
+]);
+Route::resources([
+    'pasiens' => PasiensController::class
+]);
+
+// Route::middleware(['auth'])->group(function () {
+//     Route::resources([
+//         'pasiens' => PasiensController::class
+//     ]);
+// });
