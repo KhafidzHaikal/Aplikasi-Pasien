@@ -19,8 +19,12 @@ class Pasiens extends Model
     protected $casts = [
         'no_rm' => 'string',
     ];
-    
+
     protected $keyType = 'string';
+
+    protected $guarded = [
+        'created_at', 'updated_at'
+    ];
 
     protected $dates = ['tanggal_lahir', 'tanggal_kunjungan'];
 

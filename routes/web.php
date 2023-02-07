@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PasiensController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,10 +18,18 @@ use App\Http\Controllers\DashboardController;
 |
 */
 
-Route::get('/', [LoginController::class, 'index']);
-Route::post('/', [LoginController::class, 'login'])->name('login');
+Route::get('/', [LoginController::class, 'index'])->name('login');
+Route::post('/', [LoginController::class, 'login'])->name('login.store');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/register', [RegisterController::class, 'index']);
-Route::post('/register', [RegisterController::class, 'register'])->name('register');
+// Route::get('/register', [RegisterController::class, 'index']);
+// Route::post('/register', [RegisterController::class, 'register'])->name('register');
 
 Route::get('/dashboard', [DashboardController::class, 'index']);
+
+Route::middleware(['auth', 'user-access:admin'])->group(function () {
+    Route::resources([
+        'users' => UserController::class,
+        'pasiens' => PasiensController::class
+    ]);
+});

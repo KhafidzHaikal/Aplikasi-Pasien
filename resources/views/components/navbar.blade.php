@@ -38,10 +38,11 @@
                                 <i class="icon-envelope-open"></i>
                                 <span class="ml-2">Inbox </span>
                             </a>
-                            <a href="/page-login.html" class="dropdown-item">
+                            <form action={{ route('logout') }} method="POST" class="dropdown-item">
+                                @csrf
                                 <i class="icon-key"></i>
-                                <span class="ml-2">Logout </span>
-                            </a>
+                                <button class="ml-2" style="border:0; background-color:#ffff">Logout</button>
+                            </form>
                         </div>
                     </li>
                 </ul>

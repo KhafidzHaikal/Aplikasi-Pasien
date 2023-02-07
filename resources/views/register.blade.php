@@ -37,7 +37,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label><strong>Konfirmasi Password</strong></label>
-                                            <input type="password" class="form-control" @error('password') is-invalid @enderror" name="password_confirmation" required autocomplete="current-password">
+                                            <input type="password" class="form-control" @error('password') is-invalid @enderror name="password_confirmation" required autocomplete="current-password">
                                         </div>
                                         <div class="text-center mt-4">
                                             <button type="submit" class="btn btn-primary btn-block">Register</button>

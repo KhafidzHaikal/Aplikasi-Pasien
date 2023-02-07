@@ -12,17 +12,20 @@ class RegisterController extends Controller
     {
         return view('register');
     }
+    
 
     public function register(Request $request) 
     {
         $validatedData = $request->validate([
             'username' => 'required',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6|max:20|confirmed'
+            'password' => 'required|min:6|max:20|confirmed',
+            // 'roles' => 'required'
         ]);
 
         $validatedData['password'] = Hash::make($validatedData['password']);
         User::create($validatedData);
+        // $user->assignRole($request->input('roles'));
 
         return redirect('/')->withToastSuccess('Registrasi Berhasil');
 

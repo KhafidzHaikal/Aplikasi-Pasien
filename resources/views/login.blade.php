@@ -21,7 +21,7 @@
                             <div class="col-xl-12">
                                 <div class="auth-form">
                                     <h4 class="text-center mb-4">Login</h4>
-                                    <form action={{ route('login') }} method="POST">
+                                    <form action={{ route('login.store') }} method="POST">
                                         @csrf
                                         <div class="form-group">
                                             <label><strong>Username</strong></label>

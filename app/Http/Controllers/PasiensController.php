@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pasiens;
 use App\Http\Requests\StorePasiensRequest;
 use App\Http\Requests\UpdatePasiensRequest;
+use Illuminate\Http\Request;
 
 class PasiensController extends Controller
 {
@@ -15,7 +16,10 @@ class PasiensController extends Controller
      */
     public function index()
     {
-        //
+        return view('pasiens.index', [
+            'title' => 'Pasiens',
+            'pasiens' => Pasiens::all()
+        ]);
     }
 
     /**
@@ -25,7 +29,9 @@ class PasiensController extends Controller
      */
     public function create()
     {
-        //
+        return view('pasiens.create', [
+            'title' => 'Tambah Pasien'
+        ]);
     }
 
     /**
@@ -34,9 +40,30 @@ class PasiensController extends Controller
      * @param  \App\Http\Requests\StorePasiensRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePasiensRequest $request)
+    public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        $validatedData = $request->validate([
+            'no_rm' => 'required|unique:pasiens,no_rm',
+            'tanggal_kunjungan' => 'required',
+            'nama_petugas' => 'required',
+            'name' => 'required',
+            'tanggal_lahir' => 'required',
+            'jenis_kelamin' => 'required',
+            'nik' => 'required|unique:pasiens,nik',
+            'nama_kk' => 'required',
+            'alamat' => 'required',
+            'pekerjaan' => 'required',
+            'pendidikan' => 'required',
+            'agama' => 'required',
+            'status_perkawinan' => 'required',
+            'pembiayaan' => 'required',
+            'status_kunjungan' => 'required',
+            'alergi_obat' => 'required',
+        ]);
+
+        Pasiens::create($validatedData);
+        return redirect()->route('pasiens.index')->with('success', 'Pasien Berhasil Ditambakan');
     }
 
     /**
@@ -56,9 +83,12 @@ class PasiensController extends Controller
      * @param  \App\Models\Pasiens  $pasiens
      * @return \Illuminate\Http\Response
      */
-    public function edit(Pasiens $pasiens)
+    public function edit(Pasiens $pasien)
     {
-        //
+        return view('pasiens.edit', [
+            'title' => 'Edit Pasien',
+            'pasien' => $pasien
+        ]);
     }
 
     /**
