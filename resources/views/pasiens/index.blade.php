@@ -45,6 +45,7 @@
                                         <td>{{ $pasien->nama_kk }}</td>
                                         <td class="d-flex">
                                             <a href={{ route('pasiens.edit', $pasien->no_rm ) }} class="btn btn-warning mr-2"><i class="bi bi-pencil-square"></i></a>
+                                            <a href={{ route('pasiens.show', $pasien->no_rm ) }} class="btn btn-info mr-2"><i class="bi bi-info-circle"></i></a>
                                             <form action={{ route('pasiens.destroy', $pasien->no_rm) }} method="POST">
                                                 @method('delete')
                                                 @csrf

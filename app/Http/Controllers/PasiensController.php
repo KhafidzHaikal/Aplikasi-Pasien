@@ -72,9 +72,12 @@ class PasiensController extends Controller
      * @param  \App\Models\Pasiens  $pasiens
      * @return \Illuminate\Http\Response
      */
-    public function show(Pasiens $pasiens)
+    public function show(Pasiens $pasien)
     {
-        //
+        return view('pasiens.show', [
+            'title' => 'Detail Pasien',
+            'pasien' => $pasien
+        ]);
     }
 
     /**
@@ -138,5 +141,10 @@ class PasiensController extends Controller
     {
         Pasiens::destroy($pasien->no_rm);
         return redirect()->route('pasiens.index')->with('success', 'Pasien Berhasil Dihapus');
+    }
+
+    public function pdf()
+    {
+        
     }
 }
