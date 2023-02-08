@@ -26,7 +26,7 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Tanggal Kunjungan</th>
+                                    <th>Tanggal Pemeriksaan</th>
                                     <th>Nama Petugas</th>
                                     <th>No Registrasi</th>
                                     <th>Nama</th>
@@ -45,6 +45,7 @@
                                         <td>{{ $kajian_pasien->pasiens->nik }}</td>
                                         <td class="d-flex">
                                             <a href={{ route('kajian-pasiens.edit', $kajian_pasien->id ) }} class="btn btn-warning mr-2"><i class="bi bi-pencil-square"></i></a>
+                                            <a href={{ route('kajian-pasiens.show', $kajian_pasien->id ) }} class="btn btn-info mr-2"><i class="bi bi-info-circle"></i></a>
                                             <form action={{ route('kajian-pasiens.destroy', $kajian_pasien->id) }} method="POST">
                                                 @method('delete')
                                                 @csrf

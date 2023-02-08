@@ -45,6 +45,7 @@ Route::resources([
 Route::resources([
     'kajian-pasiens' => KajianPasienController::class
 ]);
+Route::get('/pdf-view-kajian-pasien/{kajian_pasiens}', [KajianPasienController::class, 'pdf'])->name('pdf-kajian-pasien');
 
 // Route::middleware(['auth'])->group(function () {
 //     Route::resources([

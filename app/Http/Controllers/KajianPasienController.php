@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\KajianPasien;
-use App\Http\Requests\UpdateKajianPasienRequest;
-use App\Models\Pasiens;
 use App\Models\User;
+use App\Models\Pasiens;
+use App\Models\KajianPasien;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Http\Requests\UpdateKajianPasienRequest;
 
 class KajianPasienController extends Controller
 {
@@ -71,7 +72,10 @@ class KajianPasienController extends Controller
      */
     public function show(KajianPasien $kajianPasien)
     {
-        //
+        return view('kajian_pasiens.show', [
+            'title' => 'Detail Kajian Pasien',
+            'kajian_pasiens' => $kajianPasien
+        ]);
     }
 
     /**
@@ -127,5 +131,12 @@ class KajianPasienController extends Controller
     {
         KajianPasien::destroy($kajianPasien->id);
         return redirect()->route('kajian-pasiens.index')->with('success', 'Kajian Pasien Berhasil Dihapus');
+    }
+
+    public function pdf(KajianPasien $kajianPasien)
+    {
+        $pdf = Pdf::loadView('kajian_pasiens.print', ['kajian_pasiens' => ($kajianPasien)])->setPaper('a4');
+        // return $pdf->download('pasienPDF.pdf');
+        return $pdf->stream('kajian-pasienPDF.pdf');
     }
 }
