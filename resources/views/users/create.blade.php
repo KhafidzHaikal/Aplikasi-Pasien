@@ -27,6 +27,12 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Nama</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" name="name" value="{{ old('name') }}" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Email</label>
                             <div class="col-sm-3">
                                 <input type="email" class="form-control" name="email" value="{{ old('email') }}" required>
@@ -37,9 +43,14 @@
                             <div class="col-sm-3">
                                 <select class="form-control" name="type" id="roleSelect2">
                                     <option selected> --- Pilih Role ---- </option>
-                                    <option value="0">User</option>
-                                    <option value="1">Admin</option>
-                                    <option value="2">Poli Gigi</option>
+                                    <option value="0">Admin</option>
+                                    <option value="1">BP Umum</option>
+                                    <option value="2">BP Gigi</option>
+                                    <option value="3">BP Lansia</option>
+                                    <option value="4">KIA</option>
+                                    <option value="5">MTBS</option>
+                                    <option value="6">Konseling</option>
+                                    <option value="7">laboratorium</option>
                                 </select>
                             </div>
                         </div>

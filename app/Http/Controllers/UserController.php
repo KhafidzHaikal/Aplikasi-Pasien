@@ -44,6 +44,7 @@ class UserController extends Controller
         // dd($request->all());
         $validatedData = $request->validate([
             'username' => 'required',
+            'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'type' => 'required',
             'password' => 'required|min:6|max:20|confirmed',
@@ -90,6 +91,7 @@ class UserController extends Controller
     {
         $rules = [
             'username' => 'required',
+            'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'type' => 'required',
         ];

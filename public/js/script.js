@@ -23,6 +23,13 @@ $(document).ready(function () {
     });
 });
 
+$(document).ready(function () {
+    $('#noKajianPasienSelect').select2({
+        placeholder: '---Pilih No.Register Pasien---',
+    });
+});
+
+
 $(function keluhan() {
     $("#keluhan").change(function () {
         if ($(this).val() == "ya") {

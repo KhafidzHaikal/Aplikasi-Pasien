@@ -62,10 +62,10 @@
                                             <option selected> --- Pilih No.Register Perawat ---- </option>
                                             @foreach ($perawats as $perawat)
                                                 @if (old('users_id', $kajian_pasien->users->id) === $perawat->id)
-                                                    <option value="{{ $perawat->id }}" selected>{{ $perawat->username }}
+                                                    <option value="{{ $perawat->id }}" selected>{{ $perawat->name }}
                                                     </option>
                                                 @else
-                                                    <option value="{{ $perawat->id }}">{{ $perawat->username }}
+                                                    <option value="{{ $perawat->id }}">{{ $perawat->name }}
                                                     </option>
                                                 @endif
                                             @endforeach

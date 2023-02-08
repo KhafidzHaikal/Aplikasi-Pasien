@@ -26,6 +26,7 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
+                                    <th>Nama</th>
                                     <th>Username</th>
                                     <th>Email</th>
                                     <th>Role</th>
@@ -36,6 +37,7 @@
                                 @foreach ($users as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item->name }}</td>
                                         <td>{{ $item->username }}</td>
                                         <td>{{ $item->email }}</td>
                                         <td>{{ $item->type }}</td>

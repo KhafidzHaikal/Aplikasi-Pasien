@@ -6,6 +6,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KajianPasienController;
 use App\Http\Controllers\PasiensController;
+use App\Http\Controllers\PelayananPasienController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -43,7 +44,8 @@ Route::resources([
     'pasiens' => PasiensController::class
 ]);
 Route::resources([
-    'kajian-pasiens' => KajianPasienController::class
+    'kajian-pasiens' => KajianPasienController::class,
+    'pelayanan-pasiens' => PelayananPasienController::class
 ]);
 Route::get('/pdf-view-kajian-pasien/{kajian_pasiens}', [KajianPasienController::class, 'pdf'])->name('pdf-kajian-pasien');
 

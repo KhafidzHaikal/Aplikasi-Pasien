@@ -65,7 +65,7 @@
                                 <p class="col-sm-5 col-form-label">Nama Petugas</p>
                                 <div class="col-sm-5">
                                     <strong class="col-sm-3 col-form-label">:
-                                        {{ $kajian_pasiens->users->username }}</strong>
+                                        {{ $kajian_pasiens->users->name }}</strong>
                                 </div>
                             </div>
                         </div>

@@ -21,6 +21,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'username',
+        'name',
         'email',
         'password',
         'type'
@@ -47,7 +48,7 @@ class User extends Authenticatable
     protected function type(): Attribute
     {
         return new Attribute(
-            get: fn ($value) => ["user", "admin", "poli-gigi"][$value],
+            get: fn ($value) => ["admin", "bp-umum", "bp-gigi", "bp-lansia", "kia", "mtbs", "konseling", "laboratorium"][$value],
         );
     }
 

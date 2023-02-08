@@ -4,13 +4,13 @@
     <div class="row page-titles mx-0">
         <div class="col-sm-6 p-md-0">
             <div class="welcome-text">
-                <h4>Tambah Kajian Pasien</h4>
+                <h4>Tambah Pelayanan Pasien</h4>
             </div>
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href={{ route('kajian-pasiens.index') }}>Kajian Pasien</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Tambah Kajian Pasien</a></li>
+                <li class="breadcrumb-item"><a href={{ route('pelayanan-pasiens.index') }}>Pelayanan Pasien</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Tambah Pelayanan Pasien</a></li>
             </ol>
         </div>
     </div>
@@ -19,7 +19,7 @@
             <div class="card">
                 <div class="card-body">
                     {{-- Start Form --}}
-                    <form action={{ route('kajian-pasiens.store') }} method="POST">
+                    <form action={{ route('pelayanan-pasiens.store') }} method="POST">
                         @csrf
                         {{-- Start Administrasi Form --}}
                         <div class="card-header">
@@ -27,25 +27,26 @@
                         </div>
                         <div class="card-body">
                             <div class="basic-form">
-                                <div class="form-group row">
+                                @livewire('search-pasien')
+                                {{-- <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">No Registrasi Pasien</label>
                                     <div class="col-sm-5">
-                                        <select class="form-control" name="pasiens_no_rm" id="noPasienSelect">
+                                        <select class="form-control" name="kajian_pasiens_id" id="noKajianPasienSelect" >
                                             <option selected> --- Pilih No.Register Pasien ---- </option>
-                                            @foreach ($pasiens as $pasien)
-                                                @if (old('pasiens_no_rm') === $pasien->no_rm)
-                                                    <option value="{{ $pasien->no_rm }}" selected>{{ $pasien->no_rm }} -
-                                                        {{ $pasien->name }}
+                                            @foreach ($kajian_pasiens as $kajian_pasien)
+                                                @if (old('kajian_pasiens_id') === $kajian_pasien->id)
+                                                    <option value="{{ $kajian_pasien->id }}" selected>{{ $kajian_pasien->pasiens->no_rm }} -
+                                                        {{ $kajian_pasien->pasiens->name }}
                                                     </option>
                                                 @else
-                                                    <option value="{{ $pasien->no_rm }}">{{ $pasien->no_rm }} -
-                                                        {{ $pasien->name }}
+                                                    <option value="{{ $kajian_pasien->id }}">{{ $kajian_pasien->pasiens->no_rm }} -
+                                                        {{ $kajian_pasien->pasiens->name }}
                                                     </option>
                                                 @endif
                                             @endforeach
                                         </select>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Tanggal Pemeriksaan</label>
                                     <div class="col-sm-5">
@@ -54,10 +55,10 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Nama Petugas</label>
+                                    <label class="col-sm-3 col-form-label">Nama Pemeriksa / Dokter</label>
                                     <div class="col-sm-5">
                                         <select class="form-control" name="users_id" id="noPerawatSelect">
-                                            <option selected> --- Pilih No.Register Perawat ---- </option>
+                                            <option selected> --- Pilih Nama Pemeriksa / Dokter --- </option>
                                             @foreach ($perawats as $perawat)
                                                 @if (old('users_id') === $perawat->id)
                                                     <option value="{{ $perawat->id }}">{{ $perawat->name }}
@@ -76,97 +77,96 @@
                         <hr>
                         {{-- Start Identitas Pasien Form --}}
                         <div class="card-header">
-                            <h3 class="card-title">Hasil Pemeriksaan Pasien</h3>
+                            <h3 class="card-title">Anamnesa</h3>
                         </div>
                         <div class="card-body">
                             <div class="basic-form">
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Tensi</label>
+                                    <label class="col-sm-3 col-form-label">Keluhan Utama</label>
                                     <div class="col-sm-5">
                                         <div class="input-group mb-3">
-                                            <input type="text" class="form-control" name="tensi"
-                                                value="{{ old('tensi') }}" required maxlength="7" maxlength="7">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">mm/Hg</span>
-                                            </div>
+                                            <textarea class="form-control" name="keluhan_utama">{{ old('keluhan_utama') }}</textarea>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Nadi</label>
+                                    <label class="col-sm-3 col-form-label">RPS</label>
                                     <div class="col-sm-5">
                                         <div class="input-group mb-3">
-                                            <input type="text" class="form-control" name="nadi"
-                                                value="{{ old('nadi') }}" required maxlength="7">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">x/menit</span>
-                                            </div>
+                                            <input type="text" class="form-control" name="rps"
+                                                value="{{ old('rps') }}" required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Resp</label>
+                                    <label class="col-sm-3 col-form-label">RPO</label>
                                     <div class="col-sm-5">
                                         <div class="input-group mb-3">
-                                            <input type="text" class="form-control" name="resp"
-                                                value="{{ old('resp') }}" required maxlength="7">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">x/menit</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Suhu</label>
-                                    <div class="col-sm-5">
-                                        <div class="input-group mb-3">
-                                            <input type="text" class="form-control" name="suhu"
-                                                value="{{ old('suhu') }}" required maxlength="7">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><sup>o</sup>C</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Berat Badan</label>
-                                    <div class="col-sm-5">
-                                        <div class="input-group mb-3">
-                                            <input type="text" class="form-control" name="bb"
-                                                value="{{ old('bb') }}" required maxlength="7">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">Kg</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Tinggi Badan</label>
-                                    <div class="col-sm-5">
-                                        <div class="input-group mb-3">
-                                            <input type="text" class="form-control" name="tb"
-                                                value="{{ old('tb') }}" required maxlength="7">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">cm</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Indeks Massa Tubuh (IMT)</label>
-                                    <div class="col-sm-5">
-                                        <div class="input-group mb-3">
-                                            <input type="text" class="form-control" name="imt"
-                                                value="{{ old('imt') }}" required maxlength="7">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">Kg/M<sup>2</sup></span>
-                                            </div>
+                                            <input type="text" class="form-control" name="rpo"
+                                                value="{{ old('rpo') }}" required>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         {{-- End Identitas Pasien Form --}}
+                        <div class="card-header">
+                            <h3 class="card-title">Diagnosa</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="basic-form">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Tanda Vital</label>
+                                    <div class="col-sm-5">
+                                        <div class="input-group mb-3">
+                                            <textarea class="form-control" name="tanda_vital">{{ old('tanda_vital') }}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Diagnosa</label>
+                                    <div class="col-sm-5">
+                                        <div class="input-group mb-3">
+                                            <textarea class="form-control" name="diagnosa">{{ old('diagnosa') }}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Penatalaksanaan</label>
+                                    <div class="col-sm-5">
+                                        <div class="input-group mb-3">
+                                            <textarea class="form-control" name="penatalaksanaan">{{ old('penatalaksanaan') }}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Tindakan / Rujukan</label>
+                                    <div class="col-sm-5">
+                                        <div class="input-group mb-3">
+                                            <textarea class="form-control" name="tindakan">{{ old('tindakan') }}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Edukasi</label>
+                                    <div class="col-sm-5">
+                                        <div class="input-group mb-3">
+                                            <textarea class="form-control" name="edukasi">{{ old('edukasi') }}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Jenis Kasus Diagnosa</label>
+                                    <div class="col-sm-5">
+                                        <select class="form-control" name="jenis_kasus">
+                                            <option> --- Pilih Jenis Diagnosa --- </option>
+                                            <option value="Lama">Lama</option>
+                                            <option value="Baru">Baru</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="card-body">
                             <div class="basic-form">
                                 <button type="submit" class="btn btn-primary">Simpan</button>

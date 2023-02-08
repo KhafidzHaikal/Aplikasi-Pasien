@@ -27,12 +27,14 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.0/js/toastr.js"></script>
 
+    {{-- Livewire Style --}}
+    @livewireStyles
 
 </head>
 
 <body>
 
-    @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
+    @include('sweetalert::alert', ['cdn' => 'https://cdn.jsdelivr.net/npm/sweetalert2@9'])
 
     <!--*******************
         Preloader start
@@ -112,16 +114,19 @@
 
     {{-- Toast --}}
     <script>
-         $(document).ready(function() {
+        $(document).ready(function() {
             toastr.options.timeOut = 10000;
             @if (Session::has('error'))
                 toastr.error('{{ Session::get('error') }}');
-            @elseif(Session::has('success'))
+            @elseif (Session::has('success'))
                 toastr.success('{{ Session::get('success') }}');
             @endif
         });
     </script>
 
+    {{-- Livewire Script --}}
+    @livewireScripts
+    
 </body>
 
 </html>
