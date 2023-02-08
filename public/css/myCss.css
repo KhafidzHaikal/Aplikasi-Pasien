@@ -1,0 +1,20 @@
+.grid-data-penunjang {
+    display: grid;
+    grid-template-columns: repeat(6,1fr);
+    gap: 0.1rem;
+}
+
+.data-pengkajian-pasien {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.1rem;
+}
+
+@media screen and (min-width: 1000px) {
+    .hasil-pemeriksaan-pasien {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.1rem;
+    }
+}
+

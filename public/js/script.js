@@ -56,3 +56,7 @@ togglePassword.addEventListener("click", function () {
 });
 
 
+$(document).ready(function () {
+    $('.ckeditor').ckeditor();
+});
+

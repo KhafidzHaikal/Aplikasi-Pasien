@@ -20,6 +20,7 @@ class PelayananPasienController extends Controller
     {
         return view('pelayanan_pasiens.index', [
             'title' => 'Aplikasi Pelayanan Pasien',
+            'pelayanan_pasiens' => PelayananPasien::all(),
         ]);
     }
 
@@ -74,7 +75,8 @@ class PelayananPasienController extends Controller
     public function show(PelayananPasien $pelayananPasien)
     {
         return view('pelayanan_pasiens.show', [
-            'title' => 'Detail Pelayanan Pasien'
+            'title' => 'Detail Pelayanan Pasien',
+            'pelayanan_pasiens' => $pelayananPasien
         ]);
     }
 
@@ -109,6 +111,7 @@ class PelayananPasienController extends Controller
      */
     public function destroy(PelayananPasien $pelayananPasien)
     {
-        //
+        PelayananPasien::destroy($pelayananPasien->id);
+        return redirect()->route('pelayanan-pasiens.index')->with('success', 'Pasien berhasil dihapus');
     }
 }

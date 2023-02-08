@@ -28,25 +28,6 @@
                         <div class="card-body">
                             <div class="basic-form">
                                 @livewire('search-pasien')
-                                {{-- <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">No Registrasi Pasien</label>
-                                    <div class="col-sm-5">
-                                        <select class="form-control" name="kajian_pasiens_id" id="noKajianPasienSelect" >
-                                            <option selected> --- Pilih No.Register Pasien ---- </option>
-                                            @foreach ($kajian_pasiens as $kajian_pasien)
-                                                @if (old('kajian_pasiens_id') === $kajian_pasien->id)
-                                                    <option value="{{ $kajian_pasien->id }}" selected>{{ $kajian_pasien->pasiens->no_rm }} -
-                                                        {{ $kajian_pasien->pasiens->name }}
-                                                    </option>
-                                                @else
-                                                    <option value="{{ $kajian_pasien->id }}">{{ $kajian_pasien->pasiens->no_rm }} -
-                                                        {{ $kajian_pasien->pasiens->name }}
-                                                    </option>
-                                                @endif
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div> --}}
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Tanggal Pemeriksaan</label>
                                     <div class="col-sm-5">

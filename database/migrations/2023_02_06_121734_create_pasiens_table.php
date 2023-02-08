@@ -30,7 +30,6 @@ return new class extends Migration
             $table->string('pembiayaan', 50);
             $table->string('status_kunjungan', 30);
             $table->string('alergi_obat');
-            
             $table->timestamps();
         });
     }

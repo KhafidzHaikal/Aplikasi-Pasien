@@ -26,4 +26,14 @@ class PelayananPasien extends Model
     {
         return $this->belongsTo(KajianPasien::class);
     }
+
+    public function users()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function pasiens()
+    {
+        return $this->belongsTo(Pasiens::class);
+    }
 }

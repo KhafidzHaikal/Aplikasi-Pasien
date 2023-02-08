@@ -46,21 +46,70 @@ class KajianPasienController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = [
+        $request->validate([
             'pasiens_no_rm' => 'required',
             'tanggal_pemeriksaan' => 'required',
             'users_id' => 'required',
             'tensi' => 'required',
-            'nadi' => 'required',
-            'resp' => 'required',
-            'suhu' => 'required',
-            'bb' => 'required',
-            'tb' => 'required',
+            'nadi' => 'required|integer',
+            'resp' => 'required|integer',
+            'suhu' => 'required|integer',
+            'bb' => 'required|integer',
+            'tb' => 'required|integer',
             'imt' => 'required',
-        ];
-
-        $validatedData = $request->validate($rules);
-        KajianPasien::create($validatedData);
+            'sirkulasi_cairan' => 'required',
+            'perkemihan' => 'required',
+            'pernapasan' => 'required',
+            'pencernaan' => 'required',
+            'muskuloskeletal' => 'required',
+            'fungsi_penglihatan' => 'required',
+            'fungsi_pendengaran' => 'required',
+            'fungsi_perasa' => 'required',
+            'fungsi_perabaan' => 'required',
+            'fungsi_penciuman' => 'required',
+            'kulit' => 'required',
+            'tidur_istirahat' => 'required',
+            'mental' => 'required',
+            'komunikasi' => 'required',
+            'kebersihan_diri' => 'required',
+            'perawatan_diri' => 'required',
+            'labolatorium' => 'required',
+            'radiologi' => 'required',
+            'ekg' => 'required',
+            'usg' => 'required',
+        ]);
+        $kajian_pasien = new KajianPasien();
+        $kajian_pasien->pasiens_no_rm = $request->pasiens_no_rm;
+        $kajian_pasien->tanggal_pemeriksaan = $request->tanggal_pemeriksaan;
+        $kajian_pasien->users_id = $request->users_id;
+        $kajian_pasien->tensi = $request->tensi;
+        $kajian_pasien->nadi = $request->nadi;
+        $kajian_pasien->resp = $request->resp;
+        $kajian_pasien->suhu = $request->suhu;
+        $kajian_pasien->bb = $request->bb;
+        $kajian_pasien->tb = $request->tb;
+        $kajian_pasien->imt = $request->imt;
+        $kajian_pasien->sirkulasi_cairan = json_encode($request->sirkulasi_cairan);
+        $kajian_pasien->perkemihan = json_encode($request->perkemihan);
+        $kajian_pasien->pernapasan = json_encode($request->pernapasan);
+        $kajian_pasien->pencernaan = json_encode($request->pencernaan);
+        $kajian_pasien->muskuloskeletal = json_encode($request->muskuloskeletal);
+        $kajian_pasien->fungsi_penglihatan = json_encode($request->fungsi_penglihatan);
+        $kajian_pasien->fungsi_pendengaran = json_encode($request->fungsi_pendengaran);
+        $kajian_pasien->fungsi_perasa = json_encode($request->fungsi_perasa);
+        $kajian_pasien->fungsi_perabaan = json_encode($request->fungsi_perabaan);
+        $kajian_pasien->fungsi_penciuman = json_encode($request->fungsi_penciuman);
+        $kajian_pasien->kulit = json_encode($request->kulit);
+        $kajian_pasien->tidur_istirahat = json_encode($request->tidur_istirahat);
+        $kajian_pasien->mental = json_encode($request->mental);
+        $kajian_pasien->komunikasi = json_encode($request->komunikasi);
+        $kajian_pasien->kebersihan_diri = json_encode($request->kebersihan_diri);
+        $kajian_pasien->perawatan_diri = json_encode($request->perawatan_diri);
+        $kajian_pasien->labolatorium = $request->labolatorium;
+        $kajian_pasien->radiologi = $request->radiologi;
+        $kajian_pasien->ekg = $request->ekg;
+        $kajian_pasien->usg = $request->usg;
+        $kajian_pasien->save();
         return redirect()->route('kajian-pasiens.index')->with('success', 'Kajian Pasien Berhasil Ditambakan');
     }
 

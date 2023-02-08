@@ -25,8 +25,8 @@
     <div class="row page-titles mx-0">
         <div class="col-sm-6 p-md-0">
             <div class="welcome-text d-flex align-items-start">
-                <a class="btn btn-primary mr-2" style="color: #fff" href={{ route('pdf-kajian-pasien', $kajian_pasiens->id) }}><i
-                        class="bi bi-printer"></i> PDF</a>
+                <a class="btn btn-primary mr-2" style="color: #fff"
+                    href={{ route('pdf-kajian-pasien', $kajian_pasiens->id) }}><i class="bi bi-printer"></i> PDF</a>
                 <a href={{ route('kajian-pasiens.edit', $kajian_pasiens->id) }} class="btn btn-warning mr-2"><i
                         class="bi bi-pencil-square"></i> Edit</a>
                 <form action={{ route('kajian-pasiens.destroy', $kajian_pasiens->id) }} method="POST">
@@ -236,5 +236,271 @@
             </div>
         </div>
         {{-- ---------- Row Right ------------- --}}
+    </div>
+    <div class="card">
+        <div class="card-body">
+            {{-- Start Data Penunjang Form --}}
+            <div class="card-header">
+                <h3 class="card-title">Hasil Data Penunjang Pasien</h3>
+            </div>
+            <div class="card-body">
+                <div class="basic-form">
+                    <div class="form-group row">
+                        <p class="col-sm-3 col-form-label">Sirkulasi / Cairan</p>
+                        <div class="col-sm-5" style="margin-top:0.5em">
+                            <strong class="col-sm-3 col-form-label">:
+                                @php
+                                    $sirkulasi_cairan = json_decode($kajian_pasiens->sirkulasi_cairan);
+                                @endphp
+                                @foreach ($sirkulasi_cairan as $item)
+                                    {{ $item }},
+                                @endforeach
+                            </strong>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <p class="col-sm-3 col-form-label">Perkemihan</p>
+                        <div class="col-sm-5" style="margin-top:0.5em">
+                            <strong class="col-sm-3 col-form-label">:
+                                @php
+                                    $perkemihan = json_decode($kajian_pasiens->perkemihan);
+                                @endphp
+                                @foreach ($perkemihan as $item)
+                                    {{ $item }},
+                                @endforeach
+                            </strong>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <p class="col-sm-3 col-form-label">Pernapasan</p>
+                        <div class="col-sm-5" style="margin-top:0.5em">
+                            <strong class="col-sm-3 col-form-label">:
+                                @php
+                                    $pernapasan = json_decode($kajian_pasiens->pernapasan);
+                                @endphp
+                                @foreach ($pernapasan as $item)
+                                    {{ $item }},
+                                @endforeach
+                            </strong>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <p class="col-sm-3 col-form-label">Pencernaan</p>
+                        <div class="col-sm-5" style="margin-top:0.5em">
+                            <strong class="col-sm-3 col-form-label">:
+                                @php
+                                    $pencernaan = json_decode($kajian_pasiens->pencernaan);
+                                @endphp
+                                @foreach ($pencernaan as $item)
+                                    {{ $item }},
+                                @endforeach
+                            </strong>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <p class="col-sm-3 col-form-label">Muskuloskeletal</p>
+                        <div class="col-sm-5" style="margin-top:0.5em">
+                            <strong class="col-sm-3 col-form-label">:
+                                @php
+                                    $muskuloskeletal = json_decode($kajian_pasiens->muskuloskeletal);
+                                @endphp
+                                @foreach ($muskuloskeletal as $item)
+                                    {{ $item }},
+                                @endforeach
+                            </strong>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <p class="col-3 col-form-label">Neusensori</p>
+                        <div class="col-7" style="margin-top:0.5em; margin-left:1em">
+                            <strong>: Fungsi Penglihatan</strong> :
+                            <br>
+                            <p class="col-sm-12 col-form-label">
+                                @php
+                                    $fungsi_penglihatan = json_decode($kajian_pasiens->fungsi_penglihatan);
+                                @endphp
+                                @foreach ($fungsi_penglihatan as $item)
+                                    {{ $item }},
+                                @endforeach
+                            </p>
+                            <br>
+                            <strong>: Fungsi Pendengaran</strong> :
+                            <br>
+                            <p class="col-sm-12 col-form-label">
+                                @php
+                                    $fungsi_pendengaran = json_decode($kajian_pasiens->fungsi_pendengaran);
+                                @endphp
+                                @foreach ($fungsi_pendengaran as $item)
+                                    {{ $item }},
+                                @endforeach
+                            </p>
+                            <br>
+                            <strong>: Fungsi Perasa</strong> :
+                            <br>
+                            <p class="col-sm-12 col-form-label">
+                                @php
+                                    $fungsi_perasa = json_decode($kajian_pasiens->fungsi_perasa);
+                                @endphp
+                                @foreach ($fungsi_perasa as $item)
+                                    {{ $item }},
+                                @endforeach
+                            </p>
+                            <br>
+                            <strong>: Fungsi Perabaan</strong> :
+                            <br>
+                            <p class="col-sm-12 col-form-label">
+                                @php
+                                    $fungsi_perabaan = json_decode($kajian_pasiens->fungsi_perabaan);
+                                @endphp
+                                @foreach ($fungsi_perabaan as $item)
+                                    {{ $item }},
+                                @endforeach
+                            </p>
+                            <br>
+                            <strong>: Fungsi Penciuman</strong> :
+                            <br>
+                            <p class="col-sm-12 col-form-label">
+                                @php
+                                    $fungsi_penciuman = json_decode($kajian_pasiens->fungsi_penciuman);
+                                @endphp
+                                @foreach ($fungsi_penciuman as $item)
+                                    {{ $item }},
+                                @endforeach
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <p class="col-sm-3 col-form-label">Kulit</p>
+                        <div class="col-sm-5" style="margin-top:0.5em">
+                            <strong class="col-sm-3 col-form-label">:
+                                @php
+                                    $kulit = json_decode($kajian_pasiens->kulit);
+                                @endphp
+                                @foreach ($kulit as $item)
+                                    {{ $item }},
+                                @endforeach
+                            </strong>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <p class="col-sm-3 col-form-label">Tidur dan Istirahat</p>
+                        <div class="col-sm-5" style="margin-top:0.5em">
+                            <strong class="col-sm-3 col-form-label">:
+                                @php
+                                    $tidur_istirahat = json_decode($kajian_pasiens->tidur_istirahat);
+                                @endphp
+                                @foreach ($tidur_istirahat as $item)
+                                    {{ $item }},
+                                @endforeach
+                            </strong>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <p class="col-sm-3 col-form-label">Mental</p>
+                        <div class="col-sm-5" style="margin-top:0.5em">
+                            <strong class="col-sm-3 col-form-label">:
+                                @php
+                                    $mental = json_decode($kajian_pasiens->mental);
+                                @endphp
+                                @foreach ($mental as $item)
+                                    {{ $item }},
+                                @endforeach
+                            </strong>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <p class="col-sm-3 col-form-label">Komunikasi dan Budaya</p>
+                        <div class="col-sm-5" style="margin-top:0.5em">
+                            <strong class="col-sm-3 col-form-label">:
+                                @php
+                                    $komunikasi = json_decode($kajian_pasiens->komunikasi);
+                                @endphp
+                                @foreach ($komunikasi as $item)
+                                    {{ $item }},
+                                @endforeach
+                            </strong>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <p class="col-sm-3 col-form-label">Perawatan Diri Sehari-hari</p>
+                        <div class="col-sm-5" style="margin-top:0.5em">
+                            <strong class="col-sm-3 col-form-label">:
+                                @php
+                                    $perawatan_diri = json_decode($kajian_pasiens->perawatan_diri);
+                                @endphp
+                                @foreach ($perawatan_diri as $item)
+                                    {{ $item }},
+                                @endforeach
+                            </strong>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <p class="col-sm-3 col-form-label">Kebersihan Diri</p>
+                        <div class="col-sm-5" style="margin-top:0.5em">
+                            <strong class="col-sm-3 col-form-label">:
+                                @php
+                                    $kebersihan_diri = json_decode($kajian_pasiens->kebersihan_diri);
+                                @endphp
+                                @foreach ($kebersihan_diri as $item)
+                                    {{ $item }},
+                                @endforeach
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{-- End Data Penunjang Form --}}
+
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            {{-- Start Data Penunjang Form --}}
+            <div class="card-header">
+                <h3 class="card-title">Data Penunjang Medis Pasien</h3>
+            </div>
+            <div class="card-body">
+                <div class="basic-form">
+                    <div class="form-group row">
+                        <p class="col-sm-3 col-form-label">Laboratorium</p>
+                        <div class="col-sm-5" style="margin-top:0.5em">
+                                {!! $kajian_pasiens->labolatorium !!}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="basic-form">
+                    <div class="form-group row">
+                        <p class="col-sm-3 col-form-label">Radiologi</p>
+                        <div class="col-sm-5" style="margin-top:0.5em">
+                                {!! $kajian_pasiens->radiologi !!}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="basic-form">
+                    <div class="form-group row">
+                        <p class="col-sm-3 col-form-label">EKG</p>
+                        <div class="col-sm-5" style="margin-top:0.5em">
+                                {!! $kajian_pasiens->ekg !!}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="basic-form">
+                    <div class="form-group row">
+                        <p class="col-sm-3 col-form-label">USG</p>
+                        <div class="col-sm-5" style="margin-top:0.5em">
+                                {!! $kajian_pasiens->usg !!}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{-- End Data Penunjang Form --}}
+
+        </div>
     </div>
 @endsection

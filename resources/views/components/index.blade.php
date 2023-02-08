@@ -30,6 +30,9 @@
     {{-- Livewire Style --}}
     @livewireStyles
 
+    {{-- CK Editor --}}
+    <script src="//cdn.ckeditor.com/4.20.1/basic/ckeditor.js"></script>
+
 </head>
 
 <body>
@@ -126,7 +129,7 @@
 
     {{-- Livewire Script --}}
     @livewireScripts
-    
+
 </body>
 
 </html>

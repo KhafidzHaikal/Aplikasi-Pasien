@@ -31,22 +31,24 @@
                                     <th>No Registrasi</th>
                                     <th>Nama</th>
                                     <th>NIK</th>
+                                    <th>Keluhan</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @foreach ($kajian_pasiens as $kajian_pasien)
+                                @foreach ($pelayanan_pasiens as $pelayanan_pasien)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $kajian_pasien->tanggal_pemeriksaan->format('d/m/Y') }}</td>
-                                        <td>{{ $kajian_pasien->users->username }}</td>
-                                        <td>{{ $kajian_pasien->pasiens->no_rm }}</td>
-                                        <td>{{ $kajian_pasien->pasiens->name }}</td>
-                                        <td>{{ $kajian_pasien->pasiens->nik }}</td>
+                                        <td>{{ $pelayanan_pasien->tanggal_pemeriksaan->format('d/m/Y') }}</td>
+                                        <td>{{ $pelayanan_pasien->users->name }}</td>
+                                        <td>{{ $pelayanan_pasien->kajian_pasiens->pasiens->no_rm }}</td>
+                                        <td>{{ $pelayanan_pasien->kajian_pasiens->pasiens->name }}</td>
+                                        <td>{{ $pelayanan_pasien->kajian_pasiens->pasiens->nik }}</td>
+                                        <td>{{ $pelayanan_pasien->keluhan_utama }}</td>
                                         <td class="d-flex">
-                                            <a href={{ route('pelayanan-pasiens.edit', $kajian_pasien->id ) }} class="btn btn-warning mr-2"><i class="bi bi-pencil-square"></i></a>
-                                            <a href={{ route('pelayanan-pasiens.show', $kajian_pasien->id ) }} class="btn btn-info mr-2"><i class="bi bi-info-circle"></i></a>
-                                            <form action={{ route('pelayanan-pasiens.destroy', $kajian_pasien->id) }} method="POST">
+                                            <a href={{ route('pelayanan-pasiens.edit', $pelayanan_pasien->id ) }} class="btn btn-warning mr-2"><i class="bi bi-pencil-square"></i></a>
+                                            <a href={{ route('pelayanan-pasiens.show', $pelayanan_pasien->id ) }} class="btn btn-info mr-2"><i class="bi bi-info-circle"></i></a>
+                                            <form action={{ route('pelayanan-pasiens.destroy', $pelayanan_pasien->id) }} method="POST">
                                                 @method('delete')
                                                 @csrf
                                                 <button class="btn btn-danger"><i
@@ -54,14 +56,17 @@
                                             </form>
                                         </td>
                                     </tr>
-                                @endforeach --}}
+                                @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <th>No</th>
+                                    <th>Tanggal Pemeriksaan</th>
+                                    <th>Nama Petugas</th>
+                                    <th>No Registrasi</th>
                                     <th>Nama</th>
                                     <th>NIK</th>
-                                    <th>Nama KK</th>
+                                    <th>Keluhan</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
