@@ -18,7 +18,7 @@ class PasiensFactory extends Factory
     {
         return [
             'no_rm' => $this->faker->randomNumber(6, true),
-            'tanggal_kunjungan' => $this->faker->unixTime(),
+            'tanggal_kunjungan' => $this->faker->dateTimeBetween('-1 week', '+1 days'),
             'users_id' => mt_rand(2,2),
             'name' => $this->faker->name(),
             'tanggal_lahir' => $this->faker->unixTime(),

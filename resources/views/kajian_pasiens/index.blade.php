@@ -41,7 +41,7 @@
                                 @foreach ($kajian_pasiens as $kajian_pasien)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $kajian_pasien->tanggal_pemeriksaan->format('d/m/Y') }}</td>
+                                        <td>{{ $kajian_pasien->tanggal_pemeriksaan->format('d-m-Y') }}</td>
                                         <td>{{ $kajian_pasien->users->name }}</td>
                                         <td>{{ $kajian_pasien->unit_pelayanans->name }}</td>
                                         <td>{{ $kajian_pasien->pasiens->no_rm }}</td>

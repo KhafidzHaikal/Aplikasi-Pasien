@@ -137,6 +137,23 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Kode ICD</label>
+                                    <div class="col-sm-5">
+                                        <select class="form-control" name="icds_kode_icd" id="icd">
+                                            <option selected> --- Pilih ICD --- </option>
+                                            @foreach ($icds as $icd)
+                                                @if (old('icds_kode_icd') === $icd->kode_icd)
+                                                    <option value="{{ $icd->kode_icd }}">{{ $icd->kode_icd }} - {{ $icd->nama_icd_indo }}
+                                                    </option>
+                                                @else
+                                                    <option value="{{ $icd->kode_icd }}">{{ $icd->kode_icd }} - {{ $icd->nama_icd_indo }}
+                                                    </option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Diagnosa</label>
                                     <div class="col-sm-5">
                                         <div class="input-group mb-3">

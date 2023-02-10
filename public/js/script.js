@@ -2,7 +2,6 @@ $(document).ready(function () {
     $('#myTable').DataTable();
 });
 
-
 $(document).ready(function () {
     $('#tablePasiens').DataTable();
 });
@@ -26,6 +25,12 @@ $(document).ready(function () {
 $(document).ready(function () {
     $('#noKajianPasienSelect').select2({
         placeholder: '---Pilih No.Register Pasien---',
+    });
+});
+
+$(document).ready(function () {
+    $('#icd').select2({
+        placeholder: '--- Pilih ICD ---',
     });
 });
 

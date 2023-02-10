@@ -19,7 +19,7 @@ class KajianPasienFactory extends Factory
     {
         return [
             'pasiens_no_rm' => $this->faker->randomElement(Pasiens::pluck('no_rm')),
-            'tanggal_pemeriksaan' => $this->faker->unixTime(),
+            'tanggal_pemeriksaan' => $this->faker->dateTimeBetween('-1 week', '+1 days'),
             'users_id' => mt_rand(2,4),
             'tensi' => $this->faker->randomNumber(6, true),
             'nadi' => $this->faker->randomNumber(6, true),

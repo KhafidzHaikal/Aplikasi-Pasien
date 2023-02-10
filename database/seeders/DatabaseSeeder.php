@@ -24,8 +24,10 @@ class DatabaseSeeder extends Seeder
         // User::factory(100)->create();
         Pasiens::factory(100)->create();
         KajianPasien::factory(100)->create();
+        $this->call(IcdSeeder::class);
         PelayananPasien::factory(20)->create();
-        
+
+
         User::create([
             'username' => 'Haikal',
             'name' => 'Muhamad Khafidz Haikal',

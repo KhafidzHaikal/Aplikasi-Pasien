@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\UnitPelayananBpUmum;
 use App\Http\Requests\StoreUnitPelayananBpUmumRequest;
 use App\Http\Requests\UpdateUnitPelayananBpUmumRequest;
+use App\Models\Icd;
 use App\Models\KajianPasien;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -80,7 +81,8 @@ class UnitPelayananBpUmumController extends Controller
             return view('admin.bp_umum.pelayanan_pasiens.periksa', [
                 'title' => 'Periksa Pasien',
                 'perawats' => User::all(),
-                'kajian_pasien' => $kajianPasien
+                'kajian_pasien' => $kajianPasien,
+                'icds' => Icd::all()
             ]);
         } else {
             return view('bp_umum.pelayanan_pasiens.periksa', [
@@ -101,6 +103,7 @@ class UnitPelayananBpUmumController extends Controller
             'rps'  => 'required',
             'rpo'  => 'required',
             'tanda_vital'  => 'required',
+            'icds_kode_icd' => 'required',
             'diagnosa'  => 'required',
             'penatalaksanaan'  => 'required',
             'tindakan'  => 'required',
