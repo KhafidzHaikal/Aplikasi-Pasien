@@ -8,6 +8,7 @@ use App\Models\KajianPasien;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Requests\UpdateKajianPasienRequest;
+use App\Models\UnitPelayanan;
 
 class KajianPasienController extends Controller
 {
@@ -34,7 +35,8 @@ class KajianPasienController extends Controller
         return view('kajian_pasiens.create', [
             'title' => 'Tambah Kajian Pasien',
             'pasiens' => Pasiens::all(),
-            'perawats' => User::all()
+            'perawats' => User::all(),
+            'unit_pelayanans' => UnitPelayanan::all()
         ]);
     }
 
@@ -77,6 +79,7 @@ class KajianPasienController extends Controller
             'radiologi' => 'required',
             'ekg' => 'required',
             'usg' => 'required',
+            'unit_pelayanans_id' => 'required',
         ]);
         $kajian_pasien = new KajianPasien();
         $kajian_pasien->pasiens_no_rm = $request->pasiens_no_rm;
@@ -109,6 +112,7 @@ class KajianPasienController extends Controller
         $kajian_pasien->radiologi = $request->radiologi;
         $kajian_pasien->ekg = $request->ekg;
         $kajian_pasien->usg = $request->usg;
+        $kajian_pasien->unit_pelayanans_id = $request->unit_pelayanans_id;
         $kajian_pasien->save();
         return redirect()->route('kajian-pasiens.index')->with('success', 'Kajian Pasien Berhasil Ditambakan');
     }

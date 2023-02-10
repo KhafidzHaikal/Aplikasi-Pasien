@@ -5,6 +5,8 @@ namespace App\Models;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Pasiens;
+use App\Models\UnitPelayanan;
+use App\Models\PelayananPasien;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -36,5 +38,10 @@ class KajianPasien extends Model
     public function pelayanan_pasiens()
     {
         return $this->hasMany(PelayananPasien::class);
+    }
+
+    public function unit_pelayanans()
+    {
+        return $this->belongsTo(UnitPelayanan::class);
     }
 }

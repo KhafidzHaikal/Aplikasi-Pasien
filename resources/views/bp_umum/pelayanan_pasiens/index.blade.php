@@ -36,7 +36,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($kajian_pasiens as $kajian_pasien)
+                                {{-- @foreach ($kajian_pasiens as $kajian_pasien)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $kajian_pasien->tanggal_pemeriksaan->format('d/m/Y') }}</td>
@@ -56,7 +56,7 @@
                                             </form>
                                         </td>
                                     </tr>
-                                @endforeach
+                                @endforeach --}}
                             </tbody>
                             <tfoot>
                                 <tr>

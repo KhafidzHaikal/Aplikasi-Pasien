@@ -25,30 +25,31 @@ return new class extends Migration
             $table->string('bb', 10);
             $table->string('tb', 10);
             $table->string('imt', 50);
-            $table->string('sirkulasi_cairan', 100);
-            $table->string('perkemihan', 100);
-            $table->string('pernapasan', 100);
-            $table->string('pencernaan', 100);
-            $table->string('muskuloskeletal', 100);
+            $table->string('sirkulasi_cairan');
+            $table->string('perkemihan');
+            $table->string('pernapasan');
+            $table->string('pencernaan');
+            $table->string('muskuloskeletal');
             // end Data Pengkajian 
             // Neurosensori
-            $table->string('fungsi_penglihatan', 100);
-            $table->string('fungsi_pendengaran', 100);
-            $table->string('fungsi_perasa', 100);
-            $table->string('fungsi_perabaan', 100);
-            $table->string('fungsi_penciuman', 100);
+            $table->string('fungsi_penglihatan');
+            $table->string('fungsi_pendengaran');
+            $table->string('fungsi_perasa');
+            $table->string('fungsi_perabaan');
+            $table->string('fungsi_penciuman');
             // end Neurosensori
-            $table->string('kulit', 100);
-            $table->string('tidur_istirahat', 100);
-            $table->string('mental', 100);
-            $table->string('komunikasi', 100);
-            $table->string('kebersihan_diri', 100);
-            $table->string('perawatan_diri', 100);
+            $table->string('kulit');
+            $table->string('tidur_istirahat');
+            $table->string('mental');
+            $table->string('komunikasi');
+            $table->string('kebersihan_diri');
+            $table->string('perawatan_diri');
             $table->string('labolatorium');
             $table->string('radiologi');
             $table->string('ekg');
             $table->string('usg');
-
+            $table->foreignId('unit_pelayanans_id');
+            
             $table->foreign('pasiens_no_rm')->references('no_rm')->on('pasiens');
             $table->timestamps();
         });

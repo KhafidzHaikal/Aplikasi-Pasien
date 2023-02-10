@@ -17,7 +17,22 @@ class PasiensFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'no_rm' => $this->faker->randomNumber(6, true),
+            'tanggal_kunjungan' => $this->faker->unixTime(),
+            'nama_petugas' => $this->faker->firstName(),
+            'name' => $this->faker->name(),
+            'tanggal_lahir' => $this->faker->unixTime(),
+            'jenis_kelamin' => $this->faker->title(),
+            'nik' => $this->faker->nik(),
+            'nama_kk' => $this->faker->lastName(),
+            'alamat' => $this->faker->address(),
+            'pekerjaan' => $this->faker->jobTitle(),
+            'pendidikan' => $this->faker->company(),
+            'agama' => $this->faker->word(1),
+            'status_perkawinan' => $this->faker->word(1),
+            'pembiayaan' => $this->faker->word(1),
+            'status_kunjungan' => $this->faker->word(1),
+            'alergi_obat' => $this->faker->sentence(mt_rand(2, 5)),
         ];
     }
 }

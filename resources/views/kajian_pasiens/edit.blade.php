@@ -19,7 +19,7 @@
             <div class="card">
                 <div class="card-body">
                     {{-- Start Form --}}
-                    <form action={{ route('kajian-pasiens.update', $kajian_pasien->id) }} method="POST">
+                    <form action={{ route('kajian-pasiens.update', $kajian_pasien->pasiens_no_rm) }} method="POST">
                         @method('put')
                         @csrf
                         {{-- Start Administrasi Form --}}

@@ -477,12 +477,6 @@
                                         </div>
                                         <div class="form-check mb-2">
                                             <input type="checkbox" class="form-check-input" name="pencernaan[]"
-                                                id="pencernaanBauNapas" value="Bau Napas"
-                                                @if (is_array(old('pencernaan')) && in_array('Bau Napas', old('pencernaan'))) checked @endif>
-                                            <label class="form-check-label" for="pencernaanBauNapas">Bau Napas</label>
-                                        </div>
-                                        <div class="form-check mb-2">
-                                            <input type="checkbox" class="form-check-input" name="pencernaan[]"
                                                 id="pencernaanDistensiAbdomen" value="Distensi Abdomen"
                                                 @if (is_array(old('pencernaan')) && in_array('Distensi Abdomen', old('pencernaan'))) checked @endif>
                                             <label class="form-check-label" for="pencernaanDistensiAbdomen">Distensi
@@ -1279,6 +1273,29 @@
                             </div>
                         </div>
                         {{-- -------- End Data Penunjang Medis ----------- --}}
+                        {{-- -------- Start ----------- --}}
+                        <div class="card-body">
+                            <div class="basic-form">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Pilih Poli</label>
+                                    <div class="col-sm-5">
+                                        <select class="form-control" name="unit_pelayanans_id" id="noPerawatSelect">
+                                            <option selected> --- Pilih Poli ---- </option>
+                                            @foreach ($unit_pelayanans as $unit_pelayanan)
+                                                @if (old('unit_pelayanans_id') === $unit_pelayanan->id)
+                                                    <option value="{{ $unit_pelayanan->id }}">{{ $unit_pelayanan->name }}
+                                                    </option>
+                                                @else
+                                                    <option value="{{ $unit_pelayanan->id }}">{{ $unit_pelayanan->name }}
+                                                    </option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- --------- End ----------- --}}
                         <div class="card-body">
                             <div class="basic-form">
                                 <button type="submit" class="btn btn-primary">Simpan</button>

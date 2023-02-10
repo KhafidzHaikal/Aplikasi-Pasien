@@ -44,9 +44,16 @@ Route::resources([
     'pasiens' => PasiensController::class
 ]);
 Route::resources([
-    'kajian-pasiens' => KajianPasienController::class,
     'pelayanan-pasiens' => PelayananPasienController::class
 ]);
+
+Route::get('/kajian-pasien', [KajianPasienController::class, 'index'])->name('kajian-pasiens.index');
+Route::get('/kajian-pasien/create', [KajianPasienController::class, 'create'])->name('kajian-pasiens.create');
+Route::post('/kajian-pasien', [KajianPasienController::class, 'store'])->name('kajian-pasiens.store');
+Route::get('/kajian-pasien/{kajian_pasien:pasiens_no_rm}', [KajianPasienController::class, 'show'])->name('kajian-pasiens.show');
+Route::get('/kajian-pasien/{kajian_pasien:pasiens_no_rm}/edit', [KajianPasienController::class, 'edit'])->name('kajian-pasiens.edit');
+Route::put('/kajian-pasien/{kajian_pasien:pasiens_no_rm}', [KajianPasienController::class, 'update'])->name('kajian-pasiens.update');
+Route::delete('/kajian-pasien{kajian_pasien}', [KajianPasienController::class, 'destroy'])->name('kajian-pasiens.destroy');
 Route::get('/pdf-view-kajian-pasien/{kajian_pasiens}', [KajianPasienController::class, 'pdf'])->name('pdf-kajian-pasien');
 
 // Route::middleware(['auth'])->group(function () {

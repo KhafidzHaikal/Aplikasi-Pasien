@@ -68,6 +68,13 @@
                                         {{ $kajian_pasiens->users->name }}</strong>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <p class="col-sm-5 col-form-label">Poli</p>
+                                <div class="col-sm-5">
+                                    <strong class="col-sm-3 col-form-label">:
+                                        {{ $kajian_pasiens->unit_pelayanans->name }}</strong>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     {{-- End Administrasi Form --}}
@@ -252,9 +259,13 @@
                                 @php
                                     $sirkulasi_cairan = json_decode($kajian_pasiens->sirkulasi_cairan);
                                 @endphp
-                                @foreach ($sirkulasi_cairan as $item)
-                                    {{ $item }},
-                                @endforeach
+                                @if (is_array($sirkulasi_cairan) || is_object($sirkulasi_cairan))
+                                    @foreach ($sirkulasi_cairan as $item)
+                                        {{ $item }},
+                                    @endforeach
+                                @else
+                                    {{ $kajian_pasiens->sirkulasi_cairan }}
+                                @endif
                             </strong>
                         </div>
                     </div>
@@ -265,9 +276,14 @@
                                 @php
                                     $perkemihan = json_decode($kajian_pasiens->perkemihan);
                                 @endphp
-                                @foreach ($perkemihan as $item)
-                                    {{ $item }},
-                                @endforeach
+                                @if (is_array($perkemihan) || is_object($perkemihan))
+                                    @foreach ($perkemihan as $item)
+                                        {{ $item }},
+                                    @endforeach
+                                @else
+                                    {{ $kajian_pasiens->perkemihan }}
+                                @endif
+
                             </strong>
                         </div>
                     </div>
@@ -278,9 +294,13 @@
                                 @php
                                     $pernapasan = json_decode($kajian_pasiens->pernapasan);
                                 @endphp
-                                @foreach ($pernapasan as $item)
-                                    {{ $item }},
-                                @endforeach
+                                @if (is_array($pernapasan) || is_object($pernapasan))
+                                    @foreach ($pernapasan as $item)
+                                        {{ $item }},
+                                    @endforeach
+                                @else
+                                    {{ $kajian_pasiens->pernapasan }}
+                                @endif
                             </strong>
                         </div>
                     </div>
@@ -291,9 +311,13 @@
                                 @php
                                     $pencernaan = json_decode($kajian_pasiens->pencernaan);
                                 @endphp
-                                @foreach ($pencernaan as $item)
-                                    {{ $item }},
-                                @endforeach
+                                @if (is_array($pencernaan) || is_object($pencernaan))
+                                    @foreach ($pencernaan as $item)
+                                        {{ $item }},
+                                    @endforeach
+                                @else
+                                    {{ $kajian_pasiens->pencernaan }}
+                                @endif
                             </strong>
                         </div>
                     </div>
@@ -304,9 +328,13 @@
                                 @php
                                     $muskuloskeletal = json_decode($kajian_pasiens->muskuloskeletal);
                                 @endphp
-                                @foreach ($muskuloskeletal as $item)
-                                    {{ $item }},
-                                @endforeach
+                                @if (is_array($muskuloskeletal) || is_object($muskuloskeletal))
+                                    @foreach ($muskuloskeletal as $item)
+                                        {{ $item }},
+                                    @endforeach
+                                @else
+                                    {{ $kajian_pasiens->muskuloskeletal }}
+                                @endif
                             </strong>
                         </div>
                     </div>
@@ -319,9 +347,13 @@
                                 @php
                                     $fungsi_penglihatan = json_decode($kajian_pasiens->fungsi_penglihatan);
                                 @endphp
-                                @foreach ($fungsi_penglihatan as $item)
-                                    {{ $item }},
-                                @endforeach
+                                @if (is_array($fungsi_penglihatan) || is_object($fungsi_penglihatan))
+                                    @foreach ($fungsi_penglihatan as $item)
+                                        {{ $item }},
+                                    @endforeach
+                                @else
+                                    {{ $kajian_pasiens->fungsi_penglihatan }}
+                                @endif
                             </p>
                             <br>
                             <strong>: Fungsi Pendengaran</strong> :
@@ -330,9 +362,13 @@
                                 @php
                                     $fungsi_pendengaran = json_decode($kajian_pasiens->fungsi_pendengaran);
                                 @endphp
-                                @foreach ($fungsi_pendengaran as $item)
-                                    {{ $item }},
-                                @endforeach
+                                @if (is_array($fungsi_pendengaran) || is_object($fungsi_pendengaran))
+                                    @foreach ($fungsi_pendengaran as $item)
+                                        {{ $item }},
+                                    @endforeach
+                                @else
+                                    {{ $kajian_pasiens->fungsi_pendengaran }}
+                                @endif
                             </p>
                             <br>
                             <strong>: Fungsi Perasa</strong> :
@@ -341,9 +377,13 @@
                                 @php
                                     $fungsi_perasa = json_decode($kajian_pasiens->fungsi_perasa);
                                 @endphp
-                                @foreach ($fungsi_perasa as $item)
-                                    {{ $item }},
-                                @endforeach
+                                @if (is_array($fungsi_perasa) || is_object($fungsi_perasa))
+                                    @foreach ($fungsi_perasa as $item)
+                                        {{ $item }},
+                                    @endforeach
+                                @else
+                                    {{ $kajian_pasiens->fungsi_perasa }}
+                                @endif
                             </p>
                             <br>
                             <strong>: Fungsi Perabaan</strong> :
@@ -352,9 +392,13 @@
                                 @php
                                     $fungsi_perabaan = json_decode($kajian_pasiens->fungsi_perabaan);
                                 @endphp
-                                @foreach ($fungsi_perabaan as $item)
-                                    {{ $item }},
-                                @endforeach
+                                @if (is_array($fungsi_perabaan) || is_object($fungsi_perabaan))
+                                    @foreach ($fungsi_perabaan as $item)
+                                        {{ $item }},
+                                    @endforeach
+                                @else
+                                    {{ $kajian_pasiens->fungsi_perabaan }}
+                                @endif
                             </p>
                             <br>
                             <strong>: Fungsi Penciuman</strong> :
@@ -363,9 +407,13 @@
                                 @php
                                     $fungsi_penciuman = json_decode($kajian_pasiens->fungsi_penciuman);
                                 @endphp
-                                @foreach ($fungsi_penciuman as $item)
-                                    {{ $item }},
-                                @endforeach
+                                @if (is_array($fungsi_penciuman) || is_object($fungsi_penciuman))
+                                    @foreach ($fungsi_penciuman as $item)
+                                        {{ $item }},
+                                    @endforeach
+                                @else
+                                    {{ $kajian_pasiens->fungsi_penciuman }}
+                                @endif
                             </p>
                         </div>
                     </div>
@@ -376,9 +424,14 @@
                                 @php
                                     $kulit = json_decode($kajian_pasiens->kulit);
                                 @endphp
-                                @foreach ($kulit as $item)
-                                    {{ $item }},
-                                @endforeach
+                                @if (is_array($kulit) || is_object($kulit))
+                                    @foreach ($kulit as $item)
+                                        {{ $item }},
+                                    @endforeach
+                                @else
+                                    {{ $kajian_pasiens->kulit }}
+                                @endif
+
                             </strong>
                         </div>
                     </div>
@@ -389,9 +442,13 @@
                                 @php
                                     $tidur_istirahat = json_decode($kajian_pasiens->tidur_istirahat);
                                 @endphp
-                                @foreach ($tidur_istirahat as $item)
-                                    {{ $item }},
-                                @endforeach
+                                @if (is_array($tidur_istirahat) || is_object($tidur_istirahat))
+                                    @foreach ($tidur_istirahat as $item)
+                                        {{ $item }},
+                                    @endforeach
+                                @else
+                                    {{ $kajian_pasiens->tidur_istirahat }}
+                                @endif
                             </strong>
                         </div>
                     </div>
@@ -402,9 +459,13 @@
                                 @php
                                     $mental = json_decode($kajian_pasiens->mental);
                                 @endphp
-                                @foreach ($mental as $item)
-                                    {{ $item }},
-                                @endforeach
+                                @if (is_array($mental) || is_object($mental))
+                                    @foreach ($mental as $item)
+                                        {{ $item }},
+                                    @endforeach
+                                @else
+                                    {{ $kajian_pasiens->mental }}
+                                @endif
                             </strong>
                         </div>
                     </div>
@@ -415,9 +476,13 @@
                                 @php
                                     $komunikasi = json_decode($kajian_pasiens->komunikasi);
                                 @endphp
-                                @foreach ($komunikasi as $item)
-                                    {{ $item }},
-                                @endforeach
+                                @if (is_array($komunikasi) || is_object($komunikasi))
+                                    @foreach ($komunikasi as $item)
+                                        {{ $item }},
+                                    @endforeach
+                                @else
+                                    {{ $kajian_pasiens->komunikasi }}
+                                @endif
                             </strong>
                         </div>
                     </div>
@@ -428,9 +493,13 @@
                                 @php
                                     $perawatan_diri = json_decode($kajian_pasiens->perawatan_diri);
                                 @endphp
-                                @foreach ($perawatan_diri as $item)
-                                    {{ $item }},
-                                @endforeach
+                                @if (is_array($perawatan_diri) || is_object($perawatan_diri))
+                                    @foreach ($perawatan_diri as $item)
+                                        {{ $item }},
+                                    @endforeach
+                                @else
+                                    {{ $kajian_pasiens->perawatan_diri }}
+                                @endif
                             </strong>
                         </div>
                     </div>
@@ -441,9 +510,13 @@
                                 @php
                                     $kebersihan_diri = json_decode($kajian_pasiens->kebersihan_diri);
                                 @endphp
-                                @foreach ($kebersihan_diri as $item)
-                                    {{ $item }},
-                                @endforeach
+                                @if (is_array($kebersihan_diri) || is_object($kebersihan_diri))
+                                    @foreach ($kebersihan_diri as $item)
+                                        {{ $item }},
+                                    @endforeach
+                                @else
+                                    {{ $kajian_pasiens->kebersihan_diri }}
+                                @endif
                             </strong>
                         </div>
                     </div>
@@ -464,7 +537,7 @@
                     <div class="form-group row">
                         <p class="col-sm-3 col-form-label">Laboratorium</p>
                         <div class="col-sm-5" style="margin-top:0.5em">
-                                {!! $kajian_pasiens->labolatorium !!}
+                            {!! $kajian_pasiens->labolatorium !!}
                         </div>
                     </div>
                 </div>
@@ -474,7 +547,7 @@
                     <div class="form-group row">
                         <p class="col-sm-3 col-form-label">Radiologi</p>
                         <div class="col-sm-5" style="margin-top:0.5em">
-                                {!! $kajian_pasiens->radiologi !!}
+                            {!! $kajian_pasiens->radiologi !!}
                         </div>
                     </div>
                 </div>
@@ -484,7 +557,7 @@
                     <div class="form-group row">
                         <p class="col-sm-3 col-form-label">EKG</p>
                         <div class="col-sm-5" style="margin-top:0.5em">
-                                {!! $kajian_pasiens->ekg !!}
+                            {!! $kajian_pasiens->ekg !!}
                         </div>
                     </div>
                 </div>
@@ -494,7 +567,7 @@
                     <div class="form-group row">
                         <p class="col-sm-3 col-form-label">USG</p>
                         <div class="col-sm-5" style="margin-top:0.5em">
-                                {!! $kajian_pasiens->usg !!}
+                            {!! $kajian_pasiens->usg !!}
                         </div>
                     </div>
                 </div>
