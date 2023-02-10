@@ -28,9 +28,9 @@
                                     <th>No</th>
                                     <th>No Registrasi</th>
                                     <th>Tanggal Kunjungan</th>
+                                    <th>Nama Petugas</th>
                                     <th>Nama</th>
                                     <th>NIK</th>
-                                    <th>Nama KK</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -40,9 +40,9 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $pasien->no_rm }}</td>
                                         <td>{{ $pasien->tanggal_kunjungan->format('d-m-Y') }}</td>
+                                        <td>{{ $pasien->users->name }}</td>
                                         <td>{{ $pasien->name }}</td>
                                         <td>{{ $pasien->nik }}</td>
-                                        <td>{{ $pasien->nama_kk }}</td>
                                         <td class="d-flex">
                                             <a href={{ route('pasiens.edit', $pasien->no_rm ) }} class="btn btn-warning mr-2"><i class="bi bi-pencil-square"></i></a>
                                             <a href={{ route('pasiens.show', $pasien->no_rm ) }} class="btn btn-info mr-2"><i class="bi bi-info-circle"></i></a>
@@ -59,9 +59,11 @@
                             <tfoot>
                                 <tr>
                                     <th>No</th>
+                                    <th>No Registrasi</th>
+                                    <th>Tanggal Kunjungan</th>
+                                    <th>Nama Petugas</th>
                                     <th>Nama</th>
                                     <th>NIK</th>
-                                    <th>Nama KK</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>

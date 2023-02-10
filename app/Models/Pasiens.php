@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use App\Models\KajianPasien;
+use App\Models\UnitPelayananBpUmum;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -34,6 +35,11 @@ class Pasiens extends Model
         return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d-m-Y');
     }
 
+    public function users()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function kajian_pasiens()
     {
         return $this->hasMany(KajianPasien::class);
@@ -42,5 +48,10 @@ class Pasiens extends Model
     public function pelayanan_pasiens()
     {
         return $this->hasMany(PelayananPasien::class);
+    }
+
+    public function unit_pelayanan_bp_umums()
+    {
+        return $this->hasMany(UnitPelayananBpUmum::class);
     }
 }

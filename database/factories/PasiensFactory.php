@@ -19,7 +19,7 @@ class PasiensFactory extends Factory
         return [
             'no_rm' => $this->faker->randomNumber(6, true),
             'tanggal_kunjungan' => $this->faker->unixTime(),
-            'nama_petugas' => $this->faker->firstName(),
+            'users_id' => mt_rand(2,2),
             'name' => $this->faker->name(),
             'tanggal_lahir' => $this->faker->unixTime(),
             'jenis_kelamin' => $this->faker->title(),

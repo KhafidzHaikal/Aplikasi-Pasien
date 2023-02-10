@@ -49,6 +49,7 @@ class KajianPasienFactory extends Factory
             'ekg' => $this->faker->sentence(3, 20),
             'usg' => $this->faker->sentence(3, 20),
             'unit_pelayanans_id' => mt_rand(1, 6),
+            'status' => mt_rand(0, 0)
         ];
     }
 }

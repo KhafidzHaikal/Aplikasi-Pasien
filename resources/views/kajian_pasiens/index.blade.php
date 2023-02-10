@@ -13,7 +13,8 @@
             </ol>
         </div>
     </div>
-    <a class="btn btn-primary col-2 mb-xl-4" style="color:#ffff" href={{ route('kajian-pasiens.create') }}><i class="bi bi-person-add mr-2"></i> Tambah Kajian Pasien</a>
+    <a class="btn btn-primary col-2 mb-xl-4" style="color:#ffff" href={{ route('kajian-pasiens.create') }}><i
+            class="bi bi-person-add mr-2"></i> Tambah Kajian Pasien</a>
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -31,7 +32,8 @@
                                     <th>Poli</th>
                                     <th>No Registrasi</th>
                                     <th>Nama</th>
-                                    <th>NIK</th>
+                                    {{-- <th>NIK</th> --}}
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -44,15 +46,26 @@
                                         <td>{{ $kajian_pasien->unit_pelayanans->name }}</td>
                                         <td>{{ $kajian_pasien->pasiens->no_rm }}</td>
                                         <td>{{ $kajian_pasien->pasiens->name }}</td>
-                                        <td>{{ $kajian_pasien->pasiens->nik }}</td>
+                                        {{-- <td>{{ $kajian_pasien->pasiens->nik }}</td> --}}
+                                        <td>
+                                            @if ($kajian_pasien->status == 'sedang diperiksa')
+                                                <p class="btn" style="padding: 3px; background-color:#FFED00; color:black">
+                                                    {{ $kajian_pasien->status }}</p>
+                                            @else
+                                                <p class="btn" style="padding: 3px; background-color:#16FF00; color:black">
+                                                    {{ $kajian_pasien->status }}</p>
+                                            @endif
+                                        </td>
                                         <td class="d-flex">
-                                            <a href={{ route('kajian-pasiens.edit', $kajian_pasien->pasiens_no_rm ) }} class="btn btn-warning mr-2"><i class="bi bi-pencil-square"></i></a>
-                                            <a href={{ route('kajian-pasiens.show', $kajian_pasien->pasiens_no_rm ) }} class="btn btn-info mr-2"><i class="bi bi-info-circle"></i></a>
-                                            <form action={{ route('kajian-pasiens.destroy', $kajian_pasien->id) }} method="POST">
+                                            <a href={{ route('kajian-pasiens.edit', $kajian_pasien->pasiens_no_rm) }}
+                                                class="btn btn-warning mr-2"><i class="bi bi-pencil-square"></i></a>
+                                            <a href={{ route('kajian-pasiens.show', $kajian_pasien->pasiens_no_rm) }}
+                                                class="btn btn-info mr-2"><i class="bi bi-info-circle"></i></a>
+                                            <form action={{ route('kajian-pasiens.destroy', $kajian_pasien->id) }}
+                                                method="POST">
                                                 @method('delete')
                                                 @csrf
-                                                <button class="btn btn-danger"><i
-                                                        class="bi bi-trash"></i></button>
+                                                <button class="btn btn-danger"><i class="bi bi-trash"></i></button>
                                             </form>
                                         </td>
                                     </tr>
@@ -61,15 +74,19 @@
                             <tfoot>
                                 <tr>
                                     <th>No</th>
+                                    <th>Tanggal Pemeriksaan</th>
+                                    <th>Nama Petugas</th>
+                                    <th>Poli</th>
+                                    <th>No Registrasi</th>
                                     <th>Nama</th>
-                                    <th>NIK</th>
-                                    <th>Nama KK</th>
+                                    {{-- <th>NIK</th> --}}
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
                         </table>
                     </div>
-                    
+
                 </div>
             </div>
         </div>

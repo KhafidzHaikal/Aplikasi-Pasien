@@ -59,14 +59,17 @@
                                     <label class="col-sm-3 col-form-label">Nama Petugas</label>
                                     <div class="col-sm-5">
                                         <select class="form-control" name="users_id" id="noPerawatSelect">
-                                            <option selected> --- Pilih No.Register Perawat ---- </option>
+                                            <option selected> --- Pilih Nama Perawat ---- </option>
                                             @foreach ($perawats as $perawat)
-                                                @if (old('users_id', $kajian_pasien->users->id) === $perawat->id)
-                                                    <option value="{{ $perawat->id }}" selected>{{ $perawat->name }}
-                                                    </option>
+                                                @if ($user->type == 'admin')
                                                 @else
-                                                    <option value="{{ $perawat->id }}">{{ $perawat->name }}
-                                                    </option>
+                                                    @if (old('users_id', $kajian_pasien->users->id) === $perawat->id)
+                                                        <option value="{{ $perawat->id }}" selected>{{ $perawat->name }}
+                                                        </option>
+                                                    @else
+                                                        <option value="{{ $perawat->id }}">{{ $perawat->name }}
+                                                        </option>
+                                                    @endif
                                                 @endif
                                             @endforeach
                                         </select>
@@ -87,7 +90,8 @@
                                     <div class="col-sm-5">
                                         <div class="input-group mb-3">
                                             <input type="text" class="form-control" name="tensi"
-                                                value="{{ old('tensi', $kajian_pasien->tensi) }}" required maxlength="7" maxlength="7">
+                                                value="{{ old('tensi', $kajian_pasien->tensi) }}" required maxlength="7"
+                                                maxlength="7">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">mm/Hg</span>
                                             </div>

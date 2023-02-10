@@ -4,13 +4,14 @@
     <div class="row page-titles mx-0">
         <div class="col-sm-6 p-md-0">
             <div class="welcome-text">
-                <h4>Tambah Pelayanan Pasien</h4>
+                <h4>Aplikasi Pelayanan Pasien</h4>
             </div>
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href={{ route('pelayanan-pasiens.index') }}>Pelayanan Pasien</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Tambah Pelayanan Pasien</a></li>
+                <li class="breadcrumb-item"><a href={{ route('bp-umum.index') }}>Pelayanan Pasien</a></li>
+                <li class="breadcrumb-item"><a href={{ route('bp-umum.create') }}>Kajian Pasien</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Periksa Pasien</a></li>
             </ol>
         </div>
     </div>
@@ -19,7 +20,7 @@
             <div class="card">
                 <div class="card-body">
                     {{-- Start Form --}}
-                    <form action={{ route('pelayanan-pasiens.store') }} method="POST">
+                    <form action={{ route('bp-umum.store', $kajian_pasien->pasiens_no_rm) }} method="POST">
                         @csrf
                         {{-- Start Administrasi Form --}}
                         <div class="card-header">
@@ -27,7 +28,35 @@
                         </div>
                         <div class="card-body">
                             <div class="basic-form">
-                                @livewire('search-pasien')
+                                <div class="form-group row" style="display: none">
+                                    <label class="col-sm-3 col-form-label">No. Kajian Pasien</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control" name="kajian_pasiens_id"
+                                            value={{ $kajian_pasien->id }}>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">No Registrasi Pasien</label>
+                                    <div class="col-sm-5">
+                                        <input style="background-color: #e6e6e6" type="text" disabled
+                                            class="form-control" value={{ $kajian_pasien->pasiens_no_rm }}>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Nama Pasien</label>
+                                    <div class="col-sm-5">
+                                        <input style="background-color: #e6e6e6" type="text" disabled
+                                            class="form-control" value={{ $kajian_pasien->pasiens->name }}>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label"></label>
+                                    <div class="col-sm-5">
+                                        <a class="btn btn-primary col-12"
+                                            href={{ route('kajian-pasiens.show', $kajian_pasien->pasiens_no_rm) }}
+                                            target="_blank">Detai Pasien</a>
+                                    </div>
+                                </div>
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Tanggal Pemeriksaan</label>
                                     <div class="col-sm-5">
@@ -41,8 +70,7 @@
                                         <select class="form-control" name="users_id" id="noPerawatSelect">
                                             <option selected> --- Pilih Nama Pemeriksa / Dokter --- </option>
                                             @foreach ($perawats as $perawat)
-                                                @if ($perawat->type == 'admin')
-                                                @else
+                                                @if ($perawat->type == 'bp-umum')
                                                     @if (old('users_id') === $perawat->id)
                                                         <option value="{{ $perawat->id }}">{{ $perawat->name }}
                                                         </option>
@@ -50,6 +78,7 @@
                                                         <option value="{{ $perawat->id }}">{{ $perawat->name }}
                                                         </option>
                                                     @endif
+                                                @else
                                                 @endif
                                             @endforeach
                                         </select>

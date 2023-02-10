@@ -2,7 +2,7 @@
     <div class="form-group row">
         <label class="col-sm-3 col-form-label">Cari Nama / Nomor Registrasi Pasien</label>
         <div class="col-sm-5">
-            <input type="text" class="form-control" wire:model="searchkajian" value="{{ old('searchkajian') }}"
+            <input type="text" class="form-control" wire:model="searchkajianBPUmum" value="{{ old('searchkajian') }}"
                 placeholder="Masukkan Nama Pasien, No Registrasi Pasien">
         </div>
     </div>

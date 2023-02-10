@@ -13,7 +13,7 @@
             </ol>
         </div>
     </div>
-    <a class="btn btn-primary col-2 mb-xl-4" style="color:#ffff" href={{ route('bp-umum.create') }}><i class="bi bi-person-add mr-2"></i> Tambah Pelayanan Pasien</a>
+    <a class="btn btn-primary col-2 mb-xl-4" style="color:#ffff" href={{ route('admin-bp-umum.create') }}><i class="bi bi-person-add mr-2"></i> Tambah Pelayanan Pasien</a>
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -46,9 +46,9 @@
                                         <td>{{ $pelayanan_pasien->kajian_pasiens->pasiens->nik }}</td>
                                         <td>{{ $pelayanan_pasien->keluhan_utama }}</td>
                                         <td class="d-flex">
-                                            <a href={{ route('bp-umum.edit', $pelayanan_pasien->id ) }} class="btn btn-warning mr-2"><i class="bi bi-pencil-square"></i></a>
-                                            <a href={{ route('bp-umum.show', $pelayanan_pasien->id ) }} class="btn btn-info mr-2"><i class="bi bi-info-circle"></i></a>
-                                            <form action={{ route('bp-umum.destroy', $pelayanan_pasien->id) }} method="POST">
+                                            <a href={{ route('admin-bp-umum.edit', $pelayanan_pasien->id ) }} class="btn btn-warning mr-2"><i class="bi bi-pencil-square"></i></a>
+                                            <a href={{ route('admin-bp-umum.show', $pelayanan_pasien->id ) }} class="btn btn-info mr-2"><i class="bi bi-info-circle"></i></a>
+                                            <form action={{ route('admin-bp-umum.destroy', $pelayanan_pasien->id) }} method="POST">
                                                 @method('delete')
                                                 @csrf
                                                 <button class="btn btn-danger"><i

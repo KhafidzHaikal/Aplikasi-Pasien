@@ -49,7 +49,7 @@ return new class extends Migration
             $table->string('ekg');
             $table->string('usg');
             $table->foreignId('unit_pelayanans_id');
-            
+            $table->tinyInteger('status');
             $table->foreign('pasiens_no_rm')->references('no_rm')->on('pasiens');
             $table->timestamps();
         });

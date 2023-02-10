@@ -5,7 +5,7 @@
     <div class="row page-titles mx-0">
         <div class="col-sm-6 p-md-0">
             <div class="welcome-text">
-                <h4>Tambah Kajian Pasien</h4>
+                <h4>Kajian Pasien</h4>
             </div>
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
@@ -58,14 +58,17 @@
                                     <label class="col-sm-3 col-form-label">Nama Petugas</label>
                                     <div class="col-sm-5">
                                         <select class="form-control" name="users_id" id="noPerawatSelect">
-                                            <option selected> --- Pilih No.Register Perawat ---- </option>
+                                            <option selected> --- Pilih Nama Perawat ---- </option>
                                             @foreach ($perawats as $user)
-                                                @if (old('users_id') === $user->id)
-                                                    <option value="{{ $user->id }}">{{ $user->name }}
-                                                    </option>
+                                                @if ($user->type == 'admin')
                                                 @else
-                                                    <option value="{{ $user->id }}">{{ $user->name }}
-                                                    </option>
+                                                    @if (old('users_id') === $user->id)
+                                                        <option value="{{ $user->id }}">{{ $user->name }}
+                                                        </option>
+                                                    @else
+                                                        <option value="{{ $user->id }}">{{ $user->name }}
+                                                        </option>
+                                                    @endif
                                                 @endif
                                             @endforeach
                                         </select>
@@ -183,8 +186,9 @@
                                             <input type="checkbox" class="form-check-input" name="sirkulasi_cairan[]"
                                                 id="sirkulasiTidakAda" value="Tidak Ada Kelainan"
                                                 @if (is_array(old('sirkulasi_cairan')) && in_array('Tidak Ada Kelainan', old('sirkulasi_cairan'))) checked @endif>
-                                            <label class="form-check-label" for="sirkulasiTidakAda"><strong><strong>Tidak Ada
-                                                Kelainan</strong></strong></label>
+                                            <label class="form-check-label" for="sirkulasiTidakAda"><strong><strong>Tidak
+                                                        Ada
+                                                        Kelainan</strong></strong></label>
                                         </div>
                                         <div class="form-check mb-2">
                                             <input type="checkbox" class="form-check-input" id="sirkulasiAsites"
@@ -270,7 +274,7 @@
                                                 id="perkemihanTidakAda" value="Tidak Ada Kelainan"
                                                 @if (is_array(old('perkemihan')) && in_array('Tidak Ada Kelainan', old('perkemihan'))) checked @endif>
                                             <label class="form-check-label" for="perkemihanTidakAda"><strong>Tidak Ada
-                                                Kelainan</strong></label>
+                                                    Kelainan</strong></label>
                                         </div>
                                         <div class="form-check mb-2">
                                             <input type="checkbox" class="form-check-input" name="perkemihan[]"
@@ -351,7 +355,7 @@
                                                 id="pernapasanTidakAda" value="Tidak Ada Kelainan"
                                                 @if (is_array(old('pernapasan')) && in_array('Tidak Ada Kelainan', old('pernapasan'))) checked @endif>
                                             <label class="form-check-label" for="pernapasanTidakAda"><strong>Tidak Ada
-                                                Kelainan</strong></label>
+                                                    Kelainan</strong></label>
                                         </div>
                                         <div class="form-check mb-2">
                                             <input type="checkbox" class="form-check-input" name="pernapasan[]"
@@ -430,7 +434,7 @@
                                                 id="pencernaanTidakAda" value="Tidak Ada Kelainan"
                                                 @if (is_array(old('pencernaan')) && in_array('Tidak Ada Kelainan', old('pencernaan'))) checked @endif>
                                             <label class="form-check-label" for="pencernaanTidakAda"><strong>Tidak Ada
-                                                Kelainan</strong></label>
+                                                    Kelainan</strong></label>
                                         </div>
                                         <div class="form-check mb-2">
                                             <input type="checkbox" class="form-check-input" name="pencernaan[]"
@@ -565,8 +569,9 @@
                                             <input type="checkbox" class="form-check-input" name="muskuloskeletal[]"
                                                 id="muskuloskeletalTidakAda" value="Tidak Ada Kelainan"
                                                 @if (is_array(old('muskuloskeletal')) && in_array('Tidak Ada Kelainan', old('muskuloskeletal'))) checked @endif>
-                                            <label class="form-check-label" for="muskuloskeletalTidakAda"><strong>Tidak Ada
-                                                Kelainan</strong></label>
+                                            <label class="form-check-label" for="muskuloskeletalTidakAda"><strong>Tidak
+                                                    Ada
+                                                    Kelainan</strong></label>
                                         </div>
                                         <div class="form-check mb-2">
                                             <input type="checkbox" class="form-check-input" name="muskuloskeletal[]"
@@ -688,7 +693,7 @@
                                                 id="penglihatanTidakAda" value="Tidak Ada Kelainan"
                                                 @if (is_array(old('fungsi_penglihatan')) && in_array('Tidak Ada Kelainan', old('fungsi_penglihatan'))) checked @endif>
                                             <label class="form-check-label" for="penglihatanTidakAda"><strong>Tidak Ada
-                                                Kelainan</strong></label>
+                                                    Kelainan</strong></label>
                                         </div>
                                         <div class="form-check mb-2">
                                             <input type="checkbox" class="form-check-input" name="fungsi_penglihatan[]"
@@ -716,8 +721,9 @@
                                             <input type="checkbox" class="form-check-input" name="fungsi_pendengaran[]"
                                                 id="fungsi_pendengaranTidakAda" value="Tidak Ada Kelainan"
                                                 @if (is_array(old('fungsi_pendengaran')) && in_array('Tidak Ada Kelainan', old('fungsi_pendengaran'))) checked @endif>
-                                            <label class="form-check-label" for="fungsi_pendengaranTidakAda"><strong>Tidak Ada
-                                                Kelainan</strong></label>
+                                            <label class="form-check-label" for="fungsi_pendengaranTidakAda"><strong>Tidak
+                                                    Ada
+                                                    Kelainan</strong></label>
                                         </div>
                                         <div class="form-check mb-2">
                                             <input type="checkbox" class="form-check-input" name="fungsi_pendengaran[]"
@@ -754,7 +760,7 @@
                                                 id="fungsi_perasaTidakAda" value="Tidak Ada Kelainan"
                                                 @if (is_array(old('fungsi_perasa')) && in_array('Tidak Ada Kelainan', old('fungsi_perasa'))) checked @endif>
                                             <label class="form-check-label" for="fungsi_perasaTidakAda"><strong>Tidak Ada
-                                                Kelainan</strong></label>
+                                                    Kelainan</strong></label>
                                         </div>
                                         <div class="form-check mb-2">
                                             <input type="checkbox" class="form-check-input" name="fungsi_perasa[]"
@@ -775,8 +781,9 @@
                                             <input type="checkbox" class="form-check-input" name="fungsi_perabaan[]"
                                                 id="fungsi_perabaanTidakAda" value="Tidak Ada Kelainan"
                                                 @if (is_array(old('fungsi_perabaan')) && in_array('Tidak Ada Kelainan', old('fungsi_perabaan'))) checked @endif>
-                                            <label class="form-check-label" for="fungsi_perabaanTidakAda"><strong>Tidak Ada
-                                                Kelainan</strong></label>
+                                            <label class="form-check-label" for="fungsi_perabaanTidakAda"><strong>Tidak
+                                                    Ada
+                                                    Kelainan</strong></label>
                                         </div>
                                         <div class="form-check mb-2">
                                             <input type="checkbox" class="form-check-input" name="fungsi_perabaan[]"
@@ -851,8 +858,9 @@
                                             <input type="checkbox" class="form-check-input" name="fungsi_penciuman[]"
                                                 id="fungsi_penciumanTidakAda" value="Tidak Ada Kelainan"
                                                 @if (is_array(old('fungsi_penciuman')) && in_array('Tidak Ada Kelainan', old('fungsi_penciuman'))) checked @endif>
-                                            <label class="form-check-label" for="fungsi_penciumanTidakAda"><strong>Tidak Ada
-                                                Kelainan</strong></label>
+                                            <label class="form-check-label" for="fungsi_penciumanTidakAda"><strong>Tidak
+                                                    Ada
+                                                    Kelainan</strong></label>
                                         </div>
                                         <div class="form-check mb-2">
                                             <input type="checkbox" class="form-check-input" name="fungsi_penciuman[]"
@@ -880,7 +888,8 @@
                                             <input type="checkbox" class="form-check-input" name="kulit[]"
                                                 id="kulitTidakAda" value="Tidak Ada Kelainan"
                                                 @if (is_array(old('kulit')) && in_array('Tidak Ada Kelainan', old('kulit'))) checked @endif>
-                                            <label class="form-check-label" for="kulitTidakAda"><strong>Tidak Ada Kelainan</strong></label>
+                                            <label class="form-check-label" for="kulitTidakAda"><strong>Tidak Ada
+                                                    Kelainan</strong></label>
                                         </div>
                                         <div class="form-check mb-2">
                                             <input type="checkbox" class="form-check-input" name="kulit[]"
@@ -966,7 +975,7 @@
                                                 id="mentalTidakAda" value="Tidak Ada Kelainan"
                                                 @if (is_array(old('mental')) && in_array('Tidak Ada Kelainan', old('mental'))) checked @endif>
                                             <label class="form-check-label" for="mentalTidakAda"><strong>Tidak Ada
-                                                Kelainan</strong></label>
+                                                    Kelainan</strong></label>
                                         </div>
                                         <div class="form-check mb-2">
                                             <input type="checkbox" class="form-check-input" name="mental[]"
@@ -1014,7 +1023,8 @@
                                             <input type="checkbox" class="form-check-input" name="mental[]"
                                                 id="mentalMenarikDiri<" value="Menarik Diri<"
                                                 @if (is_array(old('mental')) && in_array('Menarik Diri<', old('mental'))) checked @endif>
-                                            <label class="form-check-label" for="mentalMenarikDiri<">Menarik Diri</label>
+                                            <label class="form-check-label" for="mentalMenarikDiri<">Menarik
+                                                Diri</label>
                                         </div>
                                         <div class="form-check mb-2">
                                             <input type="checkbox" class="form-check-input" name="mental[]"
@@ -1056,8 +1066,9 @@
                                             <input type="checkbox" class="form-check-input" name="kebersihan_diri[]"
                                                 id="kebersihan_diriTidakAda" value="Tidak Ada Kelainan"
                                                 @if (is_array(old('kebersihan_diri')) && in_array('Tidak Ada Kelainan', old('kebersihan_diri'))) checked @endif>
-                                            <label class="form-check-label" for="kebersihan_diriTidakAda"><strong>Tidak Ada
-                                                Kelainan</strong></label>
+                                            <label class="form-check-label" for="kebersihan_diriTidakAda"><strong>Tidak
+                                                    Ada
+                                                    Kelainan</strong></label>
                                         </div>
                                         <div class="form-check mb-2">
                                             <input type="checkbox" class="form-check-input" name="kebersihan_diri[]"
@@ -1128,8 +1139,9 @@
                                             <input type="checkbox" class="form-check-input" name="tidur_istirahat[]"
                                                 id="tidur_istirahatTidakAda" value="Tidak Ada Kelainan"
                                                 @if (is_array(old('tidur_istirahat')) && in_array('Tidak Ada Kelainan', old('tidur_istirahat'))) checked @endif>
-                                            <label class="form-check-label" for="tidur_istirahatTidakAda"><strong>Tidak Ada
-                                                Kelainan</strong></label>
+                                            <label class="form-check-label" for="tidur_istirahatTidakAda"><strong>Tidak
+                                                    Ada
+                                                    Kelainan</strong></label>
                                         </div>
                                         <div class="form-check mb-2">
                                             <input type="checkbox" class="form-check-input" name="tidur_istirahat[]"
@@ -1166,7 +1178,7 @@
                                                 id="komunikasiTidakAda" value="Tidak Ada Kelainan"
                                                 @if (is_array(old('komunikasi')) && in_array('Tidak Ada Kelainan', old('komunikasi'))) checked @endif>
                                             <label class="form-check-label" for="komunikasiTidakAda"><strong>Tidak Ada
-                                                Kelainan</strong></label>
+                                                    Kelainan</strong></label>
                                         </div>
                                         <div class="form-check mb-2">
                                             <input type="checkbox" class="form-check-input" name="komunikasi[]"
@@ -1202,8 +1214,9 @@
                                             <input type="checkbox" class="form-check-input" name="perawatan_diri[]"
                                                 id="perawatan_diriTidakAda" value="Tidak Ada Kelainan"
                                                 @if (is_array(old('perawatan_diri')) && in_array('Tidak Ada Kelainan', old('perawatan_diri'))) checked @endif>
-                                            <label class="form-check-label" for="perawatan_diriTidakAda"><strong>Tidak Ada
-                                                Kelainan</strong></label>
+                                            <label class="form-check-label" for="perawatan_diriTidakAda"><strong>Tidak
+                                                    Ada
+                                                    Kelainan</strong></label>
                                         </div>
                                         <div class="form-check mb-2">
                                             <input type="checkbox" class="form-check-input" name="perawatan_diri[]"
@@ -1283,18 +1296,32 @@
                                             <option selected> --- Pilih Poli ---- </option>
                                             @foreach ($unit_pelayanans as $unit_pelayanan)
                                                 @if (old('unit_pelayanans_id') === $unit_pelayanan->id)
-                                                    <option value="{{ $unit_pelayanan->id }}">{{ $unit_pelayanan->name }}
+                                                    <option value="{{ $unit_pelayanan->id }}">
+                                                        {{ $unit_pelayanan->name }}
                                                     </option>
                                                 @else
-                                                    <option value="{{ $unit_pelayanan->id }}">{{ $unit_pelayanan->name }}
+                                                    <option value="{{ $unit_pelayanan->id }}">
+                                                        {{ $unit_pelayanan->name }}
                                                     </option>
                                                 @endif
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Kirim Poli</label>
+                                    <div class="col-sm-5">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" name="status"
+                                                id="status" value="0"
+                                                @if (is_array(old('status')) && in_array('0', old('status'))) checked @endif>
+                                            <label class="form-check-label" for="status">Antre Periksa</label>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
                         {{-- --------- End ----------- --}}
                         <div class="card-body">
                             <div class="basic-form">

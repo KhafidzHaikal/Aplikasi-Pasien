@@ -6,6 +6,7 @@ namespace App\Models;
 Use Illuminate\Database\Eloquent\Casts\Attribute;
 use App\Models\KajianPasien;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\UnitPelayananBpUmum;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -48,8 +49,13 @@ class User extends Authenticatable
     protected function type(): Attribute
     {
         return new Attribute(
-            get: fn ($value) => ["admin", "bp-umum", "bp-gigi", "bp-lansia", "kia", "mtbs", "konseling", "laboratorium"][$value],
+            get: fn ($value) => ["admin", "nurse", "bp-umum", "bp-gigi", "bp-lansia", "kia", "mtbs", "konseling", "laboratorium"][$value],
         );
+    }
+
+    public function pasiens()
+    {
+        return $this->hasMany(Pasiens::class);
     }
 
     public function kajian_pasiens()
@@ -57,8 +63,10 @@ class User extends Authenticatable
         return $this->hasMany(KajianPasien::class);
     }
 
-    public function pelayanan_pasiens()
+    public function unit_pelayanan_bp_umums()
     {
-        return $this->hasMany(PelayananPasien::class);
+        return $this->hasMany(UnitPelayananBpUmum::class);
     }
+
+
 }

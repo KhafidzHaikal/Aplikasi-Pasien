@@ -2,15 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\KajianPasien;
-use App\Models\UnitPelayanan;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\UnitPelayanan>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\UnitPelayananBpUmum>
  */
-class UnitPelayananFactory extends Factory
+class UnitPelayananBpUmumFactory extends Factory
 {
     /**
      * Define the model's default state.

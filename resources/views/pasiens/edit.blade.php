@@ -45,8 +45,21 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Nama Petugas</label>
                                     <div class="col-sm-5">
-                                        <input type="text" class="form-control" name="nama_petugas"
-                                            value="{{ old('nama_petugas', $pasien->nama_petugas) }}" required>
+                                        <select class="form-control" name="users_id" id="noPerawatSelect">
+                                            <option selected> --- Pilih Nama Petugas ---- </option>
+                                            @foreach ($petugas as $user)
+                                                @if ($user->type == 'nurse')
+                                                    @if (old('users_id', $pasien->users->id) === $user->id)
+                                                        <option value="{{ $user->id }}">{{ $user->name }}
+                                                        </option>
+                                                    @else
+                                                        <option value="{{ $user->id }}">{{ $user->name }}
+                                                        </option>
+                                                    @endif
+                                                @else
+                                                @endif
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>

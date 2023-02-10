@@ -21,7 +21,7 @@ class KajianPasienController extends Controller
     {
         return view('kajian_pasiens.index', [
             'title' => 'Aplikasi Kajian Pasien',
-            'kajian_pasiens' => KajianPasien::all(),
+            'kajian_pasiens' => KajianPasien::latest()->get(),
         ]);
     }
 
@@ -80,6 +80,7 @@ class KajianPasienController extends Controller
             'ekg' => 'required',
             'usg' => 'required',
             'unit_pelayanans_id' => 'required',
+            'status' => 'required',
         ]);
         $kajian_pasien = new KajianPasien();
         $kajian_pasien->pasiens_no_rm = $request->pasiens_no_rm;
@@ -113,6 +114,7 @@ class KajianPasienController extends Controller
         $kajian_pasien->ekg = $request->ekg;
         $kajian_pasien->usg = $request->usg;
         $kajian_pasien->unit_pelayanans_id = $request->unit_pelayanans_id;
+        $kajian_pasien->status = $request->status;
         $kajian_pasien->save();
         return redirect()->route('kajian-pasiens.index')->with('success', 'Kajian Pasien Berhasil Ditambakan');
     }

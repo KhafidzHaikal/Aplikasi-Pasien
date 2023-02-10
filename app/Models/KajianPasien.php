@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\Pasiens;
 use App\Models\UnitPelayanan;
 use App\Models\PelayananPasien;
+use App\Models\UnitPelayananBpUmum;
+Use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -23,6 +25,13 @@ class KajianPasien extends Model
     public function getCreatedAtAttribute($date)
     {
         return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d-m-Y');
+    }
+
+    protected function status(): Attribute
+    {
+        return new Attribute(
+            get: fn ($value) => ["sedang diperiksa", "sudah diperiksa"][$value],
+        );
     }
 
     public function pasiens()
@@ -43,5 +52,10 @@ class KajianPasien extends Model
     public function unit_pelayanans()
     {
         return $this->belongsTo(UnitPelayanan::class);
+    }
+
+    public function unit_pelayanan_bp_umums()
+    {
+        return $this->hasMany(UnitPelayananBpUmum::class);
     }
 }

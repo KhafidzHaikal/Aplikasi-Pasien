@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Requests\StorePasiensRequest;
 use App\Http\Requests\UpdatePasiensRequest;
+use App\Models\User;
 
 class PasiensController extends Controller
 {
@@ -19,7 +20,7 @@ class PasiensController extends Controller
     {
         return view('pasiens.index', [
             'title' => 'Pasiens',
-            'pasiens' => Pasiens::all()
+            'pasiens' => Pasiens::latest()->get()
         ]);
     }
 
@@ -31,7 +32,8 @@ class PasiensController extends Controller
     public function create()
     {
         return view('pasiens.create', [
-            'title' => 'Tambah Pasien'
+            'title' => 'Tambah Pasien',
+            'petugas' => User::all()
         ]);
     }
 
@@ -47,7 +49,7 @@ class PasiensController extends Controller
         $validatedData = $request->validate([
             'no_rm' => 'required|unique:pasiens,no_rm|max:8',
             'tanggal_kunjungan' => 'required',
-            'nama_petugas' => 'required',
+            'users_id' => 'required',
             'name' => 'required',
             'tanggal_lahir' => 'required',
             'jenis_kelamin' => 'required',
@@ -106,7 +108,7 @@ class PasiensController extends Controller
     {
         $rules = [
             'tanggal_kunjungan' => 'required',
-            'nama_petugas' => 'required',
+            'users_id' => 'required',
             'name' => 'required',
             'tanggal_lahir' => 'required',
             'jenis_kelamin' => 'required',

@@ -60,7 +60,7 @@
                             <div class="form-group row">
                                 <p class="col-sm-3 col-form-label">Nama Petugas</p>
                                 <div class="col-sm-5">
-                                    <strong class="col-sm-3 col-form-label">: {{ $pasien->nama_petugas }}</strong>
+                                    <strong class="col-sm-3 col-form-label">: {{ $pasien->users->name }}</strong>
                                 </div>
                             </div>
                         </div>

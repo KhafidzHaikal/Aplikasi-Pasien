@@ -28,6 +28,14 @@
                                             <input type="text" class="form-control" name="username" value="{{ old('username') }}">
                                         </div>
                                         <div class="form-group">
+                                            <label><strong>Name</strong></label>
+                                            <input type="text" class="form-control" name="name" value="{{ old('name') }}">
+                                        </div>
+                                        <div class="form-group" style="display: none">
+                                            <label><strong>Type</strong></label>
+                                            <input type="text" class="form-control" name="type" value="1">
+                                        </div>
+                                        <div class="form-group">
                                             <label><strong>Email</strong></label>
                                             <input type="email" class="form-control" name="email" value="{{ old('email') }}">
                                         </div>
