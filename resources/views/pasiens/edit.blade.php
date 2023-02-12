@@ -49,8 +49,8 @@
                                             <option selected> --- Pilih Nama Petugas ---- </option>
                                             @foreach ($petugas as $user)
                                                 @if ($user->type == 'nurse')
-                                                    @if (old('users_id', $pasien->users->id) === $user->id)
-                                                        <option value="{{ $user->id }}">{{ $user->name }}
+                                                    @if (old('users_id', $pasien->users_id) == $user->id)
+                                                        <option value="{{ $user->id }}" selected>{{ $user->name }}
                                                         </option>
                                                     @else
                                                         <option value="{{ $user->id }}">{{ $user->name }}

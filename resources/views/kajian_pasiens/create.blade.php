@@ -60,8 +60,7 @@
                                         <select class="form-control" name="users_id" id="noPerawatSelect">
                                             <option selected> --- Pilih Nama Perawat ---- </option>
                                             @foreach ($perawats as $user)
-                                                @if ($user->type == 'admin')
-                                                @else
+                                                @if ($user->type == 'nurse')
                                                     @if (old('users_id') === $user->id)
                                                         <option value="{{ $user->id }}">{{ $user->name }}
                                                         </option>
@@ -69,6 +68,7 @@
                                                         <option value="{{ $user->id }}">{{ $user->name }}
                                                         </option>
                                                     @endif
+                                                @else
                                                 @endif
                                             @endforeach
                                         </select>

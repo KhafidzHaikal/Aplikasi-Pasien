@@ -31,26 +31,40 @@
     <div class="form-group row">
         <label class="col-sm-3 col-form-label">No Registrasi Pasien</label>
         <div class="col-sm-5">
-            <input type="text" class="form-control"
+            @foreach ($kajian_pasiens as $kajian_pasien)
+                @if ($searchkajian == null)
+                    
+                @else
+                    <p>{{ $kajian_pasien->pasiens->no_rm }}</p>
+                @endif
+            @endforeach
+            {{-- <input type="text" class="form-control"
                 value=@foreach ($kajian_pasiens as $kajian_pasien) 
             @if ($searchkajian == null)
 
             @else
             {{ $kajian_pasien->pasiens->no_rm }}
             @endif @endforeach>
-            <small style="font-size: 12px; color:rgb(255, 0, 0)">No. Register terisi otomatis setelah mencari nama/no registrasi pasien</small>
+            <small style="font-size: 12px; color:rgb(255, 0, 0)">No. Register terisi otomatis setelah mencari nama/no registrasi pasien</small> --}}
         </div>
     </div>
     <div class="form-group row">
         <label class="col-sm-3 col-form-label">Nama Pasien</label>
         <div class="col-sm-5">
-            <input style="background-color: #e6e6e6" type="text" disabled class="form-control"
+            @foreach ($kajian_pasiens as $kajian_pasien)
+                @if ($searchkajian == null)
+                    
+                @else
+                    <p>{{ $kajian_pasien->pasiens->name }}</p>
+                @endif
+            @endforeach
+            {{-- <input style="background-color: #e6e6e6" type="text" disabled class="form-control"
                 value=@foreach ($kajian_pasiens as $kajian_pasien) 
             @if ($searchkajian == null)
 
             @else
             {{ $kajian_pasien->pasiens->name }}
-            @endif @endforeach>
+            @endif @endforeach> --}}
         </div>
     </div>
     @foreach ($kajian_pasiens as $kajian_pasien)

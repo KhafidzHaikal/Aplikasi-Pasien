@@ -49,10 +49,16 @@
                                         {{-- <td>{{ $kajian_pasien->pasiens->nik }}</td> --}}
                                         <td>
                                             @if ($kajian_pasien->status == 'sedang diperiksa')
-                                                <p class="btn" style="padding: 3px; background-color:#FFED00; color:black">
+                                                <p class="btn"
+                                                    style="padding: 3px; background-color:#FFED00; color:black">
                                                     {{ $kajian_pasien->status }}</p>
-                                            @else
-                                                <p class="btn" style="padding: 3px; background-color:#16FF00; color:black">
+                                            @elseif ($kajian_pasien->status == 'sudah diperiksa')
+                                                <p class="btn"
+                                                    style="padding: 3px; background-color:#16FF00; color:black">
+                                                    {{ $kajian_pasien->status }}</p>
+                                            @elseif ($kajian_pasien->status == 'menunggu konfirmasi')
+                                                <p class="btn"
+                                                    style="padding: 3px; background-color:#3db5ff; color:black">
                                                     {{ $kajian_pasien->status }}</p>
                                             @endif
                                         </td>

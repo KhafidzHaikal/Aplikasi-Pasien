@@ -42,7 +42,7 @@
                                     </tr>
                                 @else
                                     @foreach ($kajian_pasiens as $kajian_pasien)
-                                        @if ($kajian_pasien->status == 'sedang diperiksa')
+                                        @if ($kajian_pasien->status == 'menunggu konfirmasi')
                                             <tr>
                                                 <td>{{ $kajian_pasien->unit_pelayanans->name }}</td>
                                                 <td>{{ $kajian_pasien->tanggal_pemeriksaan->format('d/m/Y') }}</td>
@@ -54,9 +54,13 @@
                                                         <p class="btn"
                                                             style="padding: 3px; background-color:#FFED00; color:black">
                                                             {{ $kajian_pasien->status }}</p>
-                                                    @else
+                                                    @elseif ($kajian_pasien->status == 'sudah diperiksa')
                                                         <p class="btn"
                                                             style="padding: 3px; background-color:#16FF00; color:black">
+                                                            {{ $kajian_pasien->status }}</p>
+                                                    @elseif ($kajian_pasien->status == 'menunggu konfirmasi')
+                                                        <p class="btn"
+                                                            style="padding: 3px; background-color:#3db5ff; color:black">
                                                             {{ $kajian_pasien->status }}</p>
                                                     @endif
                                                 </td>
@@ -68,7 +72,8 @@
                                                         @method('put')
                                                         @csrf
                                                         <input type="hidden" name="status" value="1">
-                                                        <button class="btn btn-info" type="submit"><i class="bi bi-check-square"></i></button>
+                                                        <button class="btn btn-info" type="submit"><i
+                                                                class="bi bi-check-square"></i></button>
                                                     </form>
                                                 </td>
                                             </tr>

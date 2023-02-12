@@ -10,6 +10,23 @@
     gap: 0.1rem;
 }
 
+.tabel-pasien-sudah-diperiksa {
+    position: absolute;
+    top: 100%;
+    right: -100%;
+}
+
+.tabel-pasien-sudah-diperiksa.active {
+    position: relative;
+    right: 0;
+    top: 0;
+}
+
+#buttonSudahDiperiksa h4 {
+    color: white !important;
+    font-size: 1rem;
+}
+
 @media screen and (min-width: 1000px) {
     .hasil-pemeriksaan-pasien {
         display: grid;

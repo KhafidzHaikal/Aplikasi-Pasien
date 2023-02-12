@@ -30,7 +30,7 @@ class KajianPasien extends Model
     protected function status(): Attribute
     {
         return new Attribute(
-            get: fn ($value) => ["sedang diperiksa", "sudah diperiksa"][$value],
+            get: fn ($value) => ["menunggu konfirmasi", "sedang diperiksa", "sudah diperiksa"][$value],
         );
     }
 

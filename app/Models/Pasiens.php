@@ -52,6 +52,6 @@ class Pasiens extends Model
 
     public function unit_pelayanan_bp_umums()
     {
-        return $this->hasMany(UnitPelayananBpUmum::class);
+        return $this->belongsTo(UnitPelayananBpUmum::class);
     }
 }

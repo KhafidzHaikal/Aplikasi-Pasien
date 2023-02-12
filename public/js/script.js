@@ -7,6 +7,10 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
+    $('#tableBpUmum').DataTable();
+});
+
+$(document).ready(function () {
     $('#roleSelect2').select2();
 });
 
@@ -64,4 +68,6 @@ togglePassword.addEventListener("click", function () {
 $(document).ready(function () {
     $('.ckeditor').ckeditor();
 });
+
+
 

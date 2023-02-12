@@ -93,7 +93,8 @@ class PasiensController extends Controller
     {
         return view('pasiens.edit', [
             'title' => 'Edit Pasien',
-            'pasien' => $pasien
+            'pasien' => $pasien,
+            'petugas' => User::all()
         ]);
     }
 

@@ -47,7 +47,7 @@ class UnitPelayananBpUmumController extends Controller
         } else {
             return view('bp_umum.pelayanan_pasiens.create', [
                 'title' => 'Tambah Pelayanan Pasien',
-                'kajian_pasiens' => KajianPasien::where('unit_pelayanans_id', '=', 1)->get()
+                'kajian_pasiens' => KajianPasien::where('unit_pelayanans_id', '=', 1)->latest()->get()
             ]);
         }
     }
@@ -69,9 +69,9 @@ class UnitPelayananBpUmumController extends Controller
         $validatedData = $request->validate($rules);
         KajianPasien::where('id', $kajianPasien->id)->update($validatedData);
         if (auth()->user()->type == 'admin') {
-            return redirect()->route('admin-bp-umum.create')->with('success', 'Status Pasien Berhasil Dihapus');
+            return redirect()->route('admin-bp-umum.create')->with('success', 'Status Pasien Sudah Diperiksa');
         } else {
-            return redirect()->route('bp-umum.create')->with('success', 'Status Pasien Berhasil Dihapus');
+            return redirect()->route('bp-umum.create')->with('success', 'Status Pasien Sudah Diperiksa');
         }
     }
 
@@ -126,9 +126,19 @@ class UnitPelayananBpUmumController extends Controller
      * @param  \App\Models\UnitPelayananBpUmum  $unitPelayananBpUmum
      * @return \Illuminate\Http\Response
      */
-    public function show(UnitPelayananBpUmum $unitPelayananBpUmum)
+    public function show(UnitPelayananBpUmum $pelayananPasien)
     {
-        //
+        if (auth()->user()->type == 'admin'){
+            return view('admin.bp_umum.pelayanan_pasiens.show', [
+                'title' => 'Detail Pelayanan Pasiens',
+                'pelayanan_pasiens' => $pelayananPasien
+            ]);
+        } else {
+            return view('bp_umum.pelayanan_pasiens.show', [
+                'title' => 'Detail Pelayanan Pasiens',
+                'pelayanan_pasiens' => $pelayananPasien
+            ]);
+        }
     }
 
     /**
@@ -137,9 +147,23 @@ class UnitPelayananBpUmumController extends Controller
      * @param  \App\Models\UnitPelayananBpUmum  $unitPelayananBpUmum
      * @return \Illuminate\Http\Response
      */
-    public function edit(UnitPelayananBpUmum $unitPelayananBpUmum)
+    public function edit(UnitPelayananBpUmum $pelayananPasien)
     {
-        //
+        if (auth()->user()->type == 'admin'){
+            return view('admin.bp_umum.pelayanan_pasiens.edit', [
+                'title' => 'Edit Pelayanan Pasien Poli Umum',
+                'pelayanan_pasiens' => $pelayananPasien,
+                'perawats' => User::all(),
+                'icds' => Icd::all(),
+            ]);
+        } else {
+            return view('bp_umum.pelayanan_pasiens.edit', [
+                'title' => 'Edit Pelayanan Pasien Poli Umum',
+                'pelayanan_pasiens' => $pelayananPasien,
+                'perawats' => User::all(),
+                'icds' => Icd::all()
+            ]);
+        }
     }
 
     /**
@@ -149,9 +173,31 @@ class UnitPelayananBpUmumController extends Controller
      * @param  \App\Models\UnitPelayananBpUmum  $unitPelayananBpUmum
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUnitPelayananBpUmumRequest $request, UnitPelayananBpUmum $unitPelayananBpUmum)
+    public function update(Request $request, UnitPelayananBpUmum $pelayananPasien)
     {
-        //
+        $rules = [
+            'kajian_pasiens_id' => 'required',
+            'tanggal_pemeriksaan'  => 'required',
+            'users_id'  => 'required',
+            'keluhan_utama'  => 'required',
+            'rps'  => 'required',
+            'rpo'  => 'required',
+            'tanda_vital'  => 'required',
+            'icds_kode_icd' => 'required',
+            'diagnosa'  => 'required',
+            'penatalaksanaan'  => 'required',
+            'tindakan'  => 'required',
+            'edukasi'  => 'required',
+            'jenis_kasus'  => 'required',
+        ];
+
+        $validatedData = $request->validate($rules);
+        UnitPelayananBpUmum::where('id', $pelayananPasien->id)->update($validatedData);
+        if (auth()->user()->type == 'admin') {
+            return redirect()->route('admin-bp-umum.index')->with('success', 'Pasien Berhasil Diubah');
+        } else {
+            return redirect()->route('bp-umum.index')->with('success', 'Pasien Berhasil Diubah');
+        }
     }
 
     /**

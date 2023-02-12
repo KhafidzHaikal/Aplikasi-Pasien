@@ -18,7 +18,7 @@
     <div class="form-group row" style="display: none">
         <label class="col-sm-3 col-form-label">No. Kajian Pasien</label>
         <div class="col-sm-5">
-            <input type="text" class="form-control" name="kajian_pasiens_id"
+            <input type="text" class="form-control" maxlength="100" name="kajian_pasiens_id"
                 value=@foreach ($kajian_pasiens as $kajian_pasien) 
             @if ($searchkajian == null)
 
