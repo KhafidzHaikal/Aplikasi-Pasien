@@ -44,13 +44,14 @@
                                 <select class="form-control" name="type" id="roleSelect2">
                                     <option selected> --- Pilih Role ---- </option>
                                     <option value="0">Admin</option>
-                                    <option value="1">BP Umum</option>
-                                    <option value="2">BP Gigi</option>
-                                    <option value="3">BP Lansia</option>
-                                    <option value="4">KIA</option>
-                                    <option value="5">MTBS</option>
-                                    <option value="6">Konseling</option>
-                                    <option value="7">laboratorium</option>
+                                    <option value="1">Nurse</option>
+                                    <option value="2">BP Umum</option>
+                                    <option value="3">BP Gigi</option>
+                                    <option value="4">BP Lansia</option>
+                                    <option value="5">KIA</option>
+                                    <option value="6">MTBS</option>
+                                    <option value="7">Konseling</option>
+                                    <option value="8">laboratorium</option>
                                 </select>
                             </div>
                         </div>
