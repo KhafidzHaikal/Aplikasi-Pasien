@@ -18,6 +18,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
+                    {{-- <h4 class="card-title">Tabel Kajian Pasien <strong>Sedang Diperiksa</strong></h4> --}}
                     <h4 class="card-title">Tabel Kajian Pasien</h4>
                 </div>
                 <div class="card-body">
@@ -59,25 +60,85 @@
                                                             style="padding: 3px; background-color:#16FF00; color:black">
                                                             {{ $kajian_pasien->status }}</p>
                                                     @elseif ($kajian_pasien->status == 'menunggu konfirmasi')
-                                                        <p class="btn"
+                                                    <p class="btn"
                                                             style="padding: 3px; background-color:#3db5ff; color:black">
                                                             {{ $kajian_pasien->status }}</p>
                                                     @endif
                                                 </td>
                                                 <td class="d-flex">
-                                                    <a href={{ route('bp-umum.periksa', $kajian_pasien->pasiens_no_rm) }}
-                                                        class="btn btn-warning mr-2"><i class="bi bi-search"></i></a>
+                                                    {{-- <a href={{ route('bp-umum.periksa', $kajian_pasien->pasiens_no_rm) }}
+                                                        class="btn btn-warning mr-2"><i class="bi bi-search"></i></a> --}}
                                                     <form action={{ route('bp-umum.status', $kajian_pasien->id) }}
                                                         method="POST">
                                                         @method('put')
                                                         @csrf
                                                         <input type="hidden" name="status" value="1">
                                                         <button class="btn btn-info" type="submit"><i
-                                                                class="bi bi-check-square"></i></button>
+                                                                class="bi bi-check-square"></i> Mulai</button>
                                                     </form>
                                                 </td>
                                             </tr>
-                                        @else
+                                        @elseif ($kajian_pasien->status == 'sedang diperiksa')
+                                        <tr>
+                                            <td>{{ $kajian_pasien->unit_pelayanans->name }}</td>
+                                            <td>{{ $kajian_pasien->tanggal_pemeriksaan->format('d/m/Y') }}</td>
+                                            <td>{{ $kajian_pasien->users->name }}</td>
+                                            <td>{{ $kajian_pasien->pasiens->no_rm }}</td>
+                                            <td>{{ $kajian_pasien->pasiens->name }}</td>
+                                            <td>
+                                                @if ($kajian_pasien->status == 'sedang diperiksa')
+                                                    <p class="btn"
+                                                        style="padding: 3px; background-color:#FFED00; color:black">
+                                                        {{ $kajian_pasien->status }}</p>
+                                                @elseif ($kajian_pasien->status == 'sudah diperiksa')
+                                                    <p class="btn"
+                                                        style="padding: 3px; background-color:#16FF00; color:black">
+                                                        {{ $kajian_pasien->status }}</p>
+                                                @elseif ($kajian_pasien->status == 'menunggu konfirmasi')
+                                                <p class="btn"
+                                                        style="padding: 3px; background-color:#3db5ff; color:black">
+                                                        {{ $kajian_pasien->status }}</p>
+                                                @endif
+                                            </td>
+                                            <td class="d-flex">
+                                                <a href={{ route('bp-umum.periksa', $kajian_pasien->pasiens_no_rm) }}
+                                                    class="btn btn-warning mr-2"><i class="bi bi-search"></i> Periksa</a>
+                                                <form action={{ route('bp-umum.status', $kajian_pasien->id) }}
+                                                    method="POST">
+                                                    @method('put')
+                                                    @csrf
+                                                    <input type="hidden" name="status" value="2">
+                                                    <button class="btn btn-danger" type="submit"><i
+                                                            class="bi bi-check-square"></i> Selesai</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        @elseif ($kajian_pasien->status == 'sudah diperiksa')
+                                        <tr>
+                                            <td>{{ $kajian_pasien->unit_pelayanans->name }}</td>
+                                            <td>{{ $kajian_pasien->tanggal_pemeriksaan->format('d/m/Y') }}</td>
+                                            <td>{{ $kajian_pasien->users->name }}</td>
+                                            <td>{{ $kajian_pasien->pasiens->no_rm }}</td>
+                                            <td>{{ $kajian_pasien->pasiens->name }}</td>
+                                            <td>
+                                                @if ($kajian_pasien->status == 'sedang diperiksa')
+                                                    <p class="btn"
+                                                        style="padding: 3px; background-color:#FFED00; color:black">
+                                                        {{ $kajian_pasien->status }}</p>
+                                                @elseif ($kajian_pasien->status == 'sudah diperiksa')
+                                                    <p class="btn"
+                                                        style="padding: 3px; background-color:#16FF00; color:black">
+                                                        {{ $kajian_pasien->status }}</p>
+                                                @elseif ($kajian_pasien->status == 'menunggu konfirmasi')
+                                                <p class="btn"
+                                                        style="padding: 3px; background-color:#3db5ff; color:black">
+                                                        {{ $kajian_pasien->status }}</p>
+                                                @endif
+                                            </td>
+                                            <td class="d-flex">
+                                                <a href={{ route('bp-umum.index') }} class="btn btn-dark"><i class="bi bi-check-lg"></i> Selesai</a>
+                                            </td>
+                                        </tr>
                                         @endif
                                     @endforeach
                                 @endif
@@ -100,4 +161,13 @@
             </div>
         </div>
     </div>
+    <script>
+        const buttonSudahPeriksa = document.querySelector('#buttonSudahDiperiksa');
+        const tabelSudahPeriksa = document.querySelector('#tabel-pasien-sudah-diperiksa');
+
+        buttonSudahPeriksa.onclick = () => {
+            tabelSudahPeriksa.classList.toggle('active');
+            // this.classList.toggle('bi-caret-up-fill');
+        }
+    </script>
 @endsection

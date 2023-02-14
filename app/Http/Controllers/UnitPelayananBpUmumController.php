@@ -88,7 +88,8 @@ class UnitPelayananBpUmumController extends Controller
             return view('bp_umum.pelayanan_pasiens.periksa', [
                 'title' => 'Periksa Pasien',
                 'perawats' => User::all(),
-                'kajian_pasien' => $kajianPasien
+                'kajian_pasien' => $kajianPasien,
+                'icds' => Icd::all()
             ]);
         }
     }

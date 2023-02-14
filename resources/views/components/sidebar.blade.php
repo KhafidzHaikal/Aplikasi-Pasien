@@ -13,21 +13,20 @@
                     <li><a href={{ route('kajian-pasiens.index') }}>Kajian Awal Pasien</a></li>
                 </ul>
             </li>
-            <li class="nav-label">Pelayanan Pasien</li>
+            {{-- <li class="nav-label">Pelayanan Pasien</li>
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                         class="icon icon-app-store"></i><span class="nav-text">Pelayanan Pasien</span></a>
                 <ul aria-expanded="false">
                     <li><a href={{ route('pelayanan-pasiens.index') }}>Aplikasi Pelayanan </a></li>
                     <li><a href="#">Aplikasi Penunjang </a></li>
                 </ul>
-            </li>
+            </li> --}}
             @elseif (auth()->user()->type == 'bp-umum')
                 <li class="nav-label">Pelayanan Pasien Poli Umum</li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                             class="icon icon-app-store"></i><span class="nav-text">Pelayanan Pasien</span></a>
                     <ul aria-expanded="false">
-                        <li><a href={{ route('bp-umum.index') }}>Aplikasi Pelayanan </a></li>
-                        <li><a href="#">Aplikasi Penunjang </a></li>
+                        <li><a href={{ route('bp-umum.index') }}>Aplikasi Pelayanan Poli Umum</a></li>
                     </ul>
                 </li>
             @elseif (auth()->user()->type == 'bp-gigi')
@@ -35,8 +34,7 @@
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                             class="icon icon-app-store"></i><span class="nav-text">Pelayanan Pasien</span></a>
                     <ul aria-expanded="false">
-                        <li><a href={{ route('bp-umum.index') }}>Aplikasi Pelayanan </a></li>
-                        <li><a href="#">Aplikasi Penunjang </a></li>
+                        <li><a href={{ route('bp-gigi.index') }}>Aplikasi Pelayanan Poli Gigi</a></li>
                     </ul>
                 </li>
             @elseif (auth()->user()->type == 'bp-lansia')
@@ -44,8 +42,31 @@
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                             class="icon icon-app-store"></i><span class="nav-text">Pelayanan Pasien</span></a>
                     <ul aria-expanded="false">
-                        <li><a href="#">Aplikasi Pelayanan </a></li>
-                        <li><a href="#">Aplikasi Penunjang </a></li>
+                        <li><a href={{ route('bp-lansia.index') }}>Aplikasi Pelayanan Poli Lansia</a></li>
+                    </ul>
+                </li>
+            @elseif (auth()->user()->type == 'kia')
+                <li class="nav-label">Pelayanan Pasien Poli KIA</li>
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+                            class="icon icon-app-store"></i><span class="nav-text">Pelayanan Pasien</span></a>
+                    <ul aria-expanded="false">
+                        <li><a href={{ route('poli-kia.index') }}>Aplikasi Pelayanan Poli KIA</a></li>
+                    </ul>
+                </li>
+            @elseif (auth()->user()->type == 'mtbs')
+                <li class="nav-label">Pelayanan Pasien Poli MTBS</li>
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+                            class="icon icon-app-store"></i><span class="nav-text">Pelayanan Pasien</span></a>
+                    <ul aria-expanded="false">
+                        <li><a href={{ route('poli-mtbs.index') }}>Aplikasi Pelayanan Poli MTBS</a></li>
+                    </ul>
+                </li>
+            @elseif (auth()->user()->type == 'konseling')
+                <li class="nav-label">Pelayanan Pasien Poli Konselinh</li>
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+                            class="icon icon-app-store"></i><span class="nav-text">Pelayanan Pasien</span></a>
+                    <ul aria-expanded="false">
+                        <li><a href={{ route('poli-konseling.index') }}>Aplikasi Pelayanan Poli Konseling</a></li>
                     </ul>
                 </li>
             @endif
@@ -72,13 +93,11 @@
                             class="icon icon-app-store"></i><span class="nav-text">Pelayanan Pasien</span></a>
                     <ul aria-expanded="false">
                         <li><a href={{ route('admin-bp-umum.index') }}>Aplikasi Pelayanan Poli Umum</a></li>
-                        <li><a href="#">Aplikasi Penunjang Poli Umum</a></li>
-                        <li><a href="#">Aplikasi Pelayanan Poli Gigi</a></li>
-                        <li><a href="#">Aplikasi Penunjang Poli Gigi</a></li>
-                        <li><a href="#">Aplikasi Pelayanan Poli Lansia</a></li>
-                        <li><a href="#">Aplikasi Penunjang Poli Lansia</a></li>
-                        <li><a href="#">Aplikasi Pelayanan KIA</a></li>
-                        <li><a href="#">Aplikasi Penunjang KIA</a></li>
+                        <li><a href={{ route('admin-bp-gigi.index') }}>Aplikasi Pelayanan Poli Gigi</a></li>
+                        <li><a href={{ route('admin-bp-lansia.index') }}>Aplikasi Pelayanan Poli Lansia</a></li>
+                        <li><a href={{ route('admin-poli-kia.index') }}>Aplikasi Pelayanan KIA</a></li>
+                        <li><a href={{ route('admin-poli-mtbs.index') }}>Aplikasi Pelayanan MTBS</a></li>
+                        <li><a href={{ route('admin-poli-konseling.index') }}>Aplikasi Pelayanan Konseling</a></li>
                     </ul>
                 </li>
                 <li class="nav-label first">Kontrol User</li>

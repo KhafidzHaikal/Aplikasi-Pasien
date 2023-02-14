@@ -68,5 +68,28 @@ class User extends Authenticatable
         return $this->hasMany(UnitPelayananBpUmum::class);
     }
 
+    public function unit_pelayanan_bp_gigis()
+    {
+        return $this->hasMany(UnitPelayananBpGigi::class);
+    }
 
+    public function unit_pelayanan_bp_lansias()
+    {
+        return $this->hasMany(UnitPelayananBpLansia::class);
+    }
+
+    public function unit_pelayanan_kias()
+    {
+        return $this->hasMany(UnitPelayananKia::class);
+    }
+
+    public function unit_pelayanan_mtbs()
+    {
+        return $this->hasMany(UnitPelayananMtbs::class);
+    }
+
+    public function unit_pelayanan_konselings()
+    {
+        return $this->hasMany(UnitPelayananKonseling::class);
+    }
 }

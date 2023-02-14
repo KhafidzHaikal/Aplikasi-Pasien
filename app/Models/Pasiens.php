@@ -54,4 +54,29 @@ class Pasiens extends Model
     {
         return $this->belongsTo(UnitPelayananBpUmum::class);
     }
+
+    public function unit_pelayanan_bp_gigis()
+    {
+        return $this->belongsTo(UnitPelayananBpGigi::class);
+    }
+
+    public function unit_pelayanan_bp_lansias()
+    {
+        return $this->belongsTo(UnitPelayananBpLansia::class);
+    }
+
+    public function unit_pelayanan_kias()
+    {
+        return $this->belongsTo(UnitPelayananKia::class);
+    }
+
+    public function unit_pelayanan_mtbs()
+    {
+        return $this->belongsTo(UnitPelayananMtbs::class);
+    }
+
+    public function unit_pelayanan_konselings()
+    {
+        return $this->belongsTo(UnitPelayananKonseling::class);
+    }
 }

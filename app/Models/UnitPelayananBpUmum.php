@@ -35,6 +35,4 @@ class UnitPelayananBpUmum extends Model
     {
         return $this->belongsTo(Icd::class);
     }
-
-
 }
