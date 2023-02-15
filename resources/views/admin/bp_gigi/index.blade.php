@@ -13,7 +13,43 @@
             </ol>
         </div>
     </div>
-    <a class="btn btn-primary col-2 mb-xl-4" style="color:#ffff" href={{ route('admin-bp-gigi.create') }}><i class="bi bi-person-add mr-2"></i> Tambah Pelayanan Pasien</a>
+    <a class="btn btn-primary col-2 mb-xl-4" style="color:#ffff" href={{ route('admin-bp-gigi.create') }}><i class="bi bi-person-add mr-2"></i> Tambah Pasien</a>
+    <button type="button" class="btn btn-danger mb-xl-4" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="bi bi-printer"></i>
+        Print Laporan</button>
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Laporan BP Gigi</h5>
+                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label class="col-sm-3 col-form-label"><strong>Pilih Tanggal Laporan</strong></label>
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Tanggal Awal</label>
+                            <div class="col-sm-5">
+                                <input type="date" class="form-control" id="tanggal_awal" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Tanggal Akhir</label>
+                            <div class="col-sm-5">
+                                <input type="date" class="form-control" id="tanggal_akhir" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <a target="_blank" onclick="this.href='/print-laporan-bp-gigi/'+document.getElementById('tanggal_awal').value+ '/' +document.getElementById('tanggal_akhir').value" class="btn btn-primary">Cetak</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-12">
             <div class="card">

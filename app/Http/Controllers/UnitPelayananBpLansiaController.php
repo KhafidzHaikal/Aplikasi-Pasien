@@ -6,6 +6,7 @@ use App\Models\Icd;
 use App\Models\User;
 use App\Models\KajianPasien;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\UnitPelayananBpLansia;
 
 class UnitPelayananBpLansiaController extends Controller
@@ -209,5 +210,14 @@ class UnitPelayananBpLansiaController extends Controller
         } else {
         return redirect()->route('bp-lansia.index')->with('success', 'Pasien Berhasil Dihapus');
         }
+    }
+
+    public function print($tanggal_awal, $tanggal_akhir)
+    {
+        // dd($tanggal_awal, $tanggal_akhir);
+        $pelayanan_pasiens = UnitPelayananBpLansia::with('users', 'kajian_pasiens', 'icds', 'pasiens')->whereBetween('tanggal_pemeriksaan', [$tanggal_awal, $tanggal_akhir])->get();
+        // dd($pelayanan_pasiens);
+        $pdf = Pdf::loadView('admin.bp_lansia.pdf', compact('pelayanan_pasiens'))->setPaper('legal', 'landscape');
+        return $pdf->stream('Laporan-BP-Lansia.pdf');
     }
 }

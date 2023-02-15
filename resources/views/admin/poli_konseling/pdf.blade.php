@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Laporan Pasien BP UMUM</title>
+    <title>Laporan Pasien Poli KONSELING</title>
     <!-- Favicon icon -->
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -17,7 +17,7 @@
 <body>
     <h2>LAPORAN KUNJUNGAN PASIEN DI PUSKESMAS</h2>
     <br>
-    <h2 class="mb-4" style="margin-top:-1.5rem">POLI/UNIT PELAYANAN UMUM</h2>
+    <h2 class="mb-4" style="margin-top:-1.5rem">POLI/UNIT PELAYANAN KONSELING</h2>
     <table>
         <thead>
             <th>No</th>

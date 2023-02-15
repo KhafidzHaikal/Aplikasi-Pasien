@@ -132,6 +132,11 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::get('/print-laporan-bp-umum/{tanggal_awal}/{tanggal_akhir}', [UnitPelayananBpUmumController::class, 'print'])->name('admin-bp-umum.print');
+    Route::get('/print-laporan-bp-gigi/{tanggal_awal}/{tanggal_akhir}', [UnitPelayananBpGigiController::class, 'print'])->name('admin-bp-gigi.print');
+    Route::get('/print-laporan-bp-lansia/{tanggal_awal}/{tanggal_akhir}', [UnitPelayananBpLansiaController::class, 'print'])->name('admin-bp-gigi.print');
+    Route::get('/print-laporan-poli-kia/{tanggal_awal}/{tanggal_akhir}', [UnitPelayananKiaController::class, 'print'])->name('admin-bp-gigi.print');
+    Route::get('/print-laporan-poli-mtbs/{tanggal_awal}/{tanggal_akhir}', [UnitPelayananMtbsController::class, 'print'])->name('admin-bp-gigi.print');
+    Route::get('/print-laporan-poli-konseling/{tanggal_awal}/{tanggal_akhir}', [UnitPelayananKonselingController::class, 'print'])->name('admin-bp-gigi.print');
 
     Route::middleware(['user-access:bp-umum'])->group(function () {
         Route::prefix('bp-umum')->group(function () {
