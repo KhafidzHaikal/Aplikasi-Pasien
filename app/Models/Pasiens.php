@@ -45,6 +45,11 @@ class Pasiens extends Model
         return $this->hasMany(KajianPasien::class);
     }
 
+    public function unit_pelayanans()
+    {
+        return $this->belongsTo(UnitPelayanan::class);
+    }
+
     public function pelayanan_pasiens()
     {
         return $this->hasMany(PelayananPasien::class);

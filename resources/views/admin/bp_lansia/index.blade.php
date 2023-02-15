@@ -41,10 +41,10 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $pelayanan_pasien->tanggal_pemeriksaan->format('d/m/Y') }}</td>
                                         <td>{{ $pelayanan_pasien->users->name }}</td>
+                                        <td>{{ $pelayanan_pasien->kajian_pasiens->unit_pelayanans->name }}</td>
                                         <td>{{ $pelayanan_pasien->kajian_pasiens->pasiens->no_rm }}</td>
                                         <td>{{ $pelayanan_pasien->kajian_pasiens->pasiens->name }}</td>
                                         <td>{{ $pelayanan_pasien->kajian_pasiens->pasiens->nik }}</td>
-                                        <td>{{ $pelayanan_pasien->keluhan_utama }}</td>
                                         <td class="d-flex">
                                             <a href={{ route('admin-bp-lansia.edit', $pelayanan_pasien->id ) }} class="btn btn-warning mr-2"><i class="bi bi-pencil-square"></i></a>
                                             <a href={{ route('admin-bp-lansia.show', $pelayanan_pasien->id ) }} class="btn btn-info mr-2"><i class="bi bi-info-circle"></i></a>

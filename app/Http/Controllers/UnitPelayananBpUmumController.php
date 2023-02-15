@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateUnitPelayananBpUmumRequest;
 use App\Models\Icd;
 use App\Models\KajianPasien;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class UnitPelayananBpUmumController extends Controller
@@ -103,9 +104,7 @@ class UnitPelayananBpUmumController extends Controller
             'keluhan_utama'  => 'required',
             'rps'  => 'required',
             'rpo'  => 'required',
-            'tanda_vital'  => 'required',
             'icds_kode_icd' => 'required',
-            'diagnosa'  => 'required',
             'penatalaksanaan'  => 'required',
             'tindakan'  => 'required',
             'edukasi'  => 'required',
@@ -183,9 +182,7 @@ class UnitPelayananBpUmumController extends Controller
             'keluhan_utama'  => 'required',
             'rps'  => 'required',
             'rpo'  => 'required',
-            'tanda_vital'  => 'required',
             'icds_kode_icd' => 'required',
-            'diagnosa'  => 'required',
             'penatalaksanaan'  => 'required',
             'tindakan'  => 'required',
             'edukasi'  => 'required',
@@ -215,5 +212,14 @@ class UnitPelayananBpUmumController extends Controller
         } else {
         return redirect()->route('bp-umum.index')->with('success', 'Pasien Berhasil Dihapus');
         }
+    }
+
+    public function print($tanggal_awal, $tanggal_akhir)
+    {
+        // dd($tanggal_awal, $tanggal_akhir);
+        $pelayanan_pasiens = UnitPelayananBpUmum::with('users', 'kajian_pasiens', 'icds', 'pasiens')->whereBetween('tanggal_pemeriksaan', [$tanggal_awal, $tanggal_akhir])->get();
+        // dd($pelayanan_pasiens);
+        $pdf = Pdf::loadView('admin.bp_umum.pelayanan_pasiens.pdf', compact('pelayanan_pasiens'))->setPaper('legal', 'landscape');
+        return $pdf->stream('Laporan-BP-Umum.pdf');
     }
 }

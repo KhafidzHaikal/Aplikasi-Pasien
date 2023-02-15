@@ -131,6 +131,8 @@ Route::middleware(['auth'])->group(function () {
         });
     });
 
+    Route::get('/print-laporan-bp-umum/{tanggal_awal}/{tanggal_akhir}', [UnitPelayananBpUmumController::class, 'print'])->name('admin-bp-umum.print');
+
     Route::middleware(['user-access:bp-umum'])->group(function () {
         Route::prefix('bp-umum')->group(function () {
             Route::get('/', [UnitPelayananBpUmumController::class, 'index'])->name('bp-umum.index');

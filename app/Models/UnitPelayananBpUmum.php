@@ -28,7 +28,7 @@ class UnitPelayananBpUmum extends Model
 
     public function pasiens()
     {
-        return $this->hasMany(Pasiens::class);
+        return $this->belongsTo(Pasiens::class);
     }
 
     public function icds()

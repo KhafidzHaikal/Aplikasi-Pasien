@@ -131,36 +131,20 @@
                         <div class="card-body">
                             <div class="basic-form">
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Tanda Vital</label>
-                                    <div class="col-sm-5">
-                                        <div class="input-group mb-3">
-                                            <textarea class="form-control" name="tanda_vital">{{ old('tanda_vital') }}</textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Kode ICD</label>
                                     <div class="col-sm-5">
                                         <select class="form-control" name="icds_kode_icd" id="icd">
                                             <option selected> --- Pilih ICD --- </option>
                                             @foreach ($icds as $icd)
                                                 @if (old('icds_kode_icd') === $icd->kode_icd)
-                                                    <option value="{{ $icd->kode_icd }}">{{ $icd->kode_icd }} - {{ $icd->nama_icd_indo }}
+                                                    <option value="{{ $icd->kode_icd }}">{{ $icd->kode_icd }} - {{ $icd->nama_icd }}
                                                     </option>
                                                 @else
-                                                    <option value="{{ $icd->kode_icd }}">{{ $icd->kode_icd }} - {{ $icd->nama_icd_indo }}
+                                                    <option value="{{ $icd->kode_icd }}">{{ $icd->kode_icd }} - {{ $icd->nama_icd }}
                                                     </option>
                                                 @endif
                                             @endforeach
                                         </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Diagnosa</label>
-                                    <div class="col-sm-5">
-                                        <div class="input-group mb-3">
-                                            <textarea class="form-control" name="diagnosa">{{ old('diagnosa') }}</textarea>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -188,10 +172,10 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Jenis Kasus Diagnosa</label>
+                                    <label class="col-sm-3 col-form-label">Status Diagnosa</label>
                                     <div class="col-sm-5">
                                         <select class="form-control" name="jenis_kasus">
-                                            <option> --- Pilih Jenis Diagnosa --- </option>
+                                            <option> --- Pilih Status Diagnosa --- </option>
                                             <option value="Lama">Lama</option>
                                             <option value="Baru">Baru</option>
                                         </select>

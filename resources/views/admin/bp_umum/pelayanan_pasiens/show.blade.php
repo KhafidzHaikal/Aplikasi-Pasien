@@ -254,7 +254,7 @@
                     <div class="card-body">
                         <div class="basic-form">
                             <div class="form-group row">
-                                <p class="col-sm-4 col-form-label">Jenis Kasus</p>
+                                <p class="col-sm-4 col-form-label">Status Diagnosa</p>
                                 <p class="col-sm-8 col-form-label">: {{ $pelayanan_pasiens->jenis_kasus }}</p>
                             </div>
                             <div class="form-group row">
@@ -270,20 +270,12 @@
                                 <p class="col-sm-8 col-form-label">: {{ $pelayanan_pasiens->rpo }}</p>
                             </div>
                             <div class="form-group row">
-                                <p class="col-sm-4 col-form-label">Tanda Vital</p>
-                                <p class="col-sm-8 col-form-label">: {{ $pelayanan_pasiens->tanda_vital }}</p>
-                            </div>
-                            <div class="form-group row">
                                 <p class="col-sm-4 col-form-label">ICD</p>
                                 <p class="col-sm-8 col-form-label">: {{ $pelayanan_pasiens->icds->kode_icd }} -
-                                    {{ $pelayanan_pasiens->icds->nama_icd_indo }}</p>
+                                    {{ $pelayanan_pasiens->icds->nama_icd }}</p>
                             </div>
                             <div class="form-group row">
-                                <p class="col-sm-4 col-form-label">Diagnosa</p>
-                                <p class="col-sm-8 col-form-label">: {{ $pelayanan_pasiens->diagnosa }}</p>
-                            </div>
-                            <div class="form-group row">
-                                <p class="col-sm-4 col-form-label">Penatalaksanaan</p>
+                                <p class="col-sm-4 col-form-label">Terapi / Pengobatan</p>
                                 <p class="col-sm-8 col-form-label">: {{ $pelayanan_pasiens->penatalaksanaan }}</p>
                             </div>
                             <div class="form-group row">

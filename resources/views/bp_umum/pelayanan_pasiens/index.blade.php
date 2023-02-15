@@ -13,7 +13,44 @@
             </ol>
         </div>
     </div>
-    <a class="btn btn-primary col-2 mb-xl-4" style="color:#ffff" href={{ route('bp-umum.create') }}><i class="bi bi-person-add mr-2"></i> Tambah Pelayanan Pasien</a>
+    <a class="btn btn-primary col-2 mb-xl-4" style="color:#ffff" href={{ route('bp-umum.create') }}><i
+            class="bi bi-person-add mr-2"></i> Tambah Pasien</a>
+    <button type="button" class="btn btn-danger mb-xl-4" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="bi bi-printer"></i>
+        Print Laporan</button>
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Laporan BP Umum</h5>
+                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label class="col-sm-3 col-form-label"><strong>Pilih Tanggal Laporan</strong></label>
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Tanggal Awal</label>
+                            <div class="col-sm-5">
+                                <input type="date" class="form-control" id="tanggal_awal" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Tanggal Akhir</label>
+                            <div class="col-sm-5">
+                                <input type="date" class="form-control" id="tanggal_akhir" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <a onclick="this.href='/print-laporan-bp-umum/'+document.getElementById('tanggal_awal').value+ '/' +document.getElementById('tanggal_akhir').value" class="btn btn-primary">Cetak</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -41,18 +78,20 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $pelayanan_pasien->tanggal_pemeriksaan->format('d/m/Y') }}</td>
                                         <td>{{ $pelayanan_pasien->users->name }}</td>
+                                        <td>{{ $pelayanan_pasien->kajian_pasiens->unit_pelayanans->name }}</td>
                                         <td>{{ $pelayanan_pasien->kajian_pasiens->pasiens->no_rm }}</td>
                                         <td>{{ $pelayanan_pasien->kajian_pasiens->pasiens->name }}</td>
                                         <td>{{ $pelayanan_pasien->kajian_pasiens->pasiens->nik }}</td>
-                                        <td>{{ $pelayanan_pasien->keluhan_utama }}</td>
                                         <td class="d-flex">
-                                            <a href={{ route('bp-umum.edit', $pelayanan_pasien->id ) }} class="btn btn-warning mr-2"><i class="bi bi-pencil-square"></i></a>
-                                            <a href={{ route('bp-umum.show', $pelayanan_pasien->id ) }} class="btn btn-info mr-2"><i class="bi bi-info-circle"></i></a>
-                                            <form action={{ route('bp-umum.destroy', $pelayanan_pasien->id) }} method="POST">
+                                            <a href={{ route('bp-umum.edit', $pelayanan_pasien->id) }}
+                                                class="btn btn-warning mr-2"><i class="bi bi-pencil-square"></i></a>
+                                            <a href={{ route('bp-umum.show', $pelayanan_pasien->id) }}
+                                                class="btn btn-info mr-2"><i class="bi bi-info-circle"></i></a>
+                                            <form action={{ route('bp-umum.destroy', $pelayanan_pasien->id) }}
+                                                method="POST">
                                                 @method('delete')
                                                 @csrf
-                                                <button class="btn btn-danger"><i
-                                                        class="bi bi-trash"></i></button>
+                                                <button class="btn btn-danger"><i class="bi bi-trash"></i></button>
                                             </form>
                                         </td>
                                     </tr>
@@ -72,7 +111,7 @@
                             </tfoot>
                         </table>
                     </div>
-                    
+
                 </div>
             </div>
         </div>

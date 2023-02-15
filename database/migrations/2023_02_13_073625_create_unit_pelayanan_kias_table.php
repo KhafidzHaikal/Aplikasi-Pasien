@@ -21,9 +21,7 @@ return new class extends Migration
             $table->text('keluhan_utama');
             $table->string('rps');
             $table->string('rpo');
-            $table->string('tanda_vital');
             $table->string('icds_kode_icd');
-            $table->string('diagnosa');
             $table->string('penatalaksanaan');
             $table->string('tindakan');
             $table->string('edukasi');
