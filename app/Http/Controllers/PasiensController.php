@@ -8,6 +8,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Requests\StorePasiensRequest;
 use App\Http\Requests\UpdatePasiensRequest;
 use App\Models\User;
+use Carbon\Carbon;
 
 class PasiensController extends Controller
 {
@@ -152,5 +153,19 @@ class PasiensController extends Controller
         $pdf = Pdf::loadView('pasiens.print', ['pasien' => ($pasien)])->setPaper('a4');
         // return $pdf->download('pasienPDF.pdf');
         return $pdf->stream('pasienPDF.pdf');
+    }
+    
+    public function print($tanggal_awal, $tanggal_akhir)
+    {
+        // dd($tanggal_awal, $tanggal_akhir);
+        $pasiens = Pasiens::with('users', 'kajian_pasiens')->whereBetween('tanggal_kunjungan', [$tanggal_awal, $tanggal_akhir])->get();
+        $date = Carbon::now()->format('d-m-Y');
+        $tanggal_awal = $tanggal_awal;
+        $newTanggalAwal = Carbon::createFromFormat('Y-m-d', $tanggal_awal)->format('d-m-Y');
+        $tanggal_akhir = $tanggal_akhir;
+        $newTanggalAkhir = Carbon::createFromFormat('Y-m-d', $tanggal_akhir)->format('d-m-Y');
+        // dd($pasiens);
+        $pdf = Pdf::loadView('pasiens.report', compact('pasiens', 'date', 'newTanggalAwal', 'newTanggalAkhir'))->setPaper('legal', 'landscape');
+        return $pdf->stream('Laporan-Pasien.pdf');
     }
 }

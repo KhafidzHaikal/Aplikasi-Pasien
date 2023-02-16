@@ -18,7 +18,9 @@
     <h2>LAPORAN KUNJUNGAN PASIEN DI PUSKESMAS</h2>
     <br>
     <h2 class="mb-4" style="margin-top:-1.5rem">POLI/UNIT PELAYANAN Lansia</h2>
-    <table>
+    <p style="position:absolute;left:0">Tanggal Kunjungan : {{ $date }}</p>
+    <p style="position:absolute;right:0">Periode Tanggal {{ $newTanggalAwal }} s/d Tanggal {{ $newTanggalAkhir }}</p>
+    <table class="mt-5">
         <thead>
             <th>No</th>
             <th>No. RM</th>

@@ -52,7 +52,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/kajian-pasien/{kajian_pasien:pasiens_no_rm}/edit', [KajianPasienController::class, 'edit'])->name('kajian-pasiens.edit');
     Route::put('/kajian-pasien/{kajian_pasien:pasiens_no_rm}', [KajianPasienController::class, 'update'])->name('kajian-pasiens.update');
     Route::delete('/kajian-pasien/{kajian_pasien}', [KajianPasienController::class, 'destroy'])->name('kajian-pasiens.destroy');
-    Route::get('/pdf-view-kajian-pasien/{kajian_pasiens}', [KajianPasienController::class, 'pdf'])->name('pdf-kajian-pasien');
+    Route::get('/pdf-view-kajian-pasien/{kajian_pasien:pasiens_no_rm}', [KajianPasienController::class, 'pdf'])->name('pdf-kajian-pasien');
 
     Route::middleware(['user-access:admin'])->group(function () {
         Route::resources([
@@ -131,6 +131,7 @@ Route::middleware(['auth'])->group(function () {
         });
     });
 
+    Route::get('/print-laporan-pasien/{tanggal_awal}/{tanggal_akhir}', [PasiensController::class, 'print'])->name('admin-pasiens.print');
     Route::get('/print-laporan-bp-umum/{tanggal_awal}/{tanggal_akhir}', [UnitPelayananBpUmumController::class, 'print'])->name('admin-bp-umum.print');
     Route::get('/print-laporan-bp-gigi/{tanggal_awal}/{tanggal_akhir}', [UnitPelayananBpGigiController::class, 'print'])->name('admin-bp-gigi.print');
     Route::get('/print-laporan-bp-lansia/{tanggal_awal}/{tanggal_akhir}', [UnitPelayananBpLansiaController::class, 'print'])->name('admin-bp-gigi.print');

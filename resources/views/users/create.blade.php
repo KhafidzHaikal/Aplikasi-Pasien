@@ -51,7 +51,7 @@
                                     <option value="5">KIA</option>
                                     <option value="6">MTBS</option>
                                     <option value="7">Konseling</option>
-                                    <option value="8">laboratorium</option>
+                                    <option value="8">Farmasi</option>
                                 </select>
                             </div>
                         </div>

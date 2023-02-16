@@ -25,8 +25,8 @@
     <div class="row page-titles mx-0">
         <div class="col-sm-6 p-md-0">
             <div class="welcome-text d-flex align-items-start">
-                <a class="btn btn-primary mr-2" style="color: #fff"
-                    href={{ route('pdf-kajian-pasien', $kajian_pasiens->id) }}><i class="bi bi-printer"></i> PDF</a>
+                <a class="btn btn-primary mr-2" target="_blank" style="color: #fff"
+                    href={{ route('pdf-kajian-pasien', $kajian_pasiens->pasiens_no_rm) }}><i class="bi bi-printer"></i> Cetak</a>
                 <a href={{ route('kajian-pasiens.edit', $kajian_pasiens->id) }} class="btn btn-warning mr-2"><i
                         class="bi bi-pencil-square"></i> Edit</a>
                 <form action={{ route('kajian-pasiens.destroy', $kajian_pasiens->id) }} method="POST">

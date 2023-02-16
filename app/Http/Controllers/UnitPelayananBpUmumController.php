@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\Icd;
+use App\Models\User;
+use App\Models\KajianPasien;
+use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\UnitPelayananBpUmum;
 use App\Http\Requests\StoreUnitPelayananBpUmumRequest;
 use App\Http\Requests\UpdateUnitPelayananBpUmumRequest;
-use App\Models\Icd;
-use App\Models\KajianPasien;
-use App\Models\User;
-use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Http\Request;
 
 class UnitPelayananBpUmumController extends Controller
 {
@@ -218,8 +219,13 @@ class UnitPelayananBpUmumController extends Controller
     {
         // dd($tanggal_awal, $tanggal_akhir);
         $pelayanan_pasiens = UnitPelayananBpUmum::with('users', 'kajian_pasiens', 'icds', 'pasiens')->whereBetween('tanggal_pemeriksaan', [$tanggal_awal, $tanggal_akhir])->get();
+        $date = Carbon::now()->format('d-m-Y');
+        $tanggal_awal = $tanggal_awal;
+        $newTanggalAwal = Carbon::createFromFormat('Y-m-d', $tanggal_awal)->format('d-m-Y');
+        $tanggal_akhir = $tanggal_akhir;
+        $newTanggalAkhir = Carbon::createFromFormat('Y-m-d', $tanggal_akhir)->format('d-m-Y');
         // dd($pelayanan_pasiens);
-        $pdf = Pdf::loadView('admin.bp_umum.pelayanan_pasiens.pdf', compact('pelayanan_pasiens'))->setPaper('legal', 'landscape');
+        $pdf = Pdf::loadView('admin.bp_umum.pelayanan_pasiens.pdf', compact('pelayanan_pasiens', 'date', 'newTanggalAwal', 'newTanggalAkhir'))->setPaper('legal', 'landscape');
         return $pdf->stream('Laporan-BP-Umum.pdf');
     }
 }

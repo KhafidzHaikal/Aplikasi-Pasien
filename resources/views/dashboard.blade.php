@@ -20,11 +20,11 @@
             <div class="card">
                 <div class="stat-widget-one card-body">
                     <div class="stat-icon d-inline-block">
-                        <i class="ti-money text-success border-success"></i>
+                        <i class="bi bi-people"></i>
                     </div>
                     <div class="stat-content d-inline-block">
-                        <div class="stat-text">Profit</div>
-                        <div class="stat-digit">1,012</div>
+                        <div class="stat-text">Jumlah Pasien</div>
+                        <div class="stat-digit"></div>
                     </div>
                 </div>
             </div>

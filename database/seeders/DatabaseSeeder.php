@@ -85,10 +85,10 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('111111')
         ]);
         User::create([
-            'username' => 'Laboratorium',
-            'name' => 'Laboratorium',
+            'username' => 'Farmasi',
+            'name' => 'Farmasi',
             'type' => '8',
-            'email' => 'Lab@gmail.com',
+            'email' => 'Far@gmail.com',
             'password' => Hash::make('111111')
         ]);
                 
