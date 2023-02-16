@@ -284,9 +284,9 @@
                                         </div>
                                         <div class="form-check mb-2">
                                             <input type="checkbox" class="form-check-input" name="perkemihan[]"
-                                                id="perkemihanHemaruri" value="Hemaruri"
-                                                @if (is_array(old('perkemihan')) && in_array('Hemaruri', old('perkemihan'))) checked @endif>
-                                            <label class="form-check-label" for="perkemihanHemaruri">Hemaruri</label>
+                                                id="perkemihanHematuri" value="Hematuri"
+                                                @if (is_array(old('perkemihan')) && in_array('Hematuri', old('perkemihan'))) checked @endif>
+                                            <label class="form-check-label" for="perkemihanHematuri">Hematuri</label>
                                         </div>
                                         <div class="form-check mb-2">
                                             <input type="checkbox" class="form-check-input" name="perkemihan[]"
