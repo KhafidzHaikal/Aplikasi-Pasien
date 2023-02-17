@@ -64,7 +64,8 @@
                                     <label class="col-sm-3 col-form-label">Tanggal Pemeriksaan</label>
                                     <div class="col-sm-5">
                                         <input type="date" class="form-control" name="tanggal_pemeriksaan"
-                                            value="{{ old('tanggal_pemeriksaan', $pelayanan_pasiens->tanggal_pemeriksaan->toDateString()) }}" required>
+                                            value="{{ old('tanggal_pemeriksaan', $pelayanan_pasiens->tanggal_pemeriksaan->toDateString()) }}"
+                                            required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -106,7 +107,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">RPS</label>
+                                    <label class="col-sm-3 col-form-label">Riwayat Penyakit Sekarang</label>
                                     <div class="col-sm-5">
                                         <div class="input-group mb-3">
                                             <input type="text" class="form-control" name="rps"
@@ -115,7 +116,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">RPO</label>
+                                    <label class="col-sm-3 col-form-label">Riwayat Penyakit Dulu</label>
                                     <div class="col-sm-5">
                                         <div class="input-group mb-3">
                                             <input type="text" class="form-control" name="rpo"
@@ -138,10 +139,12 @@
                                             <option selected> --- Pilih ICD --- </option>
                                             @foreach ($icds as $icd)
                                                 @if (old('icds_kode_icd', $pelayanan_pasiens->icds_kode_icd) == $icd->kode_icd)
-                                                    <option value="{{ $icd->kode_icd }}" selected>{{ $icd->kode_icd }} - {{ $icd->nama_icd }}
+                                                    <option value="{{ $icd->kode_icd }}" selected>{{ $icd->kode_icd }} -
+                                                        {{ $icd->nama_icd }}
                                                     </option>
                                                 @else
-                                                    <option value="{{ $icd->kode_icd }}">{{ $icd->kode_icd }} - {{ $icd->nama_icd }}
+                                                    <option value="{{ $icd->kode_icd }}">{{ $icd->kode_icd }} -
+                                                        {{ $icd->nama_icd }}
                                                     </option>
                                                 @endif
                                             @endforeach
@@ -175,10 +178,12 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Status Diagnosa</label>
                                     <div class="col-sm-5">
-                                        <select class="form-control" name="jenis_kasus">
+                                        <select class="form-control" name="jenis_kasus" required>
                                             <option> --- Pilih Status Diagnosa --- </option>
-                                            <option value="Lama">Lama</option>
-                                            <option value="Baru">Baru</option>
+                                            <option value="Lama"
+                                                @if (old('jenis_kasus', $pelayanan_pasiens->jenis_kasus) == 'Lama') {{ 'selected' }} @endif>Lama</option>
+                                            <option value="Baru"
+                                                @if (old('jenis_kasus', $pelayanan_pasiens->jenis_kasus) == 'Baru') {{ 'selected' }} @endif>Baru</option>
                                         </select>
                                     </div>
                                 </div>

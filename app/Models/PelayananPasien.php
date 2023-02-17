@@ -41,4 +41,19 @@ class PelayananPasien extends Model
     {
         return $this->belongsTo(Icd::class);
     }
+
+    public function unit_pelayanans()
+    {
+        return $this->belongsTo(UnitPelayanan::class);
+    }
+
+    public function farmasi_pasiens()
+    {
+        return $this->belongsTo(FarmasiPasien::class);
+    }
+
+    public function obats()
+    {
+        return $this->hasMany(Obat::class);
+    }
 }

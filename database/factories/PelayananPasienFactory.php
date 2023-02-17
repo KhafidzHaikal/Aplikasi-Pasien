@@ -26,13 +26,12 @@ class PelayananPasienFactory extends Factory
             'keluhan_utama' => $this->faker->sentence(6),
             'rps' => $this->faker->sentence(3, 20),
             'rpo' => $this->faker->sentence(3, 20),
-            'tanda_vital' => $this->faker->sentence(3, 20),
             'icds_kode_icd' => $this->faker->randomElement(Icd::pluck('kode_icd')),
-            'diagnosa' => $this->faker->sentence(3, 20),
             'penatalaksanaan' => $this->faker->sentence(3, 20),
             'tindakan' => $this->faker->sentence(3, 20),
             'edukasi' => $this->faker->sentence(3, 20),
             'jenis_kasus' => $this->faker->word(1),
+            'unit_pelayanans_id' => mt_rand(1, 6)
         ];
     }
 }

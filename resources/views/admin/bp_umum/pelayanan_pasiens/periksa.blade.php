@@ -56,7 +56,7 @@
                                     <div class="col-sm-5">
                                         <a class="btn btn-primary col-12"
                                             href={{ route('kajian-pasiens.show', $kajian_pasien->pasiens_no_rm) }}
-                                            target="_blank">Detai Pasien</a>
+                                            target="_blank">Detail Pasien</a>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -69,15 +69,15 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Nama Pemeriksa / Dokter</label>
                                     <div class="col-sm-5">
-                                        <select class="form-control" name="users_id" id="noPerawatSelect">
-                                            <option selected> --- Pilih Nama Pemeriksa / Dokter --- </option>
-                                            @foreach ($perawats as $perawat)
-                                                @if ($perawat->type == 'bp-umum')
-                                                    @if (old('users_id') === $perawat->id)
-                                                        <option value="{{ $perawat->id }}">{{ $perawat->name }}
+                                        <select class="form-control" name="users_id" id="noPerawatSelect" required>
+                                            <option> --- Pilih Nama Pemeriksa / Dokter --- </option>
+                                            @foreach ($perawats as $user)
+                                                @if ($user->type == 'bp-umum')
+                                                    @if (old('users_id') == $user->id)
+                                                        <option value="{{ $user->id }}" selected>{{ $user->name }}
                                                         </option>
                                                     @else
-                                                        <option value="{{ $perawat->id }}">{{ $perawat->name }}
+                                                        <option value="{{ $user->id }}">{{ $user->name }}
                                                         </option>
                                                     @endif
                                                 @else
@@ -105,7 +105,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">RPS</label>
+                                    <label class="col-sm-3 col-form-label">Riwayat Penyakit Sekarang</label>
                                     <div class="col-sm-5">
                                         <div class="input-group mb-3">
                                             <input type="text" class="form-control" name="rps"
@@ -114,7 +114,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">RPO</label>
+                                    <label class="col-sm-3 col-form-label">Riwayat Penyakit Dulu</label>
                                     <div class="col-sm-5">
                                         <div class="input-group mb-3">
                                             <input type="text" class="form-control" name="rpo"
@@ -133,14 +133,16 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Kode ICD</label>
                                     <div class="col-sm-5">
-                                        <select class="form-control" name="icds_kode_icd" id="icd">
+                                        <select class="form-control" name="icds_kode_icd" id="icd" required>
                                             <option selected> --- Pilih ICD --- </option>
                                             @foreach ($icds as $icd)
-                                                @if (old('icds_kode_icd') === $icd->kode_icd)
-                                                    <option value="{{ $icd->kode_icd }}">{{ $icd->kode_icd }} - {{ $icd->nama_icd }}
+                                                @if (old('icds_kode_icd') == $icd->kode_icd)
+                                                    <option value="{{ $icd->kode_icd }}" selected>{{ $icd->kode_icd }} -
+                                                        {{ $icd->nama_icd }}
                                                     </option>
                                                 @else
-                                                    <option value="{{ $icd->kode_icd }}">{{ $icd->kode_icd }} - {{ $icd->nama_icd }}
+                                                    <option value="{{ $icd->kode_icd }}">{{ $icd->kode_icd }} -
+                                                        {{ $icd->nama_icd }}
                                                     </option>
                                                 @endif
                                             @endforeach
@@ -174,10 +176,21 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Status Diagnosa</label>
                                     <div class="col-sm-5">
-                                        <select class="form-control" name="jenis_kasus">
+                                        <select class="form-control" name="jenis_kasus" required>
                                             <option> --- Pilih Status Diagnosa --- </option>
-                                            <option value="Lama">Lama</option>
-                                            <option value="Baru">Baru</option>
+                                            <option value="Lama"
+                                                @if (old('jenis_kasus') == 'Lama') {{ 'selected' }} @endif>Lama</option>
+                                            <option value="Baru"
+                                                @if (old('jenis_kasus') == 'Baru') {{ 'selected' }} @endif>Baru</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Unit Pelayanan</label>
+                                    <div class="col-sm-5">
+                                        <select class="form-control" name="unit_pelayanans_id">
+                                            <option value={{ $kajian_pasien->unit_pelayanans->id }}>
+                                                {{ $kajian_pasien->unit_pelayanans->name }}</option>
                                         </select>
                                     </div>
                                 </div>

@@ -7,6 +7,7 @@ use App\Models\Icd;
 use App\Models\User;
 use App\Models\KajianPasien;
 use Illuminate\Http\Request;
+use App\Models\PelayananPasien;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\UnitPelayananMtbs;
 
@@ -22,12 +23,12 @@ class UnitPelayananMtbsController extends Controller
         if (auth()->user()->type == 'admin') {
             return view('admin.poli_mtbs.index', [
                 'title' => 'Pelayanan Pasien BP MTBS',
-                'pelayanan_pasiens' => UnitPelayananMtbs::all()
+                'pelayanan_pasiens' => PelayananPasien::where('unit_pelayanans_id', '=', 5)->latest()->get()
             ]);
         } else {
             return view('poli_mtbs.index', [
                 'title' => 'Pelayanan Pasien BP MTBS',
-                'pelayanan_pasiens' => UnitPelayananMtbs::all()
+                'pelayanan_pasiens' => PelayananPasien::where('unit_pelayanans_id', '=', 5)->latest()->get()
             ]);
         }
     }
@@ -69,9 +70,9 @@ class UnitPelayananMtbsController extends Controller
         $validatedData = $request->validate($rules);
         KajianPasien::where('id', $kajianPasien->id)->update($validatedData);
         if (auth()->user()->type == 'admin') {
-            return redirect()->route('admin-poli-mtbs.create')->with('success', 'Status Pasien Sudah Diperiksa');
+            return redirect()->route('admin-poli-mtbs.create')->with('success', 'Status Pasien Diubah');
         } else {
-            return redirect()->route('poli-mtbs.create')->with('success', 'Status Pasien Sudah Diperiksa');
+            return redirect()->route('poli-mtbs.create')->with('success', 'Status Pasien Diubah');
         }
     }
 
@@ -108,14 +109,15 @@ class UnitPelayananMtbsController extends Controller
             'tindakan'  => 'required',
             'edukasi'  => 'required',
             'jenis_kasus'  => 'required',
+            'unit_pelayanans_id'  => 'required',
         ];
 
         $validatedData = $request->validate($rules);
-        UnitPelayananMtbs::create($validatedData);
+        PelayananPasien::create($validatedData);
         if (auth()->user()->type == 'admin') {
-            return redirect()->route('admin-poli-mtbs.index')->with('success', 'Daftar Pelayanan Pasien Berhasil Ditambahkan');
+            return redirect()->route('admin-poli-mtbs.index')->with('success', 'Pasien Berhasil Ditambahkan');
         } else {
-            return redirect()->route('poli-mtbs.index')->with('success', 'Daftar Pelayanan Pasien Berhasil Ditambahkan');
+            return redirect()->route('poli-mtbs.index')->with('success', 'Pasien Berhasil Ditambahkan');
         }
     }
 
@@ -125,7 +127,7 @@ class UnitPelayananMtbsController extends Controller
      * @param  \App\Models\UnitPelayananMtbs  $UnitPelayananMtbs
      * @return \Illuminate\Http\Response
      */
-    public function show(UnitPelayananMtbs $pelayananPasien)
+    public function show(PelayananPasien $pelayananPasien)
     {
         if (auth()->user()->type == 'admin'){
             return view('admin.poli_mtbs.show', [
@@ -146,7 +148,7 @@ class UnitPelayananMtbsController extends Controller
      * @param  \App\Models\UnitPelayananMtbs  $UnitPelayananMtbs
      * @return \Illuminate\Http\Response
      */
-    public function edit(UnitPelayananMtbs $pelayananPasien)
+    public function edit(PelayananPasien $pelayananPasien)
     {
         if (auth()->user()->type == 'admin'){
             return view('admin.poli_mtbs.edit', [
@@ -172,7 +174,7 @@ class UnitPelayananMtbsController extends Controller
      * @param  \App\Models\UnitPelayananMtbs  $UnitPelayananMtbs
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, UnitPelayananMtbs $pelayananPasien)
+    public function update(Request $request, PelayananPasien $pelayananPasien)
     {
         $rules = [
             'kajian_pasiens_id' => 'required',
@@ -189,7 +191,7 @@ class UnitPelayananMtbsController extends Controller
         ];
 
         $validatedData = $request->validate($rules);
-        UnitPelayananMtbs::where('id', $pelayananPasien->id)->update($validatedData);
+        PelayananPasien::where('id', $pelayananPasien->id)->update($validatedData);
         if (auth()->user()->type == 'admin') {
             return redirect()->route('admin-poli-mtbs.index')->with('success', 'Pasien Berhasil Diubah');
         } else {
@@ -203,9 +205,9 @@ class UnitPelayananMtbsController extends Controller
      * @param  \App\Models\UnitPelayananMtbs  $UnitPelayananMtbs
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UnitPelayananMtbs $pelayanan_pasien)
+    public function destroy(PelayananPasien $pelayanan_pasien)
     {
-        UnitPelayananMtbs::destroy($pelayanan_pasien->id);
+        PelayananPasien::destroy($pelayanan_pasien->id);
         if (auth()->user()->type == 'admin') {
             return redirect()->route('admin-poli-mtbs.index')->with('success', 'Pasien Berhasil Dihapus');
         } else {
@@ -216,7 +218,7 @@ class UnitPelayananMtbsController extends Controller
     public function print($tanggal_awal, $tanggal_akhir)
     {
         // dd($tanggal_awal, $tanggal_akhir);
-        $pelayanan_pasiens = UnitPelayananMtbs::with('users', 'kajian_pasiens', 'icds', 'pasiens')->whereBetween('tanggal_pemeriksaan', [$tanggal_awal, $tanggal_akhir])->get();
+        $pelayanan_pasiens = PelayananPasien::where('unit_pelayanans_id', '=', 5)->with('users', 'kajian_pasiens', 'icds', 'pasiens')->whereBetween('tanggal_pemeriksaan', [$tanggal_awal, $tanggal_akhir])->get();
         $date = Carbon::now()->format('d-m-Y');
         $tanggal_awal = $tanggal_awal;
         $newTanggalAwal = Carbon::createFromFormat('Y-m-d', $tanggal_awal)->format('d-m-Y');

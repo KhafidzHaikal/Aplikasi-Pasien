@@ -7,6 +7,7 @@ use App\Models\Icd;
 use App\Models\User;
 use App\Models\KajianPasien;
 use Illuminate\Http\Request;
+use App\Models\PelayananPasien;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\UnitPelayananKia;
 use App\Http\Requests\StoreUnitPelayananKiaRequest;
@@ -24,12 +25,12 @@ class UnitPelayananKiaController extends Controller
         if (auth()->user()->type == 'admin') {
             return view('admin.poli_kia.index', [
                 'title' => 'Pelayanan Pasien BP KIA',
-                'pelayanan_pasiens' => UnitPelayananKia::all()
+                'pelayanan_pasiens' => PelayananPasien::where('unit_pelayanans_id', '=', 4)->latest()->get()
             ]);
         } else {
             return view('poli_kia.index', [
                 'title' => 'Pelayanan Pasien BP KIA',
-                'pelayanan_pasiens' => UnitPelayananKia::all()
+                'pelayanan_pasiens' => PelayananPasien::where('unit_pelayanans_id', '=', 4)->latest()->get()
             ]);
         }
     }
@@ -71,9 +72,9 @@ class UnitPelayananKiaController extends Controller
         $validatedData = $request->validate($rules);
         KajianPasien::where('id', $kajianPasien->id)->update($validatedData);
         if (auth()->user()->type == 'admin') {
-            return redirect()->route('admin-poli-kia.create')->with('success', 'Status Pasien Sudah Diperiksa');
+            return redirect()->route('admin-poli-kia.create')->with('success', 'Status Pasien Diubah');
         } else {
-            return redirect()->route('poli-kia.create')->with('success', 'Status Pasien Sudah Diperiksa');
+            return redirect()->route('poli-kia.create')->with('success', 'Status Pasien Diubah');
         }
     }
 
@@ -110,14 +111,15 @@ class UnitPelayananKiaController extends Controller
             'tindakan'  => 'required',
             'edukasi'  => 'required',
             'jenis_kasus'  => 'required',
+            'unit_pelayanans_id'  => 'required',
         ];
 
         $validatedData = $request->validate($rules);
-        UnitPelayananKia::create($validatedData);
+        PelayananPasien::create($validatedData);
         if (auth()->user()->type == 'admin') {
-            return redirect()->route('admin-poli-kia.index')->with('success', 'Daftar Pelayanan Pasien Berhasil Ditambahkan');
+            return redirect()->route('admin-poli-kia.index')->with('success', 'Pasien Berhasil Ditambahkan');
         } else {
-            return redirect()->route('poli-kia.index')->with('success', 'Daftar Pelayanan Pasien Berhasil Ditambahkan');
+            return redirect()->route('poli-kia.index')->with('success', 'Pasien Berhasil Ditambahkan');
         }
     }
 
@@ -127,7 +129,7 @@ class UnitPelayananKiaController extends Controller
      * @param  \App\Models\UnitPelayananKia  $UnitPelayananKia
      * @return \Illuminate\Http\Response
      */
-    public function show(UnitPelayananKia $pelayananPasien)
+    public function show(PelayananPasien $pelayananPasien)
     {
         if (auth()->user()->type == 'admin'){
             return view('admin.poli_kia.show', [
@@ -148,7 +150,7 @@ class UnitPelayananKiaController extends Controller
      * @param  \App\Models\UnitPelayananKia  $UnitPelayananKia
      * @return \Illuminate\Http\Response
      */
-    public function edit(UnitPelayananKia $pelayananPasien)
+    public function edit(PelayananPasien $pelayananPasien)
     {
         if (auth()->user()->type == 'admin'){
             return view('admin.poli_kia.edit', [
@@ -174,7 +176,7 @@ class UnitPelayananKiaController extends Controller
      * @param  \App\Models\UnitPelayananKia  $UnitPelayananKia
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, UnitPelayananKia $pelayananPasien)
+    public function update(Request $request, PelayananPasien $pelayananPasien)
     {
         $rules = [
             'kajian_pasiens_id' => 'required',
@@ -191,7 +193,7 @@ class UnitPelayananKiaController extends Controller
         ];
 
         $validatedData = $request->validate($rules);
-        UnitPelayananKia::where('id', $pelayananPasien->id)->update($validatedData);
+        PelayananPasien::where('id', $pelayananPasien->id)->update($validatedData);
         if (auth()->user()->type == 'admin') {
             return redirect()->route('admin-poli-kia.index')->with('success', 'Pasien Berhasil Diubah');
         } else {
@@ -205,9 +207,9 @@ class UnitPelayananKiaController extends Controller
      * @param  \App\Models\UnitPelayananKia  $UnitPelayananKia
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UnitPelayananKia $pelayanan_pasien)
+    public function destroy(PelayananPasien $pelayanan_pasien)
     {
-        UnitPelayananKia::destroy($pelayanan_pasien->id);
+        PelayananPasien::destroy($pelayanan_pasien->id);
         if (auth()->user()->type == 'admin') {
             return redirect()->route('admin-poli-kia.index')->with('success', 'Pasien Berhasil Dihapus');
         } else {
@@ -218,7 +220,7 @@ class UnitPelayananKiaController extends Controller
     public function print($tanggal_awal, $tanggal_akhir)
     {
         // dd($tanggal_awal, $tanggal_akhir);
-        $pelayanan_pasiens = UnitPelayananKia::with('users', 'kajian_pasiens', 'icds', 'pasiens')->whereBetween('tanggal_pemeriksaan', [$tanggal_awal, $tanggal_akhir])->get();
+        $pelayanan_pasiens = PelayananPasien::where('unit_pelayanans_id', '=', 4)->with('users', 'kajian_pasiens', 'icds', 'pasiens')->whereBetween('tanggal_pemeriksaan', [$tanggal_awal, $tanggal_akhir])->get();
         $date = Carbon::now()->format('d-m-Y');
         $tanggal_awal = $tanggal_awal;
         $newTanggalAwal = Carbon::createFromFormat('Y-m-d', $tanggal_awal)->format('d-m-Y');

@@ -7,6 +7,7 @@ use App\Models\Icd;
 use App\Models\User;
 use App\Models\KajianPasien;
 use Illuminate\Http\Request;
+use App\Models\PelayananPasien;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\UnitPelayananBpGigi;
 
@@ -22,12 +23,12 @@ class UnitPelayananBpGigiController extends Controller
         if (auth()->user()->type == 'admin') {
             return view('admin.bp_gigi.index', [
                 'title' => 'Pelayanan Pasien BP Gigi',
-                'pelayanan_pasiens' => UnitPelayananBpGigi::all()
+                'pelayanan_pasiens' => PelayananPasien::where('unit_pelayanans_id', '=', 2)->latest()->get()
             ]);
         } else {
             return view('bp_gigi.index', [
                 'title' => 'Pelayanan Pasien BP Gigi',
-                'pelayanan_pasiens' => UnitPelayananBpGigi::all()
+                'pelayanan_pasiens' => PelayananPasien::where('unit_pelayanans_id', '=', 2)->latest()->get()
             ]);
         }
     }
@@ -69,9 +70,9 @@ class UnitPelayananBpGigiController extends Controller
         $validatedData = $request->validate($rules);
         KajianPasien::where('id', $kajianPasien->id)->update($validatedData);
         if (auth()->user()->type == 'admin') {
-            return redirect()->route('admin-bp-gigi.create')->with('success', 'Status Pasien Sudah Diperiksa');
+            return redirect()->route('admin-bp-gigi.create')->with('success', 'Status Pasien Diubah');
         } else {
-            return redirect()->route('bp-gigi.create')->with('success', 'Status Pasien Sudah Diperiksa');
+            return redirect()->route('bp-gigi.create')->with('success', 'Status Pasien Diubah');
         }
     }
 
@@ -108,14 +109,15 @@ class UnitPelayananBpGigiController extends Controller
             'tindakan'  => 'required',
             'edukasi'  => 'required',
             'jenis_kasus'  => 'required',
+            'unit_pelayanans_id'  => 'required',
         ];
 
         $validatedData = $request->validate($rules);
-        UnitPelayananBpGigi::create($validatedData);
+        PelayananPasien::create($validatedData);
         if (auth()->user()->type == 'admin') {
-            return redirect()->route('admin-bp-gigi.index')->with('success', 'Daftar Pelayanan Pasien Berhasil Ditambahkan');
+            return redirect()->route('admin-bp-gigi.index')->with('success', 'Pasien Berhasil Ditambahkan');
         } else {
-            return redirect()->route('bp-gigi.index')->with('success', 'Daftar Pelayanan Pasien Berhasil Ditambahkan');
+            return redirect()->route('bp-gigi.index')->with('success', 'Pasien Berhasil Ditambahkan');
         }
     }
 
@@ -125,7 +127,7 @@ class UnitPelayananBpGigiController extends Controller
      * @param  \App\Models\UnitPelayananBpGigi  $unitPelayananBpGigi
      * @return \Illuminate\Http\Response
      */
-    public function show(UnitPelayananBpGigi $pelayananPasien)
+    public function show(PelayananPasien $pelayananPasien)
     {
         if (auth()->user()->type == 'admin'){
             return view('admin.bp_gigi.show', [
@@ -146,7 +148,7 @@ class UnitPelayananBpGigiController extends Controller
      * @param  \App\Models\UnitPelayananBpGigi  $unitPelayananBpGigi
      * @return \Illuminate\Http\Response
      */
-    public function edit(UnitPelayananBpGigi $pelayananPasien)
+    public function edit(PelayananPasien $pelayananPasien)
     {
         if (auth()->user()->type == 'admin'){
             return view('admin.bp_gigi.edit', [
@@ -172,7 +174,7 @@ class UnitPelayananBpGigiController extends Controller
      * @param  \App\Models\UnitPelayananBpGigi  $unitPelayananBpGigi
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, UnitPelayananBpGigi $pelayananPasien)
+    public function update(Request $request, PelayananPasien $pelayananPasien)
     {
         $rules = [
             'kajian_pasiens_id' => 'required',
@@ -189,7 +191,7 @@ class UnitPelayananBpGigiController extends Controller
         ];
 
         $validatedData = $request->validate($rules);
-        UnitPelayananBpGigi::where('id', $pelayananPasien->id)->update($validatedData);
+        PelayananPasien::where('id', $pelayananPasien->id)->update($validatedData);
         if (auth()->user()->type == 'admin') {
             return redirect()->route('admin-bp-gigi.index')->with('success', 'Pasien Berhasil Diubah');
         } else {
@@ -203,9 +205,9 @@ class UnitPelayananBpGigiController extends Controller
      * @param  \App\Models\UnitPelayananBpGigi  $unitPelayananBpGigi
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UnitPelayananBpGigi $pelayanan_pasien)
+    public function destroy(PelayananPasien $pelayanan_pasien)
     {
-        UnitPelayananBpGigi::destroy($pelayanan_pasien->id);
+        PelayananPasien::destroy($pelayanan_pasien->id);
         if (auth()->user()->type == 'admin') {
             return redirect()->route('admin-bp-gigi.index')->with('success', 'Pasien Berhasil Dihapus');
         } else {
@@ -216,7 +218,7 @@ class UnitPelayananBpGigiController extends Controller
     public function print($tanggal_awal, $tanggal_akhir)
     {
         // dd($tanggal_awal, $tanggal_akhir);
-        $pelayanan_pasiens = UnitPelayananBpGigi::with('users', 'kajian_pasiens', 'icds', 'pasiens')->whereBetween('tanggal_pemeriksaan', [$tanggal_awal, $tanggal_akhir])->get();
+        $pelayanan_pasiens = PelayananPasien::where('unit_pelayanans_id', '=', 2)->with('users', 'kajian_pasiens', 'icds', 'pasiens')->whereBetween('tanggal_pemeriksaan', [$tanggal_awal, $tanggal_akhir])->get();
         $date = Carbon::now()->format('d-m-Y');
         $tanggal_awal = $tanggal_awal;
         $newTanggalAwal = Carbon::createFromFormat('Y-m-d', $tanggal_awal)->format('d-m-Y');

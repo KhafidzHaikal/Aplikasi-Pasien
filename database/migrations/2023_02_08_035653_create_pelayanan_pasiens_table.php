@@ -21,14 +21,13 @@ return new class extends Migration
             $table->text('keluhan_utama');
             $table->string('rps');
             $table->string('rpo');
-            $table->string('tanda_vital');
             $table->string('icds_kode_icd');
-            $table->string('diagnosa');
             $table->string('penatalaksanaan');
             $table->string('tindakan');
             $table->string('edukasi');
             $table->string('jenis_kasus', 100);
-
+            $table->foreignId('unit_pelayanans_id');
+            
             $table->foreign('icds_kode_icd')->references('kode_icd')->on('icds');
             $table->timestamps();
         });

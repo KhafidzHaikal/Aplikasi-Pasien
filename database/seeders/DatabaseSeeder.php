@@ -22,10 +22,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // User::factory(100)->create();
-        Pasiens::factory(100)->create();
-        KajianPasien::factory(100)->create();
+        Pasiens::factory(50)->create();
+        KajianPasien::factory(50)->create();
         $this->call(IcdSeeder::class);
-        PelayananPasien::factory(20)->create();
+        PelayananPasien::factory(30)->create();
 
 
         User::create([

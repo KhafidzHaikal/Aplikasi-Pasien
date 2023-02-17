@@ -46,7 +46,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <a onclick="this.href='/print-laporan-bp-umum/'+document.getElementById('tanggal_awal').value+ '/' +document.getElementById('tanggal_akhir').value" class="btn btn-primary">Cetak</a>
+                    <a target="_blank" onclick="this.href='/print-laporan-bp-umum/'+document.getElementById('tanggal_awal').value+ '/' +document.getElementById('tanggal_akhir').value" class="btn btn-primary">Cetak</a>
                 </div>
             </div>
         </div>
@@ -78,7 +78,7 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $pelayanan_pasien->tanggal_pemeriksaan->format('d/m/Y') }}</td>
                                         <td>{{ $pelayanan_pasien->users->name }}</td>
-                                        <td>{{ $pelayanan_pasien->kajian_pasiens->unit_pelayanans->name }}</td>
+                                        <td>{{ $pelayanan_pasien->unit_pelayanans->name }}</td>
                                         <td>{{ $pelayanan_pasien->kajian_pasiens->pasiens->no_rm }}</td>
                                         <td>{{ $pelayanan_pasien->kajian_pasiens->pasiens->name }}</td>
                                         <td>{{ $pelayanan_pasien->kajian_pasiens->pasiens->nik }}</td>

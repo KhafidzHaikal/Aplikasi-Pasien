@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KajianPasienController;
+use App\Http\Controllers\ObatController;
 use App\Http\Controllers\PasiensController;
 use App\Http\Controllers\PelayananPasienController;
 use App\Http\Controllers\UnitPelayananBpGigiController;
@@ -39,6 +40,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resources([
         'pasiens' => PasiensController::class
     ]);
+
     Route::get('/pdf-view-pasien/{pasien}', [PasiensController::class, 'pdf'])->name('pdf-pasien');
 
     Route::resources([
@@ -129,6 +131,16 @@ Route::middleware(['auth'])->group(function () {
             Route::put('/{pelayanan_pasien}', [UnitPelayananKonselingController::class, 'update'])->name('admin-poli-konseling.update');
             Route::delete('/{pelayanan_pasien}', [UnitPelayananKonselingController::class, 'destroy'])->name('admin-poli-konseling.destroy');
         });
+
+        Route::prefix('admin-obat')->group(function () {
+            Route::get('/', [ObatController::class, 'index'])->name('admin-obat.index');
+            Route::get('/create', [ObatController::class, 'create'])->name('admin-obat.create');
+            Route::post('/create', [ObatController::class, 'store'])->name('admin-obat.store');
+            Route::get('/{obat}', [ObatController::class, 'show'])->name('admin-obat.show');
+            Route::get('/{obat}/edit', [ObatController::class, 'edit'])->name('admin-obat.edit');
+            Route::put('/{obat}', [ObatController::class, 'update'])->name('admin-obat.update');
+            Route::delete('/{obat}', [ObatController::class, 'destroy'])->name('admin-obat.destroy');
+        });
     });
 
     Route::get('/print-laporan-pasien/{tanggal_awal}/{tanggal_akhir}', [PasiensController::class, 'print'])->name('admin-pasiens.print');
@@ -138,6 +150,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/print-laporan-poli-kia/{tanggal_awal}/{tanggal_akhir}', [UnitPelayananKiaController::class, 'print'])->name('admin-bp-gigi.print');
     Route::get('/print-laporan-poli-mtbs/{tanggal_awal}/{tanggal_akhir}', [UnitPelayananMtbsController::class, 'print'])->name('admin-bp-gigi.print');
     Route::get('/print-laporan-poli-konseling/{tanggal_awal}/{tanggal_akhir}', [UnitPelayananKonselingController::class, 'print'])->name('admin-bp-gigi.print');
+    Route::get('/print-laporan-obat/{tanggal_awal}/{tanggal_akhir}', [ObatController::class, 'print'])->name('admin-obat.print');
 
     Route::middleware(['user-access:bp-umum'])->group(function () {
         Route::prefix('bp-umum')->group(function () {
@@ -220,6 +233,18 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/{pelayanan_pasien}/edit', [UnitPelayananKonselingController::class, 'edit'])->name('poli-konseling.edit');
             Route::put('/{pelayanan_pasien}', [UnitPelayananKonselingController::class, 'update'])->name('poli-konseling.update');
             Route::delete('/{pelayanan_pasien}', [UnitPelayananKonselingController::class, 'destroy'])->name('poli-konseling.destroy');
+        });
+    });
+
+    Route::middleware(['user-access:farmasi'])->group(function () {
+        Route::prefix('obat')->group(function () {
+            Route::get('/', [ObatController::class, 'index'])->name('obat.index');
+            Route::get('/create', [ObatController::class, 'create'])->name('obat.create');
+            Route::post('/create', [ObatController::class, 'store'])->name('obat.store');
+            Route::get('/{obat}', [ObatController::class, 'show'])->name('obat.show');
+            Route::get('/{obat}/edit', [ObatController::class, 'edit'])->name('obat.edit');
+            Route::put('/{obat}', [ObatController::class, 'update'])->name('obat.update');
+            Route::delete('/{obat}', [ObatController::class, 'destroy'])->name('obat.destroy');
         });
     });
 });

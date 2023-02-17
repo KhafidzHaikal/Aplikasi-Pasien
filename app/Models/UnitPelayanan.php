@@ -13,4 +13,9 @@ class UnitPelayanan extends Model
     {
         $this->hasMany(KajianPasien::class);
     }
+
+    public function pelayanan_pasiens()
+    {
+        $this->hasMany(PelayananPasien::class);
+    }
 }

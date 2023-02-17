@@ -15,15 +15,17 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
+    $('#tipeObat').select2();
+});
+
+$(document).ready(function () {
     $('#noPasienSelect').select2({
         placeholder: '---Pilih No.Register Pasien---',
     });
 });
 
 $(document).ready(function () {
-    $('#noPerawatSelect').select2({
-        placeholder: '---Pilih Nama Petugas---',
-    });
+    $('#noPerawatSelect').select2();
 });
 
 $(document).ready(function () {

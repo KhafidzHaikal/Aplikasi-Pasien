@@ -7,6 +7,7 @@ use App\Models\Icd;
 use App\Models\User;
 use App\Models\KajianPasien;
 use Illuminate\Http\Request;
+use App\Models\PelayananPasien;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\UnitPelayananBpLansia;
 
@@ -22,12 +23,12 @@ class UnitPelayananBpLansiaController extends Controller
         if (auth()->user()->type == 'admin') {
             return view('admin.bp_lansia.index', [
                 'title' => 'Pelayanan Pasien BP lansia',
-                'pelayanan_pasiens' => UnitPelayananBpLansia::all()
+                'pelayanan_pasiens' => PelayananPasien::where('unit_pelayanans_id', '=', 3)->latest()->get()
             ]);
         } else {
             return view('bp_lansia.index', [
                 'title' => 'Pelayanan Pasien BP lansia',
-                'pelayanan_pasiens' => UnitPelayananBpLansia::all()
+                'pelayanan_pasiens' => PelayananPasien::where('unit_pelayanans_id', '=', 3)->latest()->get()
             ]);
         }
     }
@@ -69,9 +70,9 @@ class UnitPelayananBpLansiaController extends Controller
         $validatedData = $request->validate($rules);
         KajianPasien::where('id', $kajianPasien->id)->update($validatedData);
         if (auth()->user()->type == 'admin') {
-            return redirect()->route('admin-bp-lansia.create')->with('success', 'Status Pasien Sudah Diperiksa');
+            return redirect()->route('admin-bp-lansia.create')->with('success', 'Status Pasien Diubah');
         } else {
-            return redirect()->route('bp-lansia.create')->with('success', 'Status Pasien Sudah Diperiksa');
+            return redirect()->route('bp-lansia.create')->with('success', 'Status Pasien Diubah');
         }
     }
 
@@ -108,10 +109,11 @@ class UnitPelayananBpLansiaController extends Controller
             'tindakan'  => 'required',
             'edukasi'  => 'required',
             'jenis_kasus'  => 'required',
+            'unit_pelayanans_id'  => 'required',
         ];
 
         $validatedData = $request->validate($rules);
-        UnitPelayananBpLansia::create($validatedData);
+        PelayananPasien::create($validatedData);
         if (auth()->user()->type == 'admin') {
             return redirect()->route('admin-bp-lansia.index')->with('success', 'Daftar Pelayanan Pasien Berhasil Ditambahkan');
         } else {
@@ -125,7 +127,7 @@ class UnitPelayananBpLansiaController extends Controller
      * @param  \App\Models\UnitPelayananBpLansia  $UnitPelayananBpLansia
      * @return \Illuminate\Http\Response
      */
-    public function show(UnitPelayananBpLansia $pelayananPasien)
+    public function show(PelayananPasien $pelayananPasien)
     {
         if (auth()->user()->type == 'admin'){
             return view('admin.bp_lansia.show', [
@@ -146,7 +148,7 @@ class UnitPelayananBpLansiaController extends Controller
      * @param  \App\Models\UnitPelayananBpLansia  $UnitPelayananBpLansia
      * @return \Illuminate\Http\Response
      */
-    public function edit(UnitPelayananBpLansia $pelayananPasien)
+    public function edit(PelayananPasien $pelayananPasien)
     {
         if (auth()->user()->type == 'admin'){
             return view('admin.bp_lansia.edit', [
@@ -172,7 +174,7 @@ class UnitPelayananBpLansiaController extends Controller
      * @param  \App\Models\UnitPelayananBpLansia  $UnitPelayananBpLansia
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, UnitPelayananBpLansia $pelayananPasien)
+    public function update(Request $request, PelayananPasien $pelayananPasien)
     {
         $rules = [
             'kajian_pasiens_id' => 'required',
@@ -189,7 +191,7 @@ class UnitPelayananBpLansiaController extends Controller
         ];
 
         $validatedData = $request->validate($rules);
-        UnitPelayananBpLansia::where('id', $pelayananPasien->id)->update($validatedData);
+        PelayananPasien::where('id', $pelayananPasien->id)->update($validatedData);
         if (auth()->user()->type == 'admin') {
             return redirect()->route('admin-bp-lansia.index')->with('success', 'Pasien Berhasil Diubah');
         } else {
@@ -203,9 +205,9 @@ class UnitPelayananBpLansiaController extends Controller
      * @param  \App\Models\UnitPelayananBpLansia  $UnitPelayananBpLansia
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UnitPelayananBpLansia $pelayanan_pasien)
+    public function destroy(PelayananPasien $pelayanan_pasien)
     {
-        UnitPelayananBpLansia::destroy($pelayanan_pasien->id);
+        PelayananPasien::destroy($pelayanan_pasien->id);
         if (auth()->user()->type == 'admin') {
             return redirect()->route('admin-bp-lansia.index')->with('success', 'Pasien Berhasil Dihapus');
         } else {
@@ -216,7 +218,7 @@ class UnitPelayananBpLansiaController extends Controller
     public function print($tanggal_awal, $tanggal_akhir)
     {
         // dd($tanggal_awal, $tanggal_akhir);
-        $pelayanan_pasiens = UnitPelayananBpLansia::with('users', 'kajian_pasiens', 'icds', 'pasiens')->whereBetween('tanggal_pemeriksaan', [$tanggal_awal, $tanggal_akhir])->get();
+        $pelayanan_pasiens = PelayananPasien::where('unit_pelayanans_id', '=', 3)->with('users', 'kajian_pasiens', 'icds', 'pasiens')->whereBetween('tanggal_pemeriksaan', [$tanggal_awal, $tanggal_akhir])->get();
         $date = Carbon::now()->format('d-m-Y');
         $tanggal_awal = $tanggal_awal;
         $newTanggalAwal = Carbon::createFromFormat('Y-m-d', $tanggal_awal)->format('d-m-Y');

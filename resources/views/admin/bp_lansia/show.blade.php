@@ -3,7 +3,7 @@
 @section('body')
     <div class="col-sm-8 p-md-0 justify-content-sm-start mt-2 mt-sm-0 d-flex">
         <ol class="breadcrumb" style="background-color:#f8f9fa">
-            <li class="breadcrumb-item"><a style="color: black" href={{ route('admin-bp-gigi.index') }}><i
+            <li class="breadcrumb-item"><a style="color: black" href={{ route('admin-bp-lansia.index') }}><i
                         class="bi bi-arrow-left"></i> Kembali</a></li>
         </ol>
     </div>
@@ -21,9 +21,9 @@
             <div class="welcome-text d-flex align-items-start">
                 {{-- <a class="btn btn-primary mr-2" style="color: #fff"
                 href={{ route('pdf-pelayanan-pasien', $pelayanan_pasiens->id) }}><i class="bi bi-printer"></i> PDF</a> --}}
-                <a href={{ route('admin-bp-gigi.edit', $pelayanan_pasiens->id) }} class="btn btn-warning mr-2"><i
+                <a href={{ route('admin-bp-lansia.edit', $pelayanan_pasiens->id) }} class="btn btn-warning mr-2"><i
                         class="bi bi-pencil-square"></i> Edit</a>
-                <form action={{ route('admin-bp-gigi.destroy', $pelayanan_pasiens->id) }} method="POST">
+                <form action={{ route('admin-bp-lansia.destroy', $pelayanan_pasiens->id) }} method="POST">
                     @method('delete')
                     @csrf
                     <button class="btn btn-danger"><i class="bi bi-trash"></i> Delete</button>

@@ -275,7 +275,7 @@
                                     {{ $pelayanan_pasiens->icds->nama_icd }}</p>
                             </div>
                             <div class="form-group row">
-                                <p class="col-sm-4 col-form-label">Terapi</p>
+                                <p class="col-sm-4 col-form-label">Penatalaksanaan</p>
                                 <p class="col-sm-8 col-form-label">: {{ $pelayanan_pasiens->penatalaksanaan }}</p>
                             </div>
                             <div class="form-group row">

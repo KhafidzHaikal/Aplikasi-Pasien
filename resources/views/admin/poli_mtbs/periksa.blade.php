@@ -73,7 +73,7 @@
                                             <option selected> --- Pilih Nama Pemeriksa / Dokter --- </option>
                                             @foreach ($perawats as $perawat)
                                                 @if ($perawat->type == 'mtbs')
-                                                    @if (old('users_id') === $perawat->id)
+                                                    @if (old('users_id') == $perawat->id)
                                                         <option value="{{ $perawat->id }}">{{ $perawat->name }}
                                                         </option>
                                                     @else
@@ -105,7 +105,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">RPS</label>
+                                    <label class="col-sm-3 col-form-label">Riwayat Penyakit Sekarang</label>
                                     <div class="col-sm-5">
                                         <div class="input-group mb-3">
                                             <input type="text" class="form-control" name="rps"
@@ -114,7 +114,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">RPO</label>
+                                    <label class="col-sm-3 col-form-label">Riwayat Penyakit Dulu</label>
                                     <div class="col-sm-5">
                                         <div class="input-group mb-3">
                                             <input type="text" class="form-control" name="rpo"
@@ -174,10 +174,21 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Status Diagnosa</label>
                                     <div class="col-sm-5">
-                                        <select class="form-control" name="jenis_kasus">
+                                        <select class="form-control" name="jenis_kasus" required>
                                             <option> --- Pilih Status Diagnosa --- </option>
-                                            <option value="Lama">Lama</option>
-                                            <option value="Baru">Baru</option>
+                                            <option value="Lama"
+                                                @if (old('jenis_kasus') == 'Lama') {{ 'selected' }} @endif>Lama</option>
+                                            <option value="Baru"
+                                                @if (old('jenis_kasus') == 'Baru') {{ 'selected' }} @endif>Baru</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Unit Pelayanan</label>
+                                    <div class="col-sm-5">
+                                        <select class="form-control" name="unit_pelayanans_id">
+                                            <option value={{ $kajian_pasien->unit_pelayanans->id }}>
+                                                {{ $kajian_pasien->unit_pelayanans->name }}</option>
                                         </select>
                                     </div>
                                 </div>
