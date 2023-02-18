@@ -56,7 +56,7 @@
                                     <div class="col-sm-5">
                                         <a class="btn btn-primary col-12"
                                             href={{ route('kajian-pasiens.show', $kajian_pasien->pasiens_no_rm) }}
-                                            target="_blank">Detai Pasien</a>
+                                            target="_blank">Detail Pasien</a>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -189,6 +189,14 @@
                                         <select class="form-control" name="unit_pelayanans_id">
                                             <option value={{ $kajian_pasien->unit_pelayanans->id }}>
                                                 {{ $kajian_pasien->unit_pelayanans->name }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row" hidden>
+                                    <label class="col-sm-3 col-form-label">Farmasi</label>
+                                    <div class="col-sm-5">
+                                        <select class="form-control" name="status">
+                                            <option value="0" selected>Kirim</option>
                                         </select>
                                     </div>
                                 </div>

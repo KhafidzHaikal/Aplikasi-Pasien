@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FarmasiPasienController;
 use App\Http\Controllers\KajianPasienController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\PasiensController;
@@ -141,6 +142,18 @@ Route::middleware(['auth'])->group(function () {
             Route::put('/{obat}', [ObatController::class, 'update'])->name('admin-obat.update');
             Route::delete('/{obat}', [ObatController::class, 'destroy'])->name('admin-obat.destroy');
         });
+
+        Route::prefix('admin-farmasi')->group(function () {
+            Route::get('/', [FarmasiPasienController::class, 'index'])->name('admin-farmasi.index');
+            Route::get('/create', [FarmasiPasienController::class, 'create'])->name('admin-farmasi.create');
+            Route::put('/create/{pelayanan_pasien}', [FarmasiPasienController::class, 'status'])->name('admin-farmasi.status');
+            Route::get('/create/{pelayanan_pasien}/periksa', [FarmasiPasienController::class, 'periksa'])->name('admin-farmasi.periksa');
+            Route::post('/create/{pelayanan_pasien}/periksa', [FarmasiPasienController::class, 'store'])->name('admin-farmasi.store');
+            Route::get('/{farmasi}', [FarmasiPasienController::class, 'show'])->name('admin-farmasi.show');
+            Route::get('/{farmasi}/edit', [FarmasiPasienController::class, 'edit'])->name('admin-farmasi.edit');
+            Route::put('/{farmasi}', [FarmasiPasienController::class, 'update'])->name('admin-farmasi.update');
+            Route::delete('/{farmasi}', [FarmasiPasienController::class, 'destroy'])->name('admin-farmasi.destroy');
+        });
     });
 
     Route::get('/print-laporan-pasien/{tanggal_awal}/{tanggal_akhir}', [PasiensController::class, 'print'])->name('admin-pasiens.print');
@@ -151,6 +164,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/print-laporan-poli-mtbs/{tanggal_awal}/{tanggal_akhir}', [UnitPelayananMtbsController::class, 'print'])->name('admin-bp-gigi.print');
     Route::get('/print-laporan-poli-konseling/{tanggal_awal}/{tanggal_akhir}', [UnitPelayananKonselingController::class, 'print'])->name('admin-bp-gigi.print');
     Route::get('/print-laporan-obat/{tanggal_awal}/{tanggal_akhir}', [ObatController::class, 'print'])->name('admin-obat.print');
+    Route::get('/print-laporan-farmasi/{tanggal_awal}/{tanggal_akhir}', [FarmasiPasienController::class, 'print'])->name('admin-farmasi.print');
 
     Route::middleware(['user-access:bp-umum'])->group(function () {
         Route::prefix('bp-umum')->group(function () {

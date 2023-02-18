@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\KajianPasien;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+Use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class PelayananPasien extends Model
 {
@@ -20,6 +21,13 @@ class PelayananPasien extends Model
     public function getCreatedAtAttribute($date)
     {
         return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d-m-Y');
+    }
+
+    protected function status(): Attribute
+    {
+        return new Attribute(
+            get: fn ($value) => ["menunggu konfirmasi", "pencarian obat", "sudah ditebus"][$value],
+        );
     }
 
     public function kajian_pasiens()

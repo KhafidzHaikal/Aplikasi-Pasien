@@ -80,7 +80,7 @@
                                         <td>{{ $obat->sediaan }}</td>
                                         <td>{{ $obat->tanggal_kadaluarsa->format('d-m-Y') }}</td>
                                         <td>Rp. {{ $obat->harga }}</td>
-                                        <td>{{ $obat->stok }}</td>
+                                        <td>{{ $obat->total_stok }}</td>
                                         <td class="d-flex">
                                             <a href={{ route('admin-obat.edit', $obat->id ) }} class="btn btn-warning mr-2"><i class="bi bi-pencil-square"></i></a>
                                             <form action={{ route('admin-obat.destroy', $obat->id) }} method="POST">

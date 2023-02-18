@@ -17,6 +17,11 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: block;
 }
 
+h2 {
+  font-size: 1rem;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
 body {
   margin: 0;
   font-family: 'Roboto', sans-serif;

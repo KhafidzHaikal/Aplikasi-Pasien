@@ -110,6 +110,7 @@ class UnitPelayananMtbsController extends Controller
             'edukasi'  => 'required',
             'jenis_kasus'  => 'required',
             'unit_pelayanans_id'  => 'required',
+            'status'  => 'required',
         ];
 
         $validatedData = $request->validate($rules);

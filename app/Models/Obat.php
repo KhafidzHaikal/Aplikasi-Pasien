@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Obat extends Model
 {
     use HasFactory;
+    
+    protected $fillable = [
+        'tanggal_masuk', 'name', 'sediaan', 'stok_lama', 'stok_baru', 'tanggal_kadaluarsa', 'harga'
+    ];
 
     protected $guarded = [
         'id', 'created_at', 'updated_at'
@@ -17,7 +21,22 @@ class Obat extends Model
 
     public function getFormulaCalculationAttribute()
     {
-        return (($this->harga)*($this->stok));
+        return (($this->harga)*($this->stok_lama));
+    }
+
+    public function getJumlahStokBaruAttribute()
+    {
+        return (($this->harga)*($this->stok_baru));
+    }
+
+    public function getJumlahSisaObatAttribute()
+    {
+        return (($this->harga)*($this->total_stok));
+    }
+
+    public function getTotalStokAttribute()
+    {
+        return (($this->stok_lama)-($this->stok_baru));
     }
 
     public function farmasi_pasiens()

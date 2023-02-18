@@ -66,7 +66,8 @@ class ObatController extends Controller
             'name' => 'required',
             'sediaan' => 'required',
             'harga' => 'required',
-            'stok' => 'required',
+            'stok_lama' => 'required',
+            'stok_baru' => 'required',
             'tanggal_kadaluarsa' => 'required',
         ];
 
@@ -137,7 +138,7 @@ class ObatController extends Controller
             'name' => 'required',
             'sediaan' => 'required',
             'harga' => 'required',
-            'stok' => 'required',
+            'stok_lama' => 'required',
             'tanggal_kadaluarsa' => 'required',
         ];
 
@@ -175,7 +176,6 @@ class ObatController extends Controller
         $newTanggalAwal = Carbon::createFromFormat('Y-m-d', $tanggal_awal)->format('d-m-Y');
         $tanggal_akhir = $tanggal_akhir;
         $newTanggalAkhir = Carbon::createFromFormat('Y-m-d', $tanggal_akhir)->format('d-m-Y');
-        // dd($obats);
         $pdf = Pdf::loadView('admin.obat.pdf', compact('obats', 'date', 'newTanggalAwal', 'newTanggalAkhir'))->setPaper('legal', 'landscape');
         return $pdf->stream('Laporan-Obat.pdf');
     }

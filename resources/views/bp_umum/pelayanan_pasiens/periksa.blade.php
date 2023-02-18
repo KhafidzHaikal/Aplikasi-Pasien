@@ -194,6 +194,14 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="form-group row" hidden>
+                                    <label class="col-sm-3 col-form-label">Farmasi</label>
+                                    <div class="col-sm-5">
+                                        <select class="form-control" name="status">
+                                            <option value="0" selected>Kirim</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="card-body">

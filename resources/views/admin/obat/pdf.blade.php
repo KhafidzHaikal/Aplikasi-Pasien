@@ -69,17 +69,17 @@
                     <td>{{ $obat->name }}</td>
                     <td>{{ $obat->sediaan }}</td>
                     <td>{{ $obat->tanggal_kadaluarsa->format('d-m-Y') }}</td>
-                    <td>{{ $obat->stok }}</td>
+                    <td>{{ $obat->stok_lama }}</td>
                     <td>{{ $obat->harga }}</td>
                     <td>{{ $obat->formula_calculation }}</td>
-                    <td>{{ $obat->stokFarmasi }}</td>
+                    <td>{{ $obat->stok_lama }}</td>
                     <td>{{ $date }}</td>
                     <td>{{ $obat->name }}</td>
                     <td>{{ $obat->sediaan }}</td>
-                    <td>{{ $obat->stokFarmasi }}</td>
-                    <td>{{ $obat->stokFarmasi }}</td>
-                    <td>{{ $obat->stokFarmasi }}</td>
-                    <td>{{ $obat->stokFarmasi }}</td>
+                    <td>{{ $obat->stok_baru }}</td>
+                    <td>{{ $obat->jumlah_stok_baru }}</td>
+                    <td>{{ $obat->total_stok }}</td>
+                    <td>{{ $obat->jumlah_sisa_obat }}</td>
                 </tr>
             @endforeach
         </tbody>

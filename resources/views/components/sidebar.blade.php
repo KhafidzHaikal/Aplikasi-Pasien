@@ -89,7 +89,7 @@
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                             class="bi bi-prescription2"></i><span class="nav-text">Pelayanan Pasien</span></a>
                     <ul aria-expanded="false">
-                        <li><a href="">Obat</a></li>
+                        <li><a href={{ route('obat.index') }}>Obat</a></li>
                     </ul>
                 </li>
             @endif
@@ -135,7 +135,7 @@
                             class="bi bi-prescription2"></i><span class="nav-text">Pelayanan Pasien</span></a>
                     <ul aria-expanded="false">
                         <li><a href={{ route('admin-obat.index') }}>Obat</a></li>
-                        <li><a href="#">Tebus Obat</a></li>
+                        <li><a href={{ route('admin-farmasi.index') }}>Tebus Obat</a></li>
                     </ul>
                 </li>
                 <li class="nav-label first">Kontrol User</li>

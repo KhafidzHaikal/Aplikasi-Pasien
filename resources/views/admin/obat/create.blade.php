@@ -88,8 +88,17 @@
                                     <label class="col-sm-3 col-form-label">Stok</label>
                                     <div class="col-sm-5">
                                         <div class="input-group mb-3">
-                                            <input type="number" class="form-control" name="stok"
-                                                value="{{ old('stok') }}" required>
+                                            <input type="number" class="form-control" name="stok_lama"
+                                                value="{{ old('stok_lama') }}" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row" hidden>
+                                    <label class="col-sm-3 col-form-label">Stok Baru</label>
+                                    <div class="col-sm-5">
+                                        <div class="input-group mb-3">
+                                            <input type="number" class="form-control" name="stok_baru"
+                                                value="0" required>
                                         </div>
                                     </div>
                                 </div>

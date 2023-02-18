@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('edukasi');
             $table->string('jenis_kasus', 100);
             $table->foreignId('unit_pelayanans_id');
-            
+            $table->tinyInteger('status');
             $table->foreign('icds_kode_icd')->references('kode_icd')->on('icds');
             $table->timestamps();
         });

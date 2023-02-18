@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Laporan Pasien BP Gigi</title>
+    <title>Laporan Obat</title>
     <!-- Favicon icon -->
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -15,41 +15,45 @@
 </head>
 
 <body>
-    <h2>LAPORAN KUNJUNGAN PASIEN DI PUSKESMAS</h2>
+    <h2>LAPORAN OBAT DI PUSKESMAS</h2>
     <br>
-    <h2 class="mb-4" style="margin-top:-1.5rem">POLI/UNIT PELAYANAN GIGI</h2>
     <p style="position:absolute;left:0">Tanggal Kunjungan : {{ $date }}</p>
     <p style="position:absolute;right:0">Periode Tanggal {{ $newTanggalAwal }} s/d Tanggal {{ $newTanggalAkhir }}</p>
     <table class="mt-5">
         <thead>
-            <th>No</th>
-            <th>No. RM</th>
-            <th>Nama Pasien</th>
-            <th>Umur</th>
-            <th>Kelamin</th>
-            <th>Nama KK</th>
-            <th>Diagnosa</th>
-            <th>Status Diagnosa</th>
-            <th>Terapi / Pengobatan</th>
-            <th>Tindakan</th>
-            <th>Pembayaran</th>
-            <th>Dokter Pemeriksa</th>
+            <th rowspan="2">No</th>
+            <th rowspan="2">No. RM</th>
+            <th rowspan="2">Nama Pasien</th>
+            <th rowspan="2">Umur</th>
+            <th rowspan="2">Kelamin (L/K)</th>
+            <th rowspan="2">Alamat</th>
+            <th rowspan="2">Asal Poli</th>
+            <th rowspan="2">Obat Yang Diresepkan</th>
+            <th colspan="3">Obat Yang Diberikan</th>
+            <th rowspan="2">Pembiayaan</th>
+            <th rowspan="2">Dokter</th>
         </thead>
-        <tbody>
-            @foreach ($pelayanan_pasiens as $pelayanan_pasien)
+        <thead>
+            <th>Nama Obat</th>
+            <th>Dosis</th>
+            <th>Jumlah</th>
+        </thead>
+        <tbody>    
+            @foreach ($farmasis as $farmasi)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $pelayanan_pasien->kajian_pasiens->pasiens->no_rm }}</td>
-                    <td>{{ $pelayanan_pasien->kajian_pasiens->pasiens->name }}</td>
-                    <td>{{ $pelayanan_pasien->kajian_pasiens->pasiens->tanggal_lahir->format('d-m-Y') }}</td>
-                    <td>{{ $pelayanan_pasien->kajian_pasiens->pasiens->jenis_kelamin }}</td>
-                    <td>{{ $pelayanan_pasien->kajian_pasiens->pasiens->nama_kk }}</td>
-                    <td>{{ $pelayanan_pasien->icds->kode_icd }} - {{ $pelayanan_pasien->icds->nama_icd }}</td>
-                    <td>{{ $pelayanan_pasien->jenis_kasus }}</td>
-                    <td>{{ $pelayanan_pasien->penatalaksanaan }}</td>
-                    <td>{{ $pelayanan_pasien->tindakan }}</td>
-                    <td>{{ $pelayanan_pasien->kajian_pasiens->pasiens->pembiayaan }}</td>
-                    <td>{{ $pelayanan_pasien->users->name }}</td>
+                    <td>{{ $farmasi->pelayanan_pasiens->kajian_pasiens->pasiens->no_rm }}</td>
+                    <td>{{ $farmasi->pelayanan_pasiens->kajian_pasiens->pasiens->name }}</td>
+                    <td>{{ $farmasi->pelayanan_pasiens->kajian_pasiens->pasiens->tanggal_lahir->format('d-m-Y') }}</td>
+                    <td>{{ $farmasi->pelayanan_pasiens->kajian_pasiens->pasiens->jenis_kelamin }}</td>
+                    <td>{{ $farmasi->pelayanan_pasiens->kajian_pasiens->pasiens->alamat }}</td>
+                    <td>{{ $farmasi->pelayanan_pasiens->unit_pelayanans->name }}</td>
+                    <td>{{ $farmasi->pelayanan_pasiens->penatalaksanaan }}</td>
+                    <td>{{ $farmasi->obats->name }}</td>
+                    <td>{{ $farmasi->dosis }}</td>
+                    <td>{{ $farmasi->stok }}</td>
+                    <td>{{ $farmasi->pelayanan_pasiens->kajian_pasiens->pasiens->pembiayaan }}</td>
+                    <td>{{ $farmasi->pelayanan_pasiens->users->name }}</td>
                 </tr>
             @endforeach
         </tbody>

@@ -19,8 +19,9 @@ return new class extends Migration
             $table->string('name', 100);
             $table->string('sediaan', 100);
             $table->date('tanggal_kadaluarsa');
-            $table->string('harga', 100);
-            $table->integer('stok');
+            $table->bigInteger('harga');
+            $table->integer('stok_lama');
+            $table->integer('stok_baru');
             $table->timestamps();
         });
     }

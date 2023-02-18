@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('farmasi_pasiens', function (Blueprint $table) {
             $table->id();
-            // $table->foreignId('kajian_pasiens_id');
+            $table->date('tanggal_pelayanan');
             $table->foreignId('pelayanan_pasiens_id');
             $table->string('obats_id');
-            $table->string('stok');
+            $table->integer('stok');
             $table->string('dosis');
             $table->timestamps();
         });

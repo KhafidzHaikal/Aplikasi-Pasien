@@ -9,8 +9,8 @@
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href={{ route('admin-bp-gigi.index') }}>Pelayanan Pasien</a></li>
-                <li class="breadcrumb-item"><a href={{ route('admin-bp-gigi.create') }}>Kajian Pasien</a></li>
+                <li class="breadcrumb-item"><a href={{ route('admin-farmasi.index') }}>Pelayanan Pasien</a></li>
+                <li class="breadcrumb-item"><a href={{ route('admin-farmasi.create') }}>Kajian Pasien</a></li>
                 <li class="breadcrumb-item active"><a href="javascript:void(0)">Periksa Pasien</a></li>
             </ol>
         </div>
@@ -20,7 +20,7 @@
             <div class="card">
                 <div class="card-body">
                     {{-- Start Form --}}
-                    <form action={{ route('admin-bp-gigi.store', $kajian_pasien->pasiens_no_rm) }} method="POST">
+                    <form action={{ route('admin-farmasi.store', $pelayanan_pasien->id) }} method="POST">
                         @csrf
                         {{-- Start Administrasi Form --}}
                         <div class="card-header">
@@ -31,59 +31,32 @@
                                 <div class="form-group row" style="display: none">
                                     <label class="col-sm-3 col-form-label">No. Kajian Pasien</label>
                                     <div class="col-sm-5">
-                                        <input type="text" class="form-control" name="kajian_pasiens_id"
-                                            value={{ $kajian_pasien->id }}>
+                                        <input type="text" class="form-control" name="pelayanan_pasiens_id"
+                                            value={{ $pelayanan_pasien->id }}>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">No Registrasi Pasien</label>
                                     <div class="col-sm-5">
-                                        <strong>{{ $kajian_pasien->pasiens_no_rm }}</strong>
-                                        {{-- <input style="background-color: #e6e6e6" type="text" disabled
-                                            class="form-control" value={{ $kajian_pasien->pasiens_no_rm }}> --}}
+                                        <strong>{{ $pelayanan_pasien->kajian_pasiens->pasiens_no_rm }}</strong>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Nama Pasien</label>
                                     <div class="col-sm-5">
-                                        <strong>{{ $kajian_pasien->pasiens->name }}</strong>
-                                        {{-- <input style="background-color: #e6e6e6" type="text" disabled
-                                            class="form-control" value={{ $kajian_pasien->pasiens->name }}> --}}
+                                        <strong>{{ $pelayanan_pasien->kajian_pasiens->pasiens->name }}</strong>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label"></label>
+                                    <label class="col-sm-3 col-form-label">Nama KK</label>
                                     <div class="col-sm-5">
-                                        <a class="btn btn-primary col-12"
-                                            href={{ route('kajian-pasiens.show', $kajian_pasien->pasiens_no_rm) }}
-                                            target="_blank">Detai Pasien</a>
+                                        <strong>{{ $pelayanan_pasien->kajian_pasiens->pasiens->nama_kk }}</strong>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Tanggal Pemeriksaan</label>
+                                    <label class="col-sm-3 col-form-label">Resep Obat</label>
                                     <div class="col-sm-5">
-                                        <input type="date" class="form-control" name="tanggal_pemeriksaan"
-                                            value="{{ old('tanggal_pemeriksaan') }}" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Nama Pemeriksa / Dokter</label>
-                                    <div class="col-sm-5">
-                                        <select class="form-control" name="users_id" id="noPerawatSelect">
-                                            <option selected> --- Pilih Nama Pemeriksa / Dokter --- </option>
-                                            @foreach ($perawats as $perawat)
-                                                @if ($perawat->type == 'bp-gigi')
-                                                    @if (old('users_id') === $perawat->id)
-                                                        <option value="{{ $perawat->id }}">{{ $perawat->name }}
-                                                        </option>
-                                                    @else
-                                                        <option value="{{ $perawat->id }}">{{ $perawat->name }}
-                                                        </option>
-                                                    @endif
-                                                @else
-                                                @endif
-                                            @endforeach
-                                        </select>
+                                        <strong>{{ $pelayanan_pasien->penatalaksanaan }}</strong>
                                     </div>
                                 </div>
                             </div>
@@ -92,55 +65,28 @@
                         <hr>
                         {{-- Start Identitas Pasien Form --}}
                         <div class="card-header">
-                            <h3 class="card-title">Anamnesa</h3>
+                            <h3 class="card-title">Obat</h3>
                         </div>
                         <div class="card-body">
                             <div class="basic-form">
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Keluhan Utama</label>
+                                    <label class="col-sm-3 col-form-label">Tanggal Pelayanan</label>
                                     <div class="col-sm-5">
-                                        <div class="input-group mb-3">
-                                            <textarea class="form-control" name="keluhan_utama">{{ old('keluhan_utama') }}</textarea>
-                                        </div>
+                                        <input type="date" class="form-control" name="tanggal_pelayanan"
+                                            value="{{ old('tanggal_pelayanan') }}" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Riwayat Penyakit Sekarang</label>
+                                    <label class="col-sm-3 col-form-label">Obat</label>
                                     <div class="col-sm-5">
-                                        <div class="input-group mb-3">
-                                            <input type="text" class="form-control" name="rps"
-                                                value="{{ old('rps') }}" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Riwayat Penyakit Dulu</label>
-                                    <div class="col-sm-5">
-                                        <div class="input-group mb-3">
-                                            <input type="text" class="form-control" name="rpo"
-                                                value="{{ old('rpo') }}" required>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {{-- End Identitas Pasien Form --}}
-                        <div class="card-header">
-                            <h3 class="card-title">Diagnosa</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="basic-form">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Kode ICD</label>
-                                    <div class="col-sm-5">
-                                        <select class="form-control" name="icds_kode_icd" id="icd">
-                                            <option selected> --- Pilih ICD --- </option>
-                                            @foreach ($icds as $icd)
-                                                @if (old('icds_kode_icd') === $icd->kode_icd)
-                                                    <option value="{{ $icd->kode_icd }}">{{ $icd->kode_icd }} - {{ $icd->nama_icd }}
+                                        <select class="form-control" name="obats_id" id="icd">
+                                            <option selected> --- Pilih Obat --- </option>
+                                            @foreach ($obats as $obat)
+                                                @if (old('obats_id') == $obat->id)
+                                                    <option value="{{ $obat->id }}" selected>{{ $obat->name }}
                                                     </option>
                                                 @else
-                                                    <option value="{{ $icd->kode_icd }}">{{ $icd->kode_icd }} - {{ $icd->nama_icd }}
+                                                    <option value="{{ $obat->id }}">{{ $obat->name }}
                                                     </option>
                                                 @endif
                                             @endforeach
@@ -148,51 +94,61 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Terapi</label>
+                                    <label class="col-sm-3 col-form-label">Dosis</label>
                                     <div class="col-sm-5">
                                         <div class="input-group mb-3">
-                                            <textarea class="form-control" name="penatalaksanaan">{{ old('penatalaksanaan') }}</textarea>
+                                            <input type="text" class="form-control" name="dosis"
+                                                value="{{ old('dosis') }}" required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Tindakan / Rujukan</label>
+                                    <label class="col-sm-3 col-form-label">Stok</label>
                                     <div class="col-sm-5">
                                         <div class="input-group mb-3">
-                                            <textarea class="form-control" name="tindakan">{{ old('tindakan') }}</textarea>
+                                            <input type="number" class="form-control" name="stok"
+                                                value="{{ old('stok') }}" required>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Edukasi</label>
-                                    <div class="col-sm-5">
-                                        <div class="input-group mb-3">
-                                            <textarea class="form-control" name="edukasi">{{ old('edukasi') }}</textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Status Diagnosa</label>
-                                    <div class="col-sm-5">
-                                        <select class="form-control" name="jenis_kasus" required>
-                                            <option> --- Pilih Status Diagnosa --- </option>
-                                            <option value="Lama"
-                                                @if (old('jenis_kasus') == 'Lama') {{ 'selected' }} @endif>Lama</option>
-                                            <option value="Baru"
-                                                @if (old('jenis_kasus') == 'Baru') {{ 'selected' }} @endif>Baru</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Unit Pelayanan</label>
-                                    <div class="col-sm-5">
-                                        <select class="form-control" name="unit_pelayanans_id">
-                                            <option value={{ $kajian_pasien->unit_pelayanans->id }}>
-                                                {{ $kajian_pasien->unit_pelayanans->name }}</option>
-                                        </select>
                                     </div>
                                 </div>
                             </div>
+                            {{-- <div class="basic-form">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Obat</label>
+                                    <div class="col-sm-5">
+                                        <select class="form-control" name="obats_id[]" id="icd">
+                                            <option selected> --- Pilih Obat --- </option>
+                                            @foreach ($obats as $obat)
+                                                @if (old('obats_id') == $obat->id)
+                                                    <option value="{{ $obat->name }}" selected>{{ $obat->name }}
+                                                    </option>
+                                                @else
+                                                    <option value="{{ $obat->name }}">{{ $obat->name }}
+                                                    </option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Dosis</label>
+                                    <div class="col-sm-5">
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control" name="dosis[]"
+                                                value="{{ old('dosis') }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Stok</label>
+                                    <div class="col-sm-5">
+                                        <div class="input-group mb-3">
+                                            <input type="number" class="form-control" name="stok[]"
+                                                value="{{ old('stok') }}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> --}}
                         </div>
                         <div class="card-body">
                             <div class="basic-form">

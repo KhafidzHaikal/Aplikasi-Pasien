@@ -4,13 +4,13 @@
     <div class="row page-titles mx-0">
         <div class="col-sm-6 p-md-0">
             <div class="welcome-text">
-                <h4>Aplikasi Pelayanan Pasien Poli Gigi</h4>
+                <h4>Aplikasi Pelayanan Pasien Farmasi</h4>
             </div>
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href={{ route('admin-bp-gigi.index') }}>Pelayanan Pasien</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Kajian Pasien</a></li>
+                <li class="breadcrumb-item"><a href={{ route('admin-farmasi.index') }}>Pelayanan Pasien</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Pelayanan Pasien</a></li>
             </ol>
         </div>
     </div>
@@ -18,8 +18,8 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    {{-- <h4 class="card-title">Tabel Kajian Pasien <strong>Sedang Diperiksa</strong></h4> --}}
-                    <h4 class="card-title">Tabel Kajian Pasien</h4>
+                    {{-- <h4 class="card-title">Tabel Pelayanan Pasien <strong>pencarian obat</strong></h4> --}}
+                    <h4 class="card-title">Tabel Pelayanan Pasien</h4>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -36,39 +36,39 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if ($kajian_pasiens->count() == 0)
+                                @if ($pelayanan_pasiens->count() == 0)
                                     <tr>
                                         <td colspan="8"><strong style="color: rgb(255, 0, 0)">Tidak Ada Pasien</strong>
                                         </td>
                                     </tr>
                                 @else
-                                    @foreach ($kajian_pasiens as $kajian_pasien)
-                                        @if ($kajian_pasien->status == 'menunggu konfirmasi')
+                                    @foreach ($pelayanan_pasiens as $pelayanan_pasien)
+                                        @if ($pelayanan_pasien->status == 'menunggu konfirmasi')
                                             <tr>
-                                                <td>{{ $kajian_pasien->unit_pelayanans->name }}</td>
-                                                <td>{{ $kajian_pasien->tanggal_pemeriksaan->format('d/m/Y') }}</td>
-                                                <td>{{ $kajian_pasien->users->name }}</td>
-                                                <td>{{ $kajian_pasien->pasiens->no_rm }}</td>
-                                                <td>{{ $kajian_pasien->pasiens->name }}</td>
+                                                <td>{{ $pelayanan_pasien->unit_pelayanans->name }}</td>
+                                                <td>{{ $pelayanan_pasien->tanggal_pemeriksaan->format('d-m-Y') }}</td>
+                                                <td>{{ $pelayanan_pasien->users->name }}</td>
+                                                <td>{{ $pelayanan_pasien->kajian_pasiens->pasiens->no_rm }}</td>
+                                                <td>{{ $pelayanan_pasien->kajian_pasiens->pasiens->name }}</td>
                                                 <td>
-                                                    @if ($kajian_pasien->status == 'sedang diperiksa')
+                                                    @if ($pelayanan_pasien->status == 'pencarian obat')
                                                         <p class="btn"
                                                             style="padding: 3px; background-color:#FFED00; color:black">
-                                                            {{ $kajian_pasien->status }}</p>
-                                                    @elseif ($kajian_pasien->status == 'sudah diperiksa')
+                                                            {{ $pelayanan_pasien->status }}</p>
+                                                    @elseif ($pelayanan_pasien->status == 'sudah ditebus')
                                                         <p class="btn"
                                                             style="padding: 3px; background-color:#16FF00; color:black">
-                                                            {{ $kajian_pasien->status }}</p>
-                                                    @elseif ($kajian_pasien->status == 'menunggu konfirmasi')
+                                                            {{ $pelayanan_pasien->status }}</p>
+                                                    @elseif ($pelayanan_pasien->status == 'menunggu konfirmasi')
                                                     <p class="btn"
                                                             style="padding: 3px; background-color:#3db5ff; color:black">
-                                                            {{ $kajian_pasien->status }}</p>
+                                                            {{ $pelayanan_pasien->status }}</p>
                                                     @endif
                                                 </td>
                                                 <td class="d-flex">
-                                                    {{-- <a href={{ route('admin-bp-gigi.periksa', $kajian_pasien->pasiens_no_rm) }}
+                                                    {{-- <a href={{ route('admin-farmasi.periksa', $pelayanan_pasien->id) }}
                                                         class="btn btn-warning mr-2"><i class="bi bi-search"></i></a> --}}
-                                                    <form action={{ route('admin-bp-gigi.status', $kajian_pasien->id) }}
+                                                    <form action={{ route('admin-farmasi.status', $pelayanan_pasien->id) }}
                                                         method="POST">
                                                         @method('put')
                                                         @csrf
@@ -78,32 +78,32 @@
                                                     </form>
                                                 </td>
                                             </tr>
-                                        @elseif ($kajian_pasien->status == 'sedang diperiksa')
+                                        @elseif ($pelayanan_pasien->status == 'pencarian obat')
                                         <tr>
-                                            <td>{{ $kajian_pasien->unit_pelayanans->name }}</td>
-                                            <td>{{ $kajian_pasien->tanggal_pemeriksaan->format('d/m/Y') }}</td>
-                                            <td>{{ $kajian_pasien->users->name }}</td>
-                                            <td>{{ $kajian_pasien->pasiens->no_rm }}</td>
-                                            <td>{{ $kajian_pasien->pasiens->name }}</td>
+                                            <td>{{ $pelayanan_pasien->unit_pelayanans->name }}</td>
+                                            <td>{{ $pelayanan_pasien->tanggal_pemeriksaan->format('d-m-Y') }}</td>
+                                            <td>{{ $pelayanan_pasien->users->name }}</td>
+                                            <td>{{ $pelayanan_pasien->kajian_pasiens->pasiens->no_rm }}</td>
+                                            <td>{{ $pelayanan_pasien->kajian_pasiens->pasiens->name }}</td>
                                             <td>
-                                                @if ($kajian_pasien->status == 'sedang diperiksa')
+                                                @if ($pelayanan_pasien->status == 'pencarian obat')
                                                     <p class="btn"
                                                         style="padding: 3px; background-color:#FFED00; color:black">
-                                                        {{ $kajian_pasien->status }}</p>
-                                                @elseif ($kajian_pasien->status == 'sudah diperiksa')
+                                                        {{ $pelayanan_pasien->status }}</p>
+                                                @elseif ($pelayanan_pasien->status == 'sudah ditebus')
                                                     <p class="btn"
                                                         style="padding: 3px; background-color:#16FF00; color:black">
-                                                        {{ $kajian_pasien->status }}</p>
-                                                @elseif ($kajian_pasien->status == 'menunggu konfirmasi')
+                                                        {{ $pelayanan_pasien->status }}</p>
+                                                @elseif ($pelayanan_pasien->status == 'menunggu konfirmasi')
                                                 <p class="btn"
                                                         style="padding: 3px; background-color:#3db5ff; color:black">
-                                                        {{ $kajian_pasien->status }}</p>
+                                                        {{ $pelayanan_pasien->status }}</p>
                                                 @endif
                                             </td>
                                             <td class="d-flex">
-                                                <a href={{ route('admin-bp-gigi.periksa', $kajian_pasien->pasiens_no_rm) }}
+                                                <a href={{ route('admin-farmasi.periksa', $pelayanan_pasien->id) }}
                                                     class="btn btn-warning mr-2"><i class="bi bi-search"></i> Periksa</a>
-                                                <form action={{ route('admin-bp-gigi.status', $kajian_pasien->id) }}
+                                                <form action={{ route('admin-farmasi.status', $pelayanan_pasien->id) }}
                                                     method="POST">
                                                     @method('put')
                                                     @csrf
@@ -113,30 +113,30 @@
                                                 </form>
                                             </td>
                                         </tr>
-                                        @elseif ($kajian_pasien->status == 'sudah diperiksa')
+                                        @elseif ($pelayanan_pasien->status == 'sudah ditebus')
                                         <tr>
-                                            <td>{{ $kajian_pasien->unit_pelayanans->name }}</td>
-                                            <td>{{ $kajian_pasien->tanggal_pemeriksaan->format('d/m/Y') }}</td>
-                                            <td>{{ $kajian_pasien->users->name }}</td>
-                                            <td>{{ $kajian_pasien->pasiens->no_rm }}</td>
-                                            <td>{{ $kajian_pasien->pasiens->name }}</td>
+                                            <td>{{ $pelayanan_pasien->unit_pelayanans->name }}</td>
+                                            <td>{{ $pelayanan_pasien->tanggal_pemeriksaan->format('d-m-Y') }}</td>
+                                            <td>{{ $pelayanan_pasien->users->name }}</td>
+                                            <td>{{ $pelayanan_pasien->kajian_pasiens->pasiens->no_rm }}</td>
+                                            <td>{{ $pelayanan_pasien->kajian_pasiens->pasiens->name }}</td>
                                             <td>
-                                                @if ($kajian_pasien->status == 'sedang diperiksa')
+                                                @if ($pelayanan_pasien->status == 'pencarian obat')
                                                     <p class="btn"
                                                         style="padding: 3px; background-color:#FFED00; color:black">
-                                                        {{ $kajian_pasien->status }}</p>
-                                                @elseif ($kajian_pasien->status == 'sudah diperiksa')
+                                                        {{ $pelayanan_pasien->status }}</p>
+                                                @elseif ($pelayanan_pasien->status == 'sudah ditebus')
                                                     <p class="btn"
                                                         style="padding: 3px; background-color:#16FF00; color:black">
-                                                        {{ $kajian_pasien->status }}</p>
-                                                @elseif ($kajian_pasien->status == 'menunggu konfirmasi')
+                                                        {{ $pelayanan_pasien->status }}</p>
+                                                @elseif ($pelayanan_pasien->status == 'menunggu konfirmasi')
                                                 <p class="btn"
                                                         style="padding: 3px; background-color:#3db5ff; color:black">
-                                                        {{ $kajian_pasien->status }}</p>
+                                                        {{ $pelayanan_pasien->status }}</p>
                                                 @endif
                                             </td>
                                             <td class="d-flex">
-                                                <a href={{ route('admin-bp-gigi.index') }} class="btn btn-dark"><i class="bi bi-check-lg"></i> Selesai</a>
+                                                <a href={{ route('admin-farmasi.index') }} class="btn btn-dark"><i class="bi bi-check-lg"></i> Selesai</a>
                                             </td>
                                         </tr>
                                         @endif

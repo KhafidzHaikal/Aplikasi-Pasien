@@ -62,7 +62,6 @@ class UnitPelayananBpGigiController extends Controller
 
     public function status(Request $request, KajianPasien $kajianPasien)
     {
-
         $rules = [
             'status' => 'required',
         ];
@@ -110,6 +109,7 @@ class UnitPelayananBpGigiController extends Controller
             'edukasi'  => 'required',
             'jenis_kasus'  => 'required',
             'unit_pelayanans_id'  => 'required',
+            'status'  => 'required',
         ];
 
         $validatedData = $request->validate($rules);

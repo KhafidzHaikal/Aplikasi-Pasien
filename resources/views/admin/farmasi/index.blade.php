@@ -4,7 +4,7 @@
     <div class="row page-titles mx-0">
         <div class="col-sm-6 p-md-0">
             <div class="welcome-text">
-                <h4>Aplikasi Pelayanan Pasien Poli Gigi</h4>
+                <h4>Aplikasi Pelayanan Pasien Farmasi</h4>
             </div>
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
@@ -13,14 +13,16 @@
             </ol>
         </div>
     </div>
-    <a class="btn btn-primary col-2 mb-xl-4" style="color:#ffff" href={{ route('admin-bp-gigi.create') }}><i class="bi bi-person-add mr-2"></i> Tambah Pasien</a>
-    <button type="button" class="btn btn-danger mb-xl-4" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="bi bi-printer"></i>
+    <a class="btn btn-primary col-2 mb-xl-4" style="color:#ffff" href={{ route('admin-farmasi.create') }}><i
+            class="bi bi-person-add mr-2"></i> Tambah Pasien</a>
+    <button type="button" class="btn btn-danger mb-xl-4" data-toggle="modal" data-target=".bd-example-modal-lg"><i
+            class="bi bi-printer"></i>
         Print Laporan</button>
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Laporan BP Gigi</h5>
+                    <h5 class="modal-title">Laporan Farmasi</h5>
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                     </button>
                 </div>
@@ -45,7 +47,9 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <a target="_blank" onclick="this.href='/print-laporan-bp-gigi/'+document.getElementById('tanggal_awal').value+ '/' +document.getElementById('tanggal_akhir').value" class="btn btn-primary">Cetak</a>
+                    <a target="_blank"
+                        onclick="this.href='/print-laporan-farmasi/'+document.getElementById('tanggal_awal').value+ '/' +document.getElementById('tanggal_akhir').value"
+                        class="btn btn-primary">Cetak</a>
                 </div>
             </div>
         </div>
@@ -62,33 +66,45 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Tanggal Pemeriksaan</th>
                                     <th>Nama Petugas</th>
                                     <th>Poli</th>
                                     <th>No Registrasi</th>
                                     <th>Nama</th>
                                     <th>NIK</th>
+                                    <th>Obat</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($pelayanan_pasiens as $pelayanan_pasien)
+                                @foreach ($farmasis as $farmasi)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $pelayanan_pasien->tanggal_pemeriksaan->format('d/m/Y') }}</td>
-                                        <td>{{ $pelayanan_pasien->users->name }}</td>
-                                        <td>{{ $pelayanan_pasien->unit_pelayanans->name }}</td>
-                                        <td>{{ $pelayanan_pasien->kajian_pasiens->pasiens->no_rm }}</td>
-                                        <td>{{ $pelayanan_pasien->kajian_pasiens->pasiens->name }}</td>
-                                        <td>{{ $pelayanan_pasien->kajian_pasiens->pasiens->nik }}</td>
+                                        <td>{{ $farmasi->pelayanan_pasiens->users->name }}</td>
+                                        <td>{{ $farmasi->pelayanan_pasiens->unit_pelayanans->name }}</td>
+                                        <td>{{ $farmasi->pelayanan_pasiens->kajian_pasiens->pasiens->no_rm }}</td>
+                                        <td>{{ $farmasi->pelayanan_pasiens->kajian_pasiens->pasiens->name }}</td>
+                                        <td>{{ $farmasi->pelayanan_pasiens->kajian_pasiens->pasiens->nik }}</td>
+                                        <td>
+                                            @php
+                                                $obat = json_decode($farmasi->obats_id);
+                                            @endphp
+                                            @if (is_array($obat) || is_object($obat))
+                                                @foreach ($obat as $item)
+                                                    {{ $item }}, 
+                                                @endforeach
+                                            @else
+                                                {{ $farmasi->obats->name }}
+                                            @endif
+                                        </td>
                                         <td class="d-flex">
-                                            <a href={{ route('admin-bp-gigi.edit', $pelayanan_pasien->id ) }} class="btn btn-warning mr-2"><i class="bi bi-pencil-square"></i></a>
-                                            <a href={{ route('admin-bp-gigi.show', $pelayanan_pasien->id ) }} class="btn btn-info mr-2"><i class="bi bi-info-circle"></i></a>
-                                            <form action={{ route('admin-bp-gigi.destroy', $pelayanan_pasien->id) }} method="POST">
+                                            <a href={{ route('admin-farmasi.edit', $farmasi->id) }}
+                                                class="btn btn-warning mr-2"><i class="bi bi-pencil-square"></i></a>
+                                            <a href={{ route('admin-farmasi.show', $farmasi->id) }}
+                                                class="btn btn-info mr-2"><i class="bi bi-info-circle"></i></a>
+                                            <form action={{ route('admin-farmasi.destroy', $farmasi->id) }} method="POST">
                                                 @method('delete')
                                                 @csrf
-                                                <button class="btn btn-danger"><i
-                                                        class="bi bi-trash"></i></button>
+                                                <button class="btn btn-danger"><i class="bi bi-trash"></i></button>
                                             </form>
                                         </td>
                                     </tr>
@@ -97,18 +113,18 @@
                             <tfoot>
                                 <tr>
                                     <th>No</th>
-                                    <th>Tanggal Pemeriksaan</th>
                                     <th>Nama Petugas</th>
                                     <th>Poli</th>
                                     <th>No Registrasi</th>
                                     <th>Nama</th>
                                     <th>NIK</th>
+                                    <th>Obat</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
                         </table>
                     </div>
-                    
+
                 </div>
             </div>
         </div>

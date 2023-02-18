@@ -89,8 +89,8 @@
                                     <label class="col-sm-3 col-form-label">Stok</label>
                                     <div class="col-sm-5">
                                         <div class="input-group mb-3">
-                                            <input type="number" class="form-control" name="stok"
-                                                value="{{ old('stok', $obat->stok) }}" required>
+                                            <input type="number" class="form-control" name="stok_lama"
+                                                value="{{ old('stok_lama') }}" required>
                                         </div>
                                     </div>
                                 </div>
