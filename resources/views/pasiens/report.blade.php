@@ -15,9 +15,10 @@
 </head>
 
 <body>
+    {{-- <img src="{{ public_path('pemkab.png') }}" alt="" srcset="Pemkab" style="width: 200px; height: 200px"> --}}
     <h2>LAPORAN PENDAFTARAN PASIEN</h2>
     <br>
-    <p style="position:absolute;left:0">Tanggal Kunjungan : {{ $date }}</p>
+    <p style="position:absolute;left:0">Tanggal Cetak : {{ $date }}</p>
     <p style="position:absolute;right:0">Periode Tanggal {{ $newTanggalAwal }} s/d Tanggal {{ $newTanggalAkhir }}</p>
     <table class="mt-5">
         <thead>
