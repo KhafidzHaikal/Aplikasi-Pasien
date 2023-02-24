@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\UnitPelayanan;
 use App\Http\Requests\StoreUnitPelayananRequest;
 use App\Http\Requests\UpdateUnitPelayananRequest;
+use Illuminate\Http\Request;
 
 class UnitPelayananController extends Controller
 {
@@ -34,7 +35,7 @@ class UnitPelayananController extends Controller
      * @param  \App\Http\Requests\StoreUnitPelayananRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUnitPelayananRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -68,7 +69,7 @@ class UnitPelayananController extends Controller
      * @param  \App\Models\UnitPelayanan  $unitPelayanan
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUnitPelayananRequest $request, UnitPelayanan $unitPelayanan)
+    public function update(Request $request, UnitPelayanan $unitPelayanan)
     {
         //
     }

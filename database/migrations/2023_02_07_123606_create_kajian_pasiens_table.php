@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('kajian_pasiens', function (Blueprint $table) {
-            $table->id();
+            $table->string('id', 32)->primary();
             $table->string('pasiens_no_rm');
             $table->date('tanggal_pemeriksaan');
             $table->foreignId('users_id');
@@ -50,7 +50,7 @@ return new class extends Migration
             $table->string('usg');
             $table->foreignId('unit_pelayanans_id');
             $table->tinyInteger('status');
-            $table->foreign('pasiens_no_rm')->references('no_rm')->on('pasiens');
+            $table->foreign('pasiens_no_rm')->references('no_rm')->on('pasiens')->onDelete('cascade');
             $table->timestamps();
         });
     }

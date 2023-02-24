@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Ramsey\Uuid\Uuid;
 use App\Models\Pasiens;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,6 +19,7 @@ class KajianPasienFactory extends Factory
     public function definition()
     {
         return [
+            'id' => Uuid::uuid4()->getHex(),
             'pasiens_no_rm' => $this->faker->randomElement(Pasiens::pluck('no_rm')),
             'tanggal_pemeriksaan' => $this->faker->dateTimeBetween('-1 week', '+1 days'),
             'users_id' => mt_rand(2,4),

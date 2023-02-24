@@ -12,8 +12,20 @@ class PelayananPasien extends Model
 {
     use HasFactory;
 
+    protected $table = 'pelayanan_pasiens';
+
+    protected $primaryKey = 'id';
+
+    public $incrementing = false;
+
+    protected $casts = [
+        'id' => 'string',
+    ];
+
+    protected $keyType = 'string';
+
     protected $guarded = [
-        'id', 'created_at', 'updated_at'
+        'created_at', 'updated_at'
     ];
 
     protected $dates = ['tanggal_pemeriksaan'];
@@ -27,6 +39,13 @@ class PelayananPasien extends Model
     {
         return new Attribute(
             get: fn ($value) => ["menunggu konfirmasi", "pencarian obat", "sudah ditebus"][$value],
+        );
+    }
+
+    protected function statusAskep(): Attribute
+    {
+        return new Attribute(
+            get: fn ($value) => ["belum buat", "sudah buat"][$value],
         );
     }
 
@@ -63,5 +82,10 @@ class PelayananPasien extends Model
     public function obats()
     {
         return $this->hasMany(Obat::class);
+    }
+
+    public function asuhan_keperawatans()
+    {
+        return $this->belongsTo(AsuhanKeperawatan::class);
     }
 }

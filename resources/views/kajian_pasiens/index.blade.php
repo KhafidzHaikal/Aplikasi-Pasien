@@ -41,7 +41,7 @@
                                 @foreach ($kajian_pasiens as $kajian_pasien)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $kajian_pasien->tanggal_pemeriksaan->format('d-m-Y') }}</td>
+                                        <td>{{ $kajian_pasien->tanggal_pemeriksaan->translatedFormat('d F Y') }}</td>
                                         <td>{{ $kajian_pasien->users->name }}</td>
                                         <td>{{ $kajian_pasien->unit_pelayanans->name }}</td>
                                         <td>{{ $kajian_pasien->pasiens->no_rm }}</td>
@@ -49,15 +49,15 @@
                                         {{-- <td>{{ $kajian_pasien->pasiens->nik }}</td> --}}
                                         <td>
                                             @if ($kajian_pasien->status == 'sedang diperiksa')
-                                                <p class="btn"
+                                                <p class="badge"
                                                     style="padding: 3px; background-color:#FFED00; color:black">
                                                     {{ $kajian_pasien->status }}</p>
                                             @elseif ($kajian_pasien->status == 'sudah diperiksa')
-                                                <p class="btn"
+                                                <p class="badge"
                                                     style="padding: 3px; background-color:#16FF00; color:black">
                                                     {{ $kajian_pasien->status }}</p>
                                             @elseif ($kajian_pasien->status == 'menunggu konfirmasi')
-                                                <p class="btn"
+                                                <p class="badge"
                                                     style="padding: 3px; background-color:#3db5ff; color:black">
                                                     {{ $kajian_pasien->status }}</p>
                                             @endif

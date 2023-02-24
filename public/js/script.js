@@ -19,6 +19,13 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
+    $('#obatsatu').select2();
+});
+$(document).ready(function () {
+    $('#obatdua').select2();
+});
+
+$(document).ready(function () {
     $('#noPasienSelect').select2({
         placeholder: '---Pilih No.Register Pasien---',
     });

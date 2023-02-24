@@ -156,18 +156,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Indeks Massa Tubuh (IMT)</label>
-                                    <div class="col-sm-8">
-                                        <div class="input-group mb-3">
-                                            <input type="text" class="form-control" name="imt"
-                                                value="{{ old('imt') }}" required maxlength="7">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">Kg/M<sup>2</sup></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         {{-- End Identitas Pasien Form --}}
@@ -186,9 +174,9 @@
                                             <input type="checkbox" class="form-check-input" name="sirkulasi_cairan[]"
                                                 id="sirkulasiTidakAda" value="Tidak Ada Kelainan"
                                                 @if (is_array(old('sirkulasi_cairan')) && in_array('Tidak Ada Kelainan', old('sirkulasi_cairan'))) checked @endif>
-                                            <label class="form-check-label" for="sirkulasiTidakAda"><strong><strong>Tidak
-                                                        Ada
-                                                        Kelainan</strong></strong></label>
+                                            <label class="form-check-label" for="sirkulasiTidakAda"><strong>Tidak
+                                                    Ada
+                                                    Kelainan</strong></label>
                                         </div>
                                         <div class="form-check mb-2">
                                             <input type="checkbox" class="form-check-input" id="sirkulasiAsites"

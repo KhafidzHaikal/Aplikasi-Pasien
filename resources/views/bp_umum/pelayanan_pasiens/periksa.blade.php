@@ -155,6 +155,7 @@
                                         <div class="input-group mb-3">
                                             <textarea class="form-control" name="penatalaksanaan">{{ old('penatalaksanaan') }}</textarea>
                                         </div>
+                                        <p style="color: red">Obat lebih dari satu gunakan koma (,)</p>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -199,6 +200,9 @@
                                     <div class="col-sm-5">
                                         <select class="form-control" name="status">
                                             <option value="0" selected>Kirim</option>
+                                        </select>
+                                        <select class="form-control" name="statusAskep">
+                                            <option value="0" selected>Askep</option>
                                         </select>
                                     </div>
                                 </div>

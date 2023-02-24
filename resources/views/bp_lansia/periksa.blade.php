@@ -56,7 +56,7 @@
                                     <div class="col-sm-5">
                                         <a class="btn btn-primary col-12"
                                             href={{ route('kajian-pasiens.show', $kajian_pasien->pasiens_no_rm) }}
-                                            target="_blank">Detai Pasien</a>
+                                            target="_blank">Detail Pasien</a>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -148,11 +148,12 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Terapi</label>
+                                    <label class="col-sm-3 col-form-label">Terapi / Pengobatan</label>
                                     <div class="col-sm-5">
                                         <div class="input-group mb-3">
                                             <textarea class="form-control" name="penatalaksanaan">{{ old('penatalaksanaan') }}</textarea>
                                         </div>
+                                        <p style="color: red">Obat lebih dari satu gunakan koma (,)</p>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -197,6 +198,9 @@
                                     <div class="col-sm-5">
                                         <select class="form-control" name="status">
                                             <option value="0" selected>Kirim</option>
+                                        </select>
+                                        <select class="form-control" name="statusAskep">
+                                            <option value="0" selected>Askep</option>
                                         </select>
                                     </div>
                                 </div>

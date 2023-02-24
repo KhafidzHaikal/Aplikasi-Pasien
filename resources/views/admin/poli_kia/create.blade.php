@@ -37,10 +37,12 @@
                             </thead>
                             <tbody>
                                 @if ($kajian_pasiens->count() == 0)
-                                    <tr>
-                                        <td colspan="8"><strong style="color: rgb(255, 0, 0)">Tidak Ada Pasien</strong>
-                                        </td>
-                                    </tr>
+                                    <div class="alert alert-danger alert-dismissible alert-alt fade show">
+                                        <button type="button" class="close h-100" data-dismiss="alert"
+                                            aria-label="Close"><span><i class="mdi mdi-close"></i></span>
+                                        </button>
+                                        <strong>Tidak Ada Pasien</strong>
+                                    </div>
                                 @else
                                     @foreach ($kajian_pasiens as $kajian_pasien)
                                         @if ($kajian_pasien->status == 'menunggu konfirmasi')
@@ -51,16 +53,8 @@
                                                 <td>{{ $kajian_pasien->pasiens->no_rm }}</td>
                                                 <td>{{ $kajian_pasien->pasiens->name }}</td>
                                                 <td>
-                                                    @if ($kajian_pasien->status == 'sedang diperiksa')
-                                                        <p class="btn"
-                                                            style="padding: 3px; background-color:#FFED00; color:black">
-                                                            {{ $kajian_pasien->status }}</p>
-                                                    @elseif ($kajian_pasien->status == 'sudah diperiksa')
-                                                        <p class="btn"
-                                                            style="padding: 3px; background-color:#16FF00; color:black">
-                                                            {{ $kajian_pasien->status }}</p>
-                                                    @elseif ($kajian_pasien->status == 'menunggu konfirmasi')
-                                                    <p class="btn"
+                                                    @if ($kajian_pasien->status == 'menunggu konfirmasi')
+                                                        <p class="badge"
                                                             style="padding: 3px; background-color:#3db5ff; color:black">
                                                             {{ $kajian_pasien->status }}</p>
                                                     @endif
@@ -79,66 +73,44 @@
                                                 </td>
                                             </tr>
                                         @elseif ($kajian_pasien->status == 'sedang diperiksa')
-                                        <tr>
-                                            <td>{{ $kajian_pasien->unit_pelayanans->name }}</td>
-                                            <td>{{ $kajian_pasien->tanggal_pemeriksaan->format('d/m/Y') }}</td>
-                                            <td>{{ $kajian_pasien->users->name }}</td>
-                                            <td>{{ $kajian_pasien->pasiens->no_rm }}</td>
-                                            <td>{{ $kajian_pasien->pasiens->name }}</td>
-                                            <td>
-                                                @if ($kajian_pasien->status == 'sedang diperiksa')
-                                                    <p class="btn"
-                                                        style="padding: 3px; background-color:#FFED00; color:black">
-                                                        {{ $kajian_pasien->status }}</p>
-                                                @elseif ($kajian_pasien->status == 'sudah diperiksa')
-                                                    <p class="btn"
-                                                        style="padding: 3px; background-color:#16FF00; color:black">
-                                                        {{ $kajian_pasien->status }}</p>
-                                                @elseif ($kajian_pasien->status == 'menunggu konfirmasi')
-                                                <p class="btn"
-                                                        style="padding: 3px; background-color:#3db5ff; color:black">
-                                                        {{ $kajian_pasien->status }}</p>
-                                                @endif
-                                            </td>
-                                            <td class="d-flex">
-                                                <a href={{ route('admin-poli-kia.periksa', $kajian_pasien->pasiens_no_rm) }}
-                                                    class="btn btn-warning mr-2"><i class="bi bi-search"></i> Periksa</a>
-                                                <form action={{ route('admin-poli-kia.status', $kajian_pasien->id) }}
-                                                    method="POST">
-                                                    @method('put')
-                                                    @csrf
-                                                    <input type="hidden" name="status" value="2">
-                                                    <button class="btn btn-danger" type="submit"><i
-                                                            class="bi bi-check-square"></i> Selesai</button>
-                                                </form>
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td>{{ $kajian_pasien->unit_pelayanans->name }}</td>
+                                                <td>{{ $kajian_pasien->tanggal_pemeriksaan->format('d/m/Y') }}</td>
+                                                <td>{{ $kajian_pasien->users->name }}</td>
+                                                <td>{{ $kajian_pasien->pasiens->no_rm }}</td>
+                                                <td>{{ $kajian_pasien->pasiens->name }}</td>
+                                                <td>
+                                                    @if ($kajian_pasien->status == 'sedang diperiksa')
+                                                        <p class="badge"
+                                                            style="padding: 3px; background-color:#FFED00; color:black">
+                                                            {{ $kajian_pasien->status }}</p>
+                                                    @endif
+                                                </td>
+                                                <td class="d-flex">
+                                                    <a href={{ route('admin-poli-kia.periksa', $kajian_pasien->pasiens_no_rm) }}
+                                                        class="btn btn-warning mr-2"><i class="bi bi-search"></i>
+                                                        Periksa</a>
+                                                </td>
+                                            </tr>
                                         @elseif ($kajian_pasien->status == 'sudah diperiksa')
-                                        <tr>
-                                            <td>{{ $kajian_pasien->unit_pelayanans->name }}</td>
-                                            <td>{{ $kajian_pasien->tanggal_pemeriksaan->format('d/m/Y') }}</td>
-                                            <td>{{ $kajian_pasien->users->name }}</td>
-                                            <td>{{ $kajian_pasien->pasiens->no_rm }}</td>
-                                            <td>{{ $kajian_pasien->pasiens->name }}</td>
-                                            <td>
-                                                @if ($kajian_pasien->status == 'sedang diperiksa')
-                                                    <p class="btn"
-                                                        style="padding: 3px; background-color:#FFED00; color:black">
-                                                        {{ $kajian_pasien->status }}</p>
-                                                @elseif ($kajian_pasien->status == 'sudah diperiksa')
-                                                    <p class="btn"
-                                                        style="padding: 3px; background-color:#16FF00; color:black">
-                                                        {{ $kajian_pasien->status }}</p>
-                                                @elseif ($kajian_pasien->status == 'menunggu konfirmasi')
-                                                <p class="btn"
-                                                        style="padding: 3px; background-color:#3db5ff; color:black">
-                                                        {{ $kajian_pasien->status }}</p>
-                                                @endif
-                                            </td>
-                                            <td class="d-flex">
-                                                <a href={{ route('admin-poli-kia.index') }} class="btn btn-dark"><i class="bi bi-check-lg"></i> Selesai</a>
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td>{{ $kajian_pasien->unit_pelayanans->name }}</td>
+                                                <td>{{ $kajian_pasien->tanggal_pemeriksaan->format('d/m/Y') }}</td>
+                                                <td>{{ $kajian_pasien->users->name }}</td>
+                                                <td>{{ $kajian_pasien->pasiens->no_rm }}</td>
+                                                <td>{{ $kajian_pasien->pasiens->name }}</td>
+                                                <td>
+                                                    @if ($kajian_pasien->status == 'sudah diperiksa')
+                                                        <p class="badge"
+                                                            style="padding: 3px; background-color:#16FF00; color:black">
+                                                            {{ $kajian_pasien->status }}</p>
+                                                    @endif
+                                                </td>
+                                                <td class="d-flex">
+                                                    <a href={{ route('admin-poli-kia.index') }} class="btn btn-dark"><i
+                                                            class="bi bi-check-lg"></i> Selesai</a>
+                                                </td>
+                                            </tr>
                                         @endif
                                     @endforeach
                                 @endif

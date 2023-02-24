@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Ramsey\Uuid\Uuid;
 use App\Models\Pasiens;
 use App\Models\KajianPasien;
 use Illuminate\Http\Request;
+use App\Models\UnitPelayanan;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Requests\UpdateKajianPasienRequest;
-use App\Models\UnitPelayanan;
 
 class KajianPasienController extends Controller
 {
@@ -58,7 +59,6 @@ class KajianPasienController extends Controller
             'suhu' => 'required|integer',
             'bb' => 'required|integer',
             'tb' => 'required|integer',
-            'imt' => 'required',
             'sirkulasi_cairan' => 'required',
             'perkemihan' => 'required',
             'pernapasan' => 'required',
@@ -82,7 +82,9 @@ class KajianPasienController extends Controller
             'unit_pelayanans_id' => 'required',
             'status' => 'required',
         ]);
+        $imt = $request->bb / (($request->tb/100)*($request->tb/100));
         $kajian_pasien = new KajianPasien();
+        $kajian_pasien->id = Uuid::uuid4()->getHex();
         $kajian_pasien->pasiens_no_rm = $request->pasiens_no_rm;
         $kajian_pasien->tanggal_pemeriksaan = $request->tanggal_pemeriksaan;
         $kajian_pasien->users_id = $request->users_id;
@@ -92,7 +94,7 @@ class KajianPasienController extends Controller
         $kajian_pasien->suhu = $request->suhu;
         $kajian_pasien->bb = $request->bb;
         $kajian_pasien->tb = $request->tb;
-        $kajian_pasien->imt = $request->imt;
+        $kajian_pasien->imt = number_format((float)$imt, 3, '.', '');
         $kajian_pasien->sirkulasi_cairan = json_encode($request->sirkulasi_cairan);
         $kajian_pasien->perkemihan = json_encode($request->perkemihan);
         $kajian_pasien->pernapasan = json_encode($request->pernapasan);

@@ -16,8 +16,20 @@ class KajianPasien extends Model
 {
     use HasFactory;
 
+    protected $table = 'kajian_pasiens';
+
+    protected $primaryKey = 'id';
+
+    public $incrementing = false;
+
+    protected $casts = [
+        'id' => 'string',
+    ];
+
+    protected $keyType = 'string';
+
     protected $guarded = [
-        'id', 'created_at', 'updated_at'
+        'created_at', 'updated_at'
     ];
 
     protected $dates = ['tanggal_pemeriksaan'];

@@ -51,23 +51,15 @@
                                                 <td>{{ $pelayanan_pasien->kajian_pasiens->pasiens->no_rm }}</td>
                                                 <td>{{ $pelayanan_pasien->kajian_pasiens->pasiens->name }}</td>
                                                 <td>
-                                                    @if ($pelayanan_pasien->status == 'pencarian obat')
-                                                        <p class="btn"
-                                                            style="padding: 3px; background-color:#FFED00; color:black">
-                                                            {{ $pelayanan_pasien->status }}</p>
-                                                    @elseif ($pelayanan_pasien->status == 'sudah ditebus')
-                                                        <p class="btn"
-                                                            style="padding: 3px; background-color:#16FF00; color:black">
-                                                            {{ $pelayanan_pasien->status }}</p>
-                                                    @elseif ($pelayanan_pasien->status == 'menunggu konfirmasi')
-                                                    <p class="btn"
+                                                    @if ($pelayanan_pasien->status == 'menunggu konfirmasi')
+                                                        <p class="badge"
                                                             style="padding: 3px; background-color:#3db5ff; color:black">
                                                             {{ $pelayanan_pasien->status }}</p>
                                                     @endif
                                                 </td>
                                                 <td class="d-flex">
                                                     {{-- <a href={{ route('admin-farmasi.periksa', $pelayanan_pasien->id) }}
-                                                        class="btn btn-warning mr-2"><i class="bi bi-search"></i></a> --}}
+                                                        class="badge badge-warning mr-2"><i class="bi bi-search"></i></a> --}}
                                                     <form action={{ route('admin-farmasi.status', $pelayanan_pasien->id) }}
                                                         method="POST">
                                                         @method('put')
@@ -79,66 +71,51 @@
                                                 </td>
                                             </tr>
                                         @elseif ($pelayanan_pasien->status == 'pencarian obat')
-                                        <tr>
-                                            <td>{{ $pelayanan_pasien->unit_pelayanans->name }}</td>
-                                            <td>{{ $pelayanan_pasien->tanggal_pemeriksaan->format('d-m-Y') }}</td>
-                                            <td>{{ $pelayanan_pasien->users->name }}</td>
-                                            <td>{{ $pelayanan_pasien->kajian_pasiens->pasiens->no_rm }}</td>
-                                            <td>{{ $pelayanan_pasien->kajian_pasiens->pasiens->name }}</td>
-                                            <td>
-                                                @if ($pelayanan_pasien->status == 'pencarian obat')
-                                                    <p class="btn"
-                                                        style="padding: 3px; background-color:#FFED00; color:black">
-                                                        {{ $pelayanan_pasien->status }}</p>
-                                                @elseif ($pelayanan_pasien->status == 'sudah ditebus')
-                                                    <p class="btn"
-                                                        style="padding: 3px; background-color:#16FF00; color:black">
-                                                        {{ $pelayanan_pasien->status }}</p>
-                                                @elseif ($pelayanan_pasien->status == 'menunggu konfirmasi')
-                                                <p class="btn"
-                                                        style="padding: 3px; background-color:#3db5ff; color:black">
-                                                        {{ $pelayanan_pasien->status }}</p>
-                                                @endif
-                                            </td>
-                                            <td class="d-flex">
-                                                <a href={{ route('admin-farmasi.periksa', $pelayanan_pasien->id) }}
-                                                    class="btn btn-warning mr-2"><i class="bi bi-search"></i> Periksa</a>
-                                                <form action={{ route('admin-farmasi.status', $pelayanan_pasien->id) }}
-                                                    method="POST">
-                                                    @method('put')
-                                                    @csrf
-                                                    <input type="hidden" name="status" value="2">
-                                                    <button class="btn btn-danger" type="submit"><i
-                                                            class="bi bi-check-square"></i> Selesai</button>
-                                                </form>
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td>{{ $pelayanan_pasien->unit_pelayanans->name }}</td>
+                                                <td>{{ $pelayanan_pasien->tanggal_pemeriksaan->format('d-m-Y') }}</td>
+                                                <td>{{ $pelayanan_pasien->users->name }}</td>
+                                                <td>{{ $pelayanan_pasien->kajian_pasiens->pasiens->no_rm }}</td>
+                                                <td>{{ $pelayanan_pasien->kajian_pasiens->pasiens->name }}</td>
+                                                <td>
+                                                    @if ($pelayanan_pasien->status == 'pencarian obat')
+                                                        <p class="badge"
+                                                            style="padding: 3px; background-color:#FFED00; color:black">
+                                                            {{ $pelayanan_pasien->status }}</p>
+                                                    @endif
+                                                </td>
+                                                <td class="d-flex">
+                                                    <a href={{ route('admin-farmasi.periksa', $pelayanan_pasien->id) }}
+                                                        class="btn btn-warning mr-2"><i class="bi bi-search"></i> Layani</a>
+                                                    <form action={{ route('admin-farmasi.status', $pelayanan_pasien->id) }}
+                                                        method="POST">
+                                                        @method('put')
+                                                        @csrf
+                                                        <input type="hidden" name="status" value="2">
+                                                        <button class="btn btn-danger" type="submit"><i
+                                                                class="bi bi-check-square"></i> Selesai</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
                                         @elseif ($pelayanan_pasien->status == 'sudah ditebus')
-                                        <tr>
-                                            <td>{{ $pelayanan_pasien->unit_pelayanans->name }}</td>
-                                            <td>{{ $pelayanan_pasien->tanggal_pemeriksaan->format('d-m-Y') }}</td>
-                                            <td>{{ $pelayanan_pasien->users->name }}</td>
-                                            <td>{{ $pelayanan_pasien->kajian_pasiens->pasiens->no_rm }}</td>
-                                            <td>{{ $pelayanan_pasien->kajian_pasiens->pasiens->name }}</td>
-                                            <td>
-                                                @if ($pelayanan_pasien->status == 'pencarian obat')
-                                                    <p class="btn"
-                                                        style="padding: 3px; background-color:#FFED00; color:black">
-                                                        {{ $pelayanan_pasien->status }}</p>
-                                                @elseif ($pelayanan_pasien->status == 'sudah ditebus')
-                                                    <p class="btn"
-                                                        style="padding: 3px; background-color:#16FF00; color:black">
-                                                        {{ $pelayanan_pasien->status }}</p>
-                                                @elseif ($pelayanan_pasien->status == 'menunggu konfirmasi')
-                                                <p class="btn"
-                                                        style="padding: 3px; background-color:#3db5ff; color:black">
-                                                        {{ $pelayanan_pasien->status }}</p>
-                                                @endif
-                                            </td>
-                                            <td class="d-flex">
-                                                <a href={{ route('admin-farmasi.index') }} class="btn btn-dark"><i class="bi bi-check-lg"></i> Selesai</a>
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td>{{ $pelayanan_pasien->unit_pelayanans->name }}</td>
+                                                <td>{{ $pelayanan_pasien->tanggal_pemeriksaan->format('d-m-Y') }}</td>
+                                                <td>{{ $pelayanan_pasien->users->name }}</td>
+                                                <td>{{ $pelayanan_pasien->kajian_pasiens->pasiens->no_rm }}</td>
+                                                <td>{{ $pelayanan_pasien->kajian_pasiens->pasiens->name }}</td>
+                                                <td>
+                                                    @if ($pelayanan_pasien->status == 'sudah ditebus')
+                                                        <p class="badge"
+                                                            style="padding: 3px; background-color:#16FF00; color:black">
+                                                            {{ $pelayanan_pasien->status }}</p>
+                                                    @endif
+                                                </td>
+                                                <td class="d-flex">
+                                                    <a href={{ route('admin-farmasi.index') }} class="btn btn-danger"><i
+                                                            class="bi bi-check-lg"></i> Selesai</a>
+                                                </td>
+                                            </tr>
                                         @endif
                                     @endforeach
                                 @endif

@@ -23,6 +23,7 @@
         <thead>
             <th>No</th>
             <th>No. RM</th>
+            <th>Tanggal Kunjungan</th>
             <th>Nama Pasien</th>
             <th>Umur</th>
             <th>Kelamin</th>
@@ -38,8 +39,9 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $pasien->no_rm }}</td>
+                    <td>{{ $pasien->tanggal_kunjungan->translatedFormat('d F Y') }}</td>
                     <td>{{ $pasien->name }}</td>
-                    <td>{{ $pasien->tanggal_lahir->format('d-m-Y') }}</td>
+                    <td>{{ $pasien->tanggal_lahir->translatedFormat('d F Y') }}</td>
                     <td>{{ $pasien->jenis_kelamin }}</td>
                     <td>{{ $pasien->status_kunjungan }}</td>
                     <td>{{ $pasien->nama_kk }}</td>

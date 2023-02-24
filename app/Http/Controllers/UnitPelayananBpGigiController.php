@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Icd;
 use App\Models\User;
+use Ramsey\Uuid\Uuid;
 use App\Models\KajianPasien;
 use Illuminate\Http\Request;
 use App\Models\PelayananPasien;
@@ -43,12 +44,12 @@ class UnitPelayananBpGigiController extends Controller
         if (auth()->user()->type == 'admin') {
             return view('admin.bp_gigi.create', [
                 'title' => 'Tambah Pelayanan Pasien',
-                'kajian_pasiens' => KajianPasien::where('unit_pelayanans_id', '=', 2)->latest()->get()
+                'kajian_pasiens' => KajianPasien::where('unit_pelayanans_id', '=', 2)->get()
             ]);
         } else {
             return view('bp_gigi.create', [
                 'title' => 'Tambah Pelayanan Pasien',
-                'kajian_pasiens' => KajianPasien::where('unit_pelayanans_id', '=', 2)->latest()->get()
+                'kajian_pasiens' => KajianPasien::where('unit_pelayanans_id', '=', 2)->get()
             ]);
         }
     }
@@ -96,7 +97,7 @@ class UnitPelayananBpGigiController extends Controller
 
     public function store(Request $request)
     {
-        $rules = [
+        $request->validate([
             'kajian_pasiens_id' => 'required',
             'tanggal_pemeriksaan'  => 'required',
             'users_id'  => 'required',
@@ -110,10 +111,32 @@ class UnitPelayananBpGigiController extends Controller
             'jenis_kasus'  => 'required',
             'unit_pelayanans_id'  => 'required',
             'status'  => 'required',
-        ];
+            'statusAskep'  => 'required',
+        ]);
 
-        $validatedData = $request->validate($rules);
-        PelayananPasien::create($validatedData);
+        $kajianPasien = KajianPasien::find($request->kajian_pasiens_id);
+        // dd($kajianPasien->status);
+        $kajianPasien->status = 2;
+        $kajianPasien->update();
+        
+        $pelayanan_pasien = new PelayananPasien();
+        $pelayanan_pasien->id = Uuid::uuid4()->getHex();
+        $pelayanan_pasien->kajian_pasiens_id = $request->kajian_pasiens_id;
+        $pelayanan_pasien->tanggal_pemeriksaan = $request->tanggal_pemeriksaan;
+        $pelayanan_pasien->users_id = $request->users_id;
+        $pelayanan_pasien->keluhan_utama = $request->keluhan_utama;
+        $pelayanan_pasien->rps = $request->rps;
+        $pelayanan_pasien->rpo = $request->rpo;
+        $pelayanan_pasien->icds_kode_icd = $request->icds_kode_icd;
+        $pelayanan_pasien->penatalaksanaan = $request->penatalaksanaan;
+        $pelayanan_pasien->tindakan = $request->tindakan;
+        $pelayanan_pasien->edukasi = $request->edukasi;
+        $pelayanan_pasien->jenis_kasus = $request->jenis_kasus;
+        $pelayanan_pasien->unit_pelayanans_id = $request->unit_pelayanans_id;
+        $pelayanan_pasien->status = $request->status;
+        $pelayanan_pasien->statusAskep = $request->statusAskep;
+        // dd($pelayanan_pasien);
+        $pelayanan_pasien->save();
         if (auth()->user()->type == 'admin') {
             return redirect()->route('admin-bp-gigi.index')->with('success', 'Pasien Berhasil Ditambahkan');
         } else {
@@ -219,11 +242,11 @@ class UnitPelayananBpGigiController extends Controller
     {
         // dd($tanggal_awal, $tanggal_akhir);
         $pelayanan_pasiens = PelayananPasien::where('unit_pelayanans_id', '=', 2)->with('users', 'kajian_pasiens', 'icds', 'pasiens')->whereBetween('tanggal_pemeriksaan', [$tanggal_awal, $tanggal_akhir])->get();
-        $date = Carbon::now()->format('d-m-Y');
+        $date = Carbon::now()->translatedFormat('d F Y H:i:s');
         $tanggal_awal = $tanggal_awal;
-        $newTanggalAwal = Carbon::createFromFormat('Y-m-d', $tanggal_awal)->format('d-m-Y');
+        $newTanggalAwal = Carbon::createFromFormat('Y-m-d', $tanggal_awal)->translatedFormat('d F Y');
         $tanggal_akhir = $tanggal_akhir;
-        $newTanggalAkhir = Carbon::createFromFormat('Y-m-d', $tanggal_akhir)->format('d-m-Y');
+        $newTanggalAkhir = Carbon::createFromFormat('Y-m-d', $tanggal_akhir)->translatedFormat('d F Y');
         // dd($pelayanan_pasiens);
         $pdf = Pdf::loadView('admin.bp_gigi.pdf', compact('pelayanan_pasiens', 'date', 'newTanggalAwal', 'newTanggalAkhir'))->setPaper('legal', 'landscape');
         return $pdf->stream('Laporan-BP-Gigi.pdf');

@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Icd;
 use App\Models\User;
+use Ramsey\Uuid\Uuid;
 use App\Models\KajianPasien;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -20,6 +21,7 @@ class PelayananPasienFactory extends Factory
     public function definition()
     {
         return [
+            'id' => Uuid::uuid4()->getHex(),
             'kajian_pasiens_id' => $this->faker->randomElement(KajianPasien::pluck('id')),
             'tanggal_pemeriksaan' => $this->faker->dateTimeBetween('-1 week', '+1 days'),
             'users_id' => mt_rand(2, 6),
@@ -32,7 +34,8 @@ class PelayananPasienFactory extends Factory
             'edukasi' => $this->faker->sentence(3, 20),
             'jenis_kasus' => $this->faker->word(1),
             'unit_pelayanans_id' => mt_rand(1, 6),
-            'status' => mt_rand(0, 0)
+            'status' => mt_rand(0, 0),
+            'statusAskep' => mt_rand(0, 0)
         ];
     }
 }

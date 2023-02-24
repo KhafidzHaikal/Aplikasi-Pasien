@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\KajianPasien;
+use App\Models\Obat;
 use App\Models\Pasiens;
 use App\Models\PelayananPasien;
 use App\Models\UnitPelayanan;
@@ -25,7 +26,9 @@ class DatabaseSeeder extends Seeder
         Pasiens::factory(50)->create();
         KajianPasien::factory(50)->create();
         $this->call(IcdSeeder::class);
+        $this->call(DiagnosaSeeder::class);
         PelayananPasien::factory(30)->create();
+        Obat::factory(10)->create();
 
 
         User::create([

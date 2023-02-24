@@ -13,9 +13,29 @@
             </ol>
         </div>
     </div>
-    <a class="btn btn-primary col-2 mb-xl-4" style="color:#ffff" href={{ route('obat.create') }}><i class="bi bi-person-add mr-2"></i> Tambah Obat</a>
-    <button type="button" class="btn btn-danger mb-xl-4" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="bi bi-printer"></i>
+    <a class="btn btn-primary col-2 mb-xl-4" style="color:#ffff" href={{ route('obat.create') }}><i
+            class="bi bi-person-add mr-2"></i> Tambah Obat</a>
+    <button type="button" class="btn btn-danger mb-xl-4" data-toggle="modal" data-target=".bd-example-modal-lg"><i
+            class="bi bi-printer"></i>
         Print Laporan</button>
+    @if ($errors->count() > 0)
+        <div class="alert alert-danger alert-dismissible alert-alt solid fade show">
+            <button type="button" class="close h-100" data-dismiss="alert" aria-label="Close"><span><i
+                        class="mdi mdi-close"></i></span>
+            </button>
+            <strong>
+                @foreach ($errors->all() as $error)
+                    <strong>{{ $error }}</strong>
+                @endforeach
+            </strong>
+        </div>
+    @endif
+    <div class="alert alert-danger alert-dismissible alert-alt solid fade show">
+        <button type="button" class="close h-100" data-dismiss="alert" aria-label="Close"><span><i
+                    class="mdi mdi-close"></i></span>
+        </button>
+        <strong>Error!</strong> Message Sending failed.
+    </div>
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -45,7 +65,9 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <a target="_blank" onclick="this.href='/print-laporan-obat/'+document.getElementById('tanggal_awal').value+ '/' +document.getElementById('tanggal_akhir').value" class="btn btn-primary">Cetak</a>
+                    <a target="_blank"
+                        onclick="this.href='/print-laporan-obat/'+document.getElementById('tanggal_awal').value+ '/' +document.getElementById('tanggal_akhir').value"
+                        class="btn btn-primary">Cetak</a>
                 </div>
             </div>
         </div>
@@ -82,13 +104,15 @@
                                         <td>Rp. {{ $obat->harga }}</td>
                                         <td>{{ $obat->stok }}</td>
                                         <td class="d-flex">
-                                            <a href={{ route('obat.edit', $obat->id ) }} class="btn btn-warning mr-2"><i class="bi bi-pencil-square"></i></a>
-                                            <form action={{ route('obat.destroy', $obat->id) }} method="POST">
-                                                @method('delete')
-                                                @csrf
-                                                <button class="btn btn-danger"><i
-                                                        class="bi bi-trash"></i></button>
-                                            </form>
+                                            <a href={{ route('obat.edit', $obat->id) }} class="btn btn-warning mr-2"><i
+                                                    class="bi bi-pencil-square"></i></a>
+                                            {{-- @if (!$obat->farmasi_pasiens()->getChild()->count() > 0) --}}
+                                                <form action={{ route('obat.destroy', $obat->id) }} method="POST">
+                                                    @method('delete')
+                                                    @csrf
+                                                    <button class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                                                </form>
+                                            {{-- @endif --}}
                                         </td>
                                     </tr>
                                 @endforeach
@@ -107,7 +131,7 @@
                             </tfoot>
                         </table>
                     </div>
-                    
+
                 </div>
             </div>
         </div>

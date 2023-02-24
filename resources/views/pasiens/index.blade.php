@@ -13,8 +13,10 @@
             </ol>
         </div>
     </div>
-    <a class="btn btn-primary col-2 mb-xl-4" style="color:#ffff" href={{ route('pasiens.create') }}><i class="bi bi-person-add mr-2"></i> Tambah Pasien</a>
-    <button type="button" class="btn btn-danger mb-xl-4" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="bi bi-printer"></i>
+    <a class="btn btn-primary col-2 mb-xl-4" style="color:#ffff" href={{ route('pasiens.create') }}><i
+            class="bi bi-person-add mr-2"></i> Tambah Pasien</a>
+    <button type="button" class="btn btn-danger mb-xl-4" data-toggle="modal" data-target=".bd-example-modal-lg"><i
+            class="bi bi-printer"></i>
         Print Laporan</button>
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -45,7 +47,9 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <a target="_blank" onclick="this.href='/print-laporan-pasien/'+document.getElementById('tanggal_awal').value+ '/' +document.getElementById('tanggal_akhir').value" class="btn btn-primary">Cetak</a>
+                    <a target="_blank"
+                        onclick="this.href='/print-laporan-pasien/'+document.getElementById('tanggal_awal').value+ '/' +document.getElementById('tanggal_akhir').value"
+                        class="btn btn-primary">Cetak</a>
                 </div>
             </div>
         </div>
@@ -80,14 +84,17 @@
                                         <td>{{ $pasien->name }}</td>
                                         <td>{{ $pasien->nik }}</td>
                                         <td class="d-flex">
-                                            <a href={{ route('pasiens.edit', $pasien->no_rm ) }} class="btn btn-warning mr-2"><i class="bi bi-pencil-square"></i></a>
-                                            <a href={{ route('pasiens.show', $pasien->no_rm ) }} class="btn btn-info mr-2"><i class="bi bi-info-circle"></i></a>
-                                            <form action={{ route('pasiens.destroy', $pasien->no_rm) }} method="POST">
-                                                @method('delete')
-                                                @csrf
-                                                <button class="btn btn-danger"><i
-                                                        class="bi bi-trash"></i></button>
-                                            </form>
+                                            <a href={{ route('pasiens.edit', $pasien->no_rm) }}
+                                                class="btn btn-warning mr-2"><i class="bi bi-pencil-square"></i></a>
+                                            <a href={{ route('pasiens.show', $pasien->no_rm) }}
+                                                class="btn btn-info mr-2"><i class="bi bi-info-circle"></i></a>
+                                            @if (!$pasien->kajian_pasiens->count() > 0)
+                                                <form action={{ route('pasiens.destroy', $pasien->no_rm) }} method="POST">
+                                                    @method('delete')
+                                                    @csrf
+                                                    <button class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                                                </form>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

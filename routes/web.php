@@ -1,12 +1,15 @@
 <?php
 
+use App\Http\Controllers\AsuhanKeperawatanController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DiagnosaController;
 use App\Http\Controllers\FarmasiPasienController;
 use App\Http\Controllers\KajianPasienController;
 use App\Http\Controllers\ObatController;
+use App\Http\Controllers\ObatMasukController;
 use App\Http\Controllers\PasiensController;
 use App\Http\Controllers\PelayananPasienController;
 use App\Http\Controllers\UnitPelayananBpGigiController;
@@ -57,10 +60,29 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/kajian-pasien/{kajian_pasien}', [KajianPasienController::class, 'destroy'])->name('kajian-pasiens.destroy');
     Route::get('/pdf-view-kajian-pasien/{kajian_pasien:pasiens_no_rm}', [KajianPasienController::class, 'pdf'])->name('pdf-kajian-pasien');
 
+    Route::prefix('askep')->group(function () {
+        Route::get('/', [AsuhanKeperawatanController::class, 'index'])->name('askep.index');
+        Route::get('/create', [AsuhanKeperawatanController::class, 'create'])->name('askep.create');
+        Route::put('/create/{pelayanan_pasien}', [AsuhanKeperawatanController::class, 'status'])->name('askep.status');
+        Route::get('/create/{pelayanan_pasien}/periksa', [AsuhanKeperawatanController::class, 'periksa'])->name('askep.periksa');
+        Route::post('/create/{pelayanan_pasien}/periksa', [AsuhanKeperawatanController::class, 'store'])->name('askep.store');
+        Route::get('/detail-pasien/{pelayanan_pasien}', [AsuhanKeperawatanController::class, 'detail'])->name('askep.detail');
+        Route::get('/{askep}', [AsuhanKeperawatanController::class, 'show'])->name('askep.show');
+        Route::get('/{askep}/edit', [AsuhanKeperawatanController::class, 'edit'])->name('askep.edit');
+        Route::put('/{askep}', [AsuhanKeperawatanController::class, 'update'])->name('askep.update');
+        Route::get('/pdf-view-askep/{askep}', [AsuhanKeperawatanController::class, 'pdf'])->name('askep.print');
+        Route::delete('/{askep}', [AsuhanKeperawatanController::class, 'destroy'])->name('askep.destroy');
+        Route::get('/print-laporan-askep/{tanggal_awal}/{tanggal_akhir}', [AsuhanKeperawatanController::class, 'print'])->name('askep.report');
+    });
+
     Route::middleware(['user-access:admin'])->group(function () {
         Route::resources([
             'users' => UserController::class,
         ]);
+
+        Route::get('admin/pelayanan-pasien', [PelayananPasienController::class, 'index'])->name('admin.pelayanan-pasien.index');
+        Route::get('/print-laporan-poli/{tanggal_awal}/{tanggal_akhir}', [PelayananPasienController::class, 'print'])->name('admin.pelayanan-pasien.print');
+
         Route::prefix('admin-bp-umum')->group(function () {
             Route::get('/', [UnitPelayananBpUmumController::class, 'index'])->name('admin-bp-umum.index');
             Route::get('/create', [UnitPelayananBpUmumController::class, 'create'])->name('admin-bp-umum.create');
@@ -141,8 +163,10 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/{obat}/edit', [ObatController::class, 'edit'])->name('admin-obat.edit');
             Route::put('/{obat}', [ObatController::class, 'update'])->name('admin-obat.update');
             Route::delete('/{obat}', [ObatController::class, 'destroy'])->name('admin-obat.destroy');
+            Route::get('/obat/add-stok', [ObatMasukController::class, 'create'])->name('admin-obat.addStok');
+            Route::post('/obat/add-stok', [ObatMasukController::class, 'store'])->name('admin-obat.storeStok');
         });
-
+        
         Route::prefix('admin-farmasi')->group(function () {
             Route::get('/', [FarmasiPasienController::class, 'index'])->name('admin-farmasi.index');
             Route::get('/create', [FarmasiPasienController::class, 'create'])->name('admin-farmasi.create');
@@ -154,6 +178,27 @@ Route::middleware(['auth'])->group(function () {
             Route::put('/{farmasi}', [FarmasiPasienController::class, 'update'])->name('admin-farmasi.update');
             Route::delete('/{farmasi}', [FarmasiPasienController::class, 'destroy'])->name('admin-farmasi.destroy');
         });
+        
+        Route::prefix('admin-farmasi')->group(function () {
+            Route::get('/', [FarmasiPasienController::class, 'index'])->name('admin-farmasi.index');
+            Route::get('/create', [FarmasiPasienController::class, 'create'])->name('admin-farmasi.create');
+            Route::put('/create/{pelayanan_pasien}', [FarmasiPasienController::class, 'status'])->name('admin-farmasi.status');
+            Route::get('/create/{pelayanan_pasien}/periksa', [FarmasiPasienController::class, 'periksa'])->name('admin-farmasi.periksa');
+            Route::post('/create/{pelayanan_pasien}/periksa', [FarmasiPasienController::class, 'store'])->name('admin-farmasi.store');
+            Route::get('/{farmasi}', [FarmasiPasienController::class, 'show'])->name('admin-farmasi.show');
+            Route::get('/{farmasi}/edit', [FarmasiPasienController::class, 'edit'])->name('admin-farmasi.edit');
+            Route::put('/{farmasi}', [FarmasiPasienController::class, 'update'])->name('admin-farmasi.update');
+            Route::delete('/{farmasi}', [FarmasiPasienController::class, 'destroy'])->name('admin-farmasi.destroy');
+        });
+
+        Route::prefix('admin-diagnosa')->group(function () {
+            Route::get('/', [DiagnosaController::class, 'index'])->name('admin-diagnosa.index');
+            Route::get('/create', [DiagnosaController::class, 'create'])->name('admin-diagnosa.create');
+            Route::post('/create', [DiagnosaController::class, 'store'])->name('admin-diagnosa.store');
+            Route::get('/{diagnosa}/edit', [DiagnosaController::class, 'edit'])->name('admin-diagnosa.edit');
+            Route::put('/{diagnosa}', [DiagnosaController::class, 'update'])->name('admin-diagnosa.update');
+            Route::delete('/{diagnosa}', [DiagnosaController::class, 'destroy'])->name('admin-diagnosa.destroy');
+        });
     });
 
     Route::get('/print-laporan-pasien/{tanggal_awal}/{tanggal_akhir}', [PasiensController::class, 'print'])->name('admin-pasiens.print');
@@ -163,6 +208,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/print-laporan-poli-kia/{tanggal_awal}/{tanggal_akhir}', [UnitPelayananKiaController::class, 'print'])->name('admin-bp-gigi.print');
     Route::get('/print-laporan-poli-mtbs/{tanggal_awal}/{tanggal_akhir}', [UnitPelayananMtbsController::class, 'print'])->name('admin-bp-gigi.print');
     Route::get('/print-laporan-poli-konseling/{tanggal_awal}/{tanggal_akhir}', [UnitPelayananKonselingController::class, 'print'])->name('admin-bp-gigi.print');
+    Route::get('/print-laporan-obat/{tanggal_awal}/{tanggal_akhir}', [ObatController::class, 'print'])->name('admin-obat.print');
     Route::get('/print-laporan-obat/{tanggal_awal}/{tanggal_akhir}', [ObatController::class, 'print'])->name('admin-obat.print');
     Route::get('/print-laporan-farmasi/{tanggal_awal}/{tanggal_akhir}', [FarmasiPasienController::class, 'print'])->name('admin-farmasi.print');
 

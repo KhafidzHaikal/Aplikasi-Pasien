@@ -144,6 +144,10 @@ class PasiensController extends Controller
      */
     public function destroy(Pasiens $pasien)
     {
+        if ($pasien->kajian_pasiens()->count())
+        {
+            return back()->withErrors(['error' => 'Pasien Tidak Dapat Dihapus']);
+        }
         Pasiens::destroy($pasien->no_rm);
         return redirect()->route('pasiens.index')->with('success', 'Pasien Berhasil Dihapus');
     }
@@ -159,11 +163,11 @@ class PasiensController extends Controller
     {
         // dd($tanggal_awal, $tanggal_akhir);
         $pasiens = Pasiens::with('users', 'kajian_pasiens')->whereBetween('tanggal_kunjungan', [$tanggal_awal, $tanggal_akhir])->get();
-        $date = Carbon::now()->format('d-m-Y');
+        $date = Carbon::now()->translatedFormat('d F Y H:i:s');
         $tanggal_awal = $tanggal_awal;
-        $newTanggalAwal = Carbon::createFromFormat('Y-m-d', $tanggal_awal)->format('d-m-Y');
+        $newTanggalAwal = Carbon::createFromFormat('Y-m-d', $tanggal_awal)->translatedFormat('d F Y');
         $tanggal_akhir = $tanggal_akhir;
-        $newTanggalAkhir = Carbon::createFromFormat('Y-m-d', $tanggal_akhir)->format('d-m-Y');
+        $newTanggalAkhir = Carbon::createFromFormat('Y-m-d', $tanggal_akhir)->translatedFormat('d F Y');
         // dd($pasiens);
         $pdf = Pdf::loadView('pasiens.report', compact('pasiens', 'date', 'newTanggalAwal', 'newTanggalAkhir'))->setPaper('legal', 'landscape');
         return $pdf->stream('Laporan-Pasien.pdf');

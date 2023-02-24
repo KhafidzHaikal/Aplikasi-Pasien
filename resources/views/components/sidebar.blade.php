@@ -21,6 +21,13 @@
                         <li><a href={{ route('kajian-pasiens.index') }}>Kajian Awal Pasien</a></li>
                     </ul>
                 </li>
+                <li class="nav-label">Asuhan Keperawatan</li>
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+                            class="bi bi-hospital"></i><span class="nav-text">Pelayanan Asuhan Keperawatan</span></a>
+                    <ul aria-expanded="false">
+                        <li><a href={{ route('askep.index') }}>Asuhan Keperawatan</a></li>
+                    </ul>
+                </li>
                 {{-- <li class="nav-label">Pelayanan Pasien</li>
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                         class="icon icon-app-store"></i><span class="nav-text">Pelayanan Pasien</span></a>
@@ -80,14 +87,14 @@
             @elseif (auth()->user()->type == 'farmasi')
                 <li class="nav-label">Pelayanan Pasien Farmasi</li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                            class="bi bi-prescription2"></i><span class="nav-text">Pelayanan Pasien</span></a>
+                            class="bi bi-prescription2"></i><span class="nav-text">Pelayanan Farmasi</span></a>
                     <ul aria-expanded="false">
                         <li><a href="">Tebus Obat</a></li>
                     </ul>
                 </li>
                 <li class="nav-label">Obat</li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                            class="bi bi-prescription2"></i><span class="nav-text">Pelayanan Pasien</span></a>
+                            class="bi bi-prescription2"></i><span class="nav-text">Manage Obat</span></a>
                     <ul aria-expanded="false">
                         <li><a href={{ route('obat.index') }}>Obat</a></li>
                     </ul>
@@ -128,11 +135,20 @@
                         <li><a href={{ route('admin-poli-kia.index') }}>Aplikasi Pelayanan KIA</a></li>
                         <li><a href={{ route('admin-poli-mtbs.index') }}>Aplikasi Pelayanan MTBS</a></li>
                         <li><a href={{ route('admin-poli-konseling.index') }}>Aplikasi Pelayanan Konseling</a></li>
+                        <li><a href={{ route('admin.pelayanan-pasien.index') }}>Laporan Poli</a></li>
+                    </ul>
+                </li>
+                <li class="nav-label">Asuhan Keperawatan</li>
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+                            class="bi bi-hospital"></i><span class="nav-text">Pelayanan Asuhan Keperawatan</span></a>
+                    <ul aria-expanded="false">
+                        <li><a href={{ route('admin-diagnosa.index') }}>Diagnosa</a></li>
+                        <li><a href={{ route('askep.index') }}>Asuhan Keperawatan</a></li>
                     </ul>
                 </li>
                 <li class="nav-label">Pelayanan Pasien Farmasi</li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                            class="bi bi-prescription2"></i><span class="nav-text">Pelayanan Pasien</span></a>
+                            class="bi bi-prescription2"></i><span class="nav-text">Pelayanan Farmasi</span></a>
                     <ul aria-expanded="false">
                         <li><a href={{ route('admin-obat.index') }}>Obat</a></li>
                         <li><a href={{ route('admin-farmasi.index') }}>Tebus Obat</a></li>

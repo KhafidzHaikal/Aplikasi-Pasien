@@ -14,6 +14,7 @@
         </div>
     </div>
     <a class="btn btn-primary col-2 mb-xl-4" style="color:#ffff" href={{ route('admin-obat.create') }}><i class="bi bi-person-add mr-2"></i> Tambah Obat</a>
+    <a class="btn btn-warning col-2 mb-xl-4" style="color:#ffff" href={{ route('admin-obat.addStok') }}><i class="bi bi-person-add mr-2"></i> Tambah Stok</a>
     <button type="button" class="btn btn-danger mb-xl-4" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="bi bi-printer"></i>
         Print Laporan</button>
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
@@ -67,6 +68,8 @@
                                     <th>Sediaan</th>
                                     <th>Tanggal Kadaluarsa</th>
                                     <th>Harga</th>
+                                    <th>Stok Awal</th>
+                                    <th>Stok Digunakan</th>
                                     <th>Stok</th>
                                     <th>Action</th>
                                 </tr>
@@ -75,15 +78,17 @@
                                 @foreach ($obats as $obat)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $obat->tanggal_masuk->format('d-m-Y') }}</td>
+                                        <td>{{ $obat->tanggal_masuk->translatedFormat('d F Y') }}</td>
                                         <td>{{ $obat->name }}</td>
                                         <td>{{ $obat->sediaan }}</td>
-                                        <td>{{ $obat->tanggal_kadaluarsa->format('d-m-Y') }}</td>
-                                        <td>Rp. {{ $obat->harga }}</td>
+                                        <td>{{ $obat->tanggal_kadaluarsa->translatedFormat('d F Y') }}</td>
+                                        <td>@currency($obat->harga)</td>
+                                        <td>{{ $obat->stok_lama }}</td>
+                                        <td>{{ $obat->stok_baru }}</td>
                                         <td>{{ $obat->total_stok }}</td>
                                         <td class="d-flex">
-                                            <a href={{ route('admin-obat.edit', $obat->id ) }} class="btn btn-warning mr-2"><i class="bi bi-pencil-square"></i></a>
-                                            <form action={{ route('admin-obat.destroy', $obat->id) }} method="POST">
+                                            <a href={{ route('admin-obat.edit', $obat->no_obat ) }} class="btn btn-warning mr-2"><i class="bi bi-pencil-square"></i></a>
+                                            <form action={{ route('admin-obat.destroy', $obat->no_obat) }} method="POST">
                                                 @method('delete')
                                                 @csrf
                                                 <button class="btn btn-danger"><i
@@ -101,6 +106,8 @@
                                     <th>Sediaan</th>
                                     <th>Tanggal Kadaluarsa</th>
                                     <th>Harga</th>
+                                    <th>Stok Awal</th>
+                                    <th>Stok Digunakan</th>
                                     <th>Stok</th>
                                     <th>Action</th>
                                 </tr>

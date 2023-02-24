@@ -22,6 +22,12 @@
     top: 0;
 }
 
+#obat {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+}
+
 #buttonSudahDiperiksa h4 {
     color: white !important;
     font-size: 1rem;

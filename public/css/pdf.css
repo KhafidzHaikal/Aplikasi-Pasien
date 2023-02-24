@@ -32,14 +32,37 @@ body {
   text-align: center;
 }
 
-
 td, th {
   border: 1px solid #000000;
   padding: 0.5rem;
   text-align: center;
 }
 
+td {
+  text-align: left;
+  word-spacing: 0px;
+  vertical-align: top;
+}
+
 table {
   border-collapse: collapse;
   width: 100%;
+}
+
+.header {
+  text-align: left;
+  margin-bottom: 3em;
+
+}
+
+.header .left {
+  position: relative;
+  left: 0;
+}
+
+.header .right {
+  position: absolute;
+  right: 0;
+  width: 58%;
+  top: 5.2em;
 }

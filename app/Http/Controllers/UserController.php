@@ -109,6 +109,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        // dd($user->kajian_pasiens()->count());
         User::destroy($user->id);
         return redirect()->route('users.index')->with('success','User Berhasil Dihapus');;
     }

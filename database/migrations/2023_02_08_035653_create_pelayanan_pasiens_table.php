@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('pelayanan_pasiens', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('kajian_pasiens_id');
+            $table->string('id', 32)->primary();
+            $table->string('kajian_pasiens_id');
             $table->date('tanggal_pemeriksaan');
             $table->foreignId('users_id');
             $table->text('keluhan_utama');
@@ -28,6 +28,10 @@ return new class extends Migration
             $table->string('jenis_kasus', 100);
             $table->foreignId('unit_pelayanans_id');
             $table->tinyInteger('status');
+            $table->tinyInteger('statusAskep');
+
+            // $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('kajian_pasiens_id')->references('id')->on('kajian_pasiens')->onDelete('cascade');
             $table->foreign('icds_kode_icd')->references('kode_icd')->on('icds');
             $table->timestamps();
         });

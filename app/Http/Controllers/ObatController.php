@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Obat;
+use App\Models\ObatMasuk;
 use Illuminate\Http\Request;
+use App\Models\FarmasiPasien;
 use App\Models\PelayananPasien;
 use Barryvdh\DomPDF\Facade\Pdf;
-use App\Http\Requests\StoreObatRequest;
-use App\Http\Requests\UpdateObatRequest;
-use App\Models\FarmasiPasien;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 
 class ObatController extends Controller
 {
@@ -18,17 +18,19 @@ class ObatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Obat $obat)
     {
         if (auth()->user()->type == 'admin') {
             return view('admin.obat.index', [
                 'title' => 'Obat',
-                'obats' => Obat::all()
+                'obats' => Obat::all(),
+                'obat' => $obat
             ]);
         } else {
             return view('obat.index', [
                 'title' => 'Obat',
-                'obats' => Obat::all()
+                'obats' => Obat::all(),
+                'obat' => $obat
             ]);
         }
     }
@@ -61,7 +63,8 @@ class ObatController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = [
+        $request->validate([
+            'no_obat' => 'required|unique:obats,no_obat',
             'tanggal_masuk' => 'required',
             'name' => 'required',
             'sediaan' => 'required',
@@ -69,28 +72,35 @@ class ObatController extends Controller
             'stok_lama' => 'required',
             'stok_baru' => 'required',
             'tanggal_kadaluarsa' => 'required',
-        ];
+            'sumber_dana' => 'required',
+        ]);
 
-        // $this->decreaseStok();
+        $obat = new Obat();
+        $obat->no_obat = $request->no_obat;
+        $obat->tanggal_masuk = $request->tanggal_masuk;
+        $obat->name = $request->name;
+        $obat->sediaan = $request->sediaan;
+        $obat->harga = $request->harga;
+        $obat->stok_lama = $request->stok_lama;
+        $obat->stok_baru = $request->stok_baru;
+        $obat->tanggal_kadaluarsa = $request->tanggal_kadaluarsa;
+        $obat->sumber_dana = $request->sumber_dana;
+        // dd($obat);
+        $obat->save();
 
-        $validatedData = $request->validate($rules);
-        Obat::create($validatedData);
+        $obat_masuk = new ObatMasuk();
+        $obat_masuk->tanggal_masuk = $obat->tanggal_masuk;
+        $obat_masuk->obats_no_obat = $obat->no_obat;
+        $obat_masuk->stok = $obat->stok_lama;
+        $obat_masuk->sumber_dana = $obat->sumber_dana;
+        $obat_masuk->save();
+
         if (auth()->user()->type == 'admin') {
             return redirect()->route('admin-obat.index')->with('success', 'Obat Berhasil Ditambahkan');
         } else {
             return redirect()->route('obat.index')->with('success', 'Obat Berhasil Ditambahkan');
         }
     }
-
-    // public function decreaseStok()
-    // {
-    //     foreach (FarmasiPasien::content() as $item)  
-    //     {
-    //         $obat = Obat::find($item->id);
-
-    //         $obat->update(['stok' => $obat->stok - $item->stok]);
-    //     }
-    // }
 
     /**
      * Display the specified resource.
@@ -133,23 +143,40 @@ class ObatController extends Controller
      */
     public function update(Request $request, Obat $obat)
     {
-        $rules = [
+        $request->validate([
             'tanggal_masuk' => 'required',
             'name' => 'required',
             'sediaan' => 'required',
             'harga' => 'required',
-            'stok_lama' => 'required',
+            // 'stok_lama' => 'required',
             'tanggal_kadaluarsa' => 'required',
-        ];
+        ]);
 
-        $validatedData = $request->validate($rules);
-        Obat::where('id', $obat->id)->update($validatedData);
+        $obat = Obat::find($obat->no_obat);
+        $obat->tanggal_masuk = $request->tanggal_masuk;
+        $obat->name = $request->name;
+        $obat->sediaan = $request->sediaan;
+        $obat->harga = $request->harga;
+        // $obat->stok_lama += $request->stok_lama;
+        $obat->tanggal_kadaluarsa = $request->tanggal_kadaluarsa;
+        $obat->save();
+        
         if (auth()->user()->type == 'admin') {
             return redirect()->route('admin-obat.index')->with('success', 'Obat Berhasil Diubah');
         } else {
             return redirect()->route('obat.index')->with('success', 'Obat Berhasil Diubah');
         }
     }
+
+    public function addStok(Obat $obat)
+    {   
+        return view('admin.obat.addStok', [
+            'title' => 'Tambah Stok Obat',
+            'obat' => $obat
+        ]);
+    }
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -159,7 +186,13 @@ class ObatController extends Controller
      */
     public function destroy(Obat $obat)
     {
-        Obat::destroy($obat->id);
+        // dd($obat->farmasi_pasiens()->count());
+        if ($obat->farmasi_pasiens()->count())
+        {
+            return back()->withErrors(['error' => 'Obat Tidak Dapat Dihapus']);
+            // return back()->with('error', 'Obat Tidak Dapat Dihapus');
+        } 
+        Obat::destroy($obat->no_obat);
         if (auth()->user()->type == 'admin') {
             return redirect()->route('admin-obat.index')->with('success', 'Obat Berhasil Dihapus');
         } else {
@@ -170,13 +203,15 @@ class ObatController extends Controller
     public function print($tanggal_awal, $tanggal_akhir)
     {
         // dd($tanggal_awal, $tanggal_akhir);
-        $obats = Obat::whereBetween('tanggal_masuk', [$tanggal_awal, $tanggal_akhir])->get();
-        $date = Carbon::now()->format('d-m-Y');
+        $obats = ObatMasuk::with('obats')->whereBetween('tanggal_masuk', [$tanggal_awal, $tanggal_akhir])->get();
+        $obat_past = Obat::whereBetween('tanggal_masuk', [$tanggal_awal, $tanggal_akhir])->get();
+        // dd($obats->total_obat);
+        $date = Carbon::now()->translatedFormat('d F Y H:i:s');
         $tanggal_awal = $tanggal_awal;
-        $newTanggalAwal = Carbon::createFromFormat('Y-m-d', $tanggal_awal)->format('d-m-Y');
+        $newTanggalAwal = Carbon::createFromFormat('Y-m-d', $tanggal_awal)->translatedFormat('d F Y');
         $tanggal_akhir = $tanggal_akhir;
-        $newTanggalAkhir = Carbon::createFromFormat('Y-m-d', $tanggal_akhir)->format('d-m-Y');
-        $pdf = Pdf::loadView('admin.obat.pdf', compact('obats', 'date', 'newTanggalAwal', 'newTanggalAkhir'))->setPaper('legal', 'landscape');
+        $newTanggalAkhir = Carbon::createFromFormat('Y-m-d', $tanggal_akhir)->translatedFormat('d F Y');
+        $pdf = Pdf::loadView('admin.obat.pdf', compact('obats', 'obat_past', 'date', 'newTanggalAwal', 'newTanggalAkhir'))->setPaper('legal', 'landscape');
         return $pdf->stream('Laporan-Obat.pdf');
     }
 }
