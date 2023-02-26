@@ -11,6 +11,7 @@ use App\Models\PelayananPasien;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Requests\StoreFarmasiPasienRequest;
 use App\Http\Requests\UpdateFarmasiPasienRequest;
+use Illuminate\Support\Facades\DB;
 
 class FarmasiPasienController extends Controller
 {
@@ -96,12 +97,10 @@ class FarmasiPasienController extends Controller
     public function store(Request $request)
     {
         $obat = Obat::find($request->obats_no_obat);
-        // $obatsatu = Obat::find($request->obatssatu_no_obat);
-        // $obatdua = Obat::find($request->obatsdua_no_obat);
-        // $obattiga = Obat::find($request->obatstiga_no_obat);
-        // $obatempat = Obat::find($request->obatsempat_no_obat);
-
-        // dd($obatsatu->stok_lama, $obatdua->stok_lama, $obattiga, $obatempat);
+        $obatsatu = Obat::find($request->obatssatu_no_obat);
+        $obatdua = Obat::find($request->obatsdua_no_obat);
+        $obattiga = Obat::find($request->obatstiga_no_obat);
+        $obatempat = Obat::find($request->obatsempat_no_obat);
 
         if ($obat->stok_lama < $request->stok) {
             return back()->withErrors(['Stok Obat Tidak Cukup']);
@@ -114,60 +113,58 @@ class FarmasiPasienController extends Controller
                 'stok'  => 'required',
             ]);
 
-            // $pelayanan_pasien = PelayananPasien::find($request->pelayanan_pasiens_id);
-            // // dd($pelayanan_pasien->status = 2);
-            // $pelayanan_pasien->status = 2;
-            // $pelayanan_pasien->update();
+            $pelayanan_pasien = PelayananPasien::find($request->pelayanan_pasiens_id);
+            $pelayanan_pasien->status = 2;
+            $pelayanan_pasien->update();
+            
+            /** TRANSACTION */
+            DB::transaction(function () use ($obat, $request, $obatsatu, $obatdua, $obattiga, $obatempat) {
+                $obat->stok_baru += $request->stok;
+                $obat->save();
 
-            $obat->stok_baru += $request->stok;
-            // dd($obat->stok_baru);
-            $obat->save();
+                if ($obatsatu != null) {
+                    if ($obatsatu->stok_lama < $request->stoksatu) {
+                        return back()->withErrors(['Stok Obat Tidak Cukup']);
+                    } else {
+                        $obatsatu->stok_baru = $obatsatu->stok_baru + $request->stoksatu;
+                        $obatsatu->save();
+                    }
+                }
 
-            // if ($obatsatu != null) {
-            //     if ($obatsatu->stok_lama < $request->stoksatu) {
-            //         return back()->withErrors(['Stok Obat Tidak Cukup']);
-            //     } else {
-            //         $obatsatu->stok_baru += $request->stok;
-            //         // dd($obatsatu->stok_baru);
-            //         $obatsatu->save();
-            //     }
-            // }
+                if ($obatdua != null) {
+                    if ($obatdua->stok_lama < $request->stokdua) {
+                        return back()->withErrors(['Stok Obat Tidak Cukup']);
+                    } else {
+                        $obatdua->stok_baru += $request->stokdua;
+                        $obatdua->save();
+                    }
+                }
 
-            // if ($obatdua != null) {
-            //     if ($obatdua->stok_lama < $request->stokdua) {
-            //         return back()->withErrors(['Stok Obat Tidak Cukup']);
-            //     } else {
-            //         $obatdua->stok_baru += $request->stok;
-            //         // dd($obatdua->stok_baru);
-            //         $obatdua->save();
-            //     }
-            // }
+                if ($obattiga != null) {
+                    if ($obattiga->stok_lama < $request->stoktiga) {
+                        return back()->withErrors(['Stok Obat Tidak Cukup']);
+                    } else {
+                        $obattiga->stok_baru += $request->stoktiga;
+                        $obattiga->save();
+                    }
+                }
 
-            // if ($obattiga != null) {
-            //     if ($obattiga->stok_lama < $request->stoktiga) {
-            //         return back()->withErrors(['Stok Obat Tidak Cukup']);
-            //     } else {
-            //         $obattiga->stok_baru += $request->stok;
-            //         // dd($obattiga->stok_baru);
-            //         $obattiga->save();
-            //     }
-            // }
+                if ($obatempat != null) {
+                    if ($obatempat->stok_lama < $request->stokempat) {
+                        return back()->withErrors(['Stok Obat Tidak Cukup']);
+                    } else {
+                        $obatempat->stok_baru += $request->stokempat;
+                        $obatempat->save();
+                    }
+                }
 
-            // if ($obatempat != null) {
-            //     if ($obatempat->stok_lama < $request->stokempat) {
-            //         return back()->withErrors(['Stok Obat Tidak Cukup']);
-            //     } else {
-            //         $obatempat->stok_baru += $request->stok;
-            //         // dd($obatempat->stok_baru);
-            //         $obatempat->save();
-            //     }
-            // }
+            });
+            /** TRANSACTION */
 
             $stok_keluar = new ObatKeluar();
             $stok_keluar->tanggal_keluar = $request->tanggal_pelayanan;
             $stok_keluar->obats_no_obat = $request->obats_no_obat;
             $stok_keluar->stok += $request->stok;
-            // dd($obat, $obatsatu, $obatdua, $obattiga, $obatempat, $stok_keluar);
             $stok_keluar->save();
 
             // $obat_keluar = new ObatKeluar();

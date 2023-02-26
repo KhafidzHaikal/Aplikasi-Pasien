@@ -78,7 +78,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body" id="obat">
                             <div class="basic-form">
                                 <h3 class="card-title">Obat 1</h3>
                                 <div class="form-group row">
@@ -118,7 +118,7 @@
                                 </div>
                                 <hr>
                             </div>
-                            {{-- <div class="basic-form">
+                            <div class="basic-form">
                                 <h3 class="card-title">Obat 2</h3>
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Obat</label>
@@ -269,7 +269,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div> --}}
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="basic-form">
