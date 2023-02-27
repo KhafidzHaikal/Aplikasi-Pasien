@@ -162,6 +162,7 @@ class PasiensController extends Controller
     public function print($tanggal_awal, $tanggal_akhir)
     {
         // dd($tanggal_awal, $tanggal_akhir);
+        $title = 'Laporan Pasien';
         $pasiens = Pasiens::with('users', 'kajian_pasiens')->whereBetween('tanggal_kunjungan', [$tanggal_awal, $tanggal_akhir])->get();
         $date = Carbon::now()->translatedFormat('d F Y H:i:s');
         $tanggal_awal = $tanggal_awal;
@@ -169,7 +170,7 @@ class PasiensController extends Controller
         $tanggal_akhir = $tanggal_akhir;
         $newTanggalAkhir = Carbon::createFromFormat('Y-m-d', $tanggal_akhir)->translatedFormat('d F Y');
         // dd($pasiens);
-        $pdf = Pdf::loadView('pasiens.report', compact('pasiens', 'date', 'newTanggalAwal', 'newTanggalAkhir'))->setPaper('legal', 'landscape');
+        $pdf = Pdf::loadView('pasiens.report', compact('pasiens', 'title', 'date', 'newTanggalAwal', 'newTanggalAkhir'))->setPaper('legal', 'landscape');
         return $pdf->stream('Laporan-Pasien.pdf');
     }
 }

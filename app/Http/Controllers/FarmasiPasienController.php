@@ -116,11 +116,17 @@ class FarmasiPasienController extends Controller
             $pelayanan_pasien = PelayananPasien::find($request->pelayanan_pasiens_id);
             $pelayanan_pasien->status = 2;
             $pelayanan_pasien->update();
-            
+
             /** TRANSACTION */
             DB::transaction(function () use ($obat, $request, $obatsatu, $obatdua, $obattiga, $obatempat) {
                 $obat->stok_baru += $request->stok;
                 $obat->save();
+
+                $stok_keluar = new ObatKeluar();
+                $stok_keluar->tanggal_keluar = $request->tanggal_pelayanan;
+                $stok_keluar->obats_no_obat = $request->obats_no_obat;
+                $stok_keluar->stok = $request->stok;
+                $stok_keluar->save();
 
                 if ($obatsatu != null) {
                     if ($obatsatu->stok_lama < $request->stoksatu) {
@@ -128,6 +134,11 @@ class FarmasiPasienController extends Controller
                     } else {
                         $obatsatu->stok_baru = $obatsatu->stok_baru + $request->stoksatu;
                         $obatsatu->save();
+
+                        $stok_keluar->tanggal_keluar = $request->tanggal_pelayanan;
+                        $stok_keluar->obats_no_obat = $request->obatssatu_no_obat;
+                        $stok_keluar->stok = $request->stoksatu;
+                        $stok_keluar->save();
                     }
                 }
 
@@ -137,6 +148,11 @@ class FarmasiPasienController extends Controller
                     } else {
                         $obatdua->stok_baru += $request->stokdua;
                         $obatdua->save();
+
+                        $stok_keluar->tanggal_keluar = $request->tanggal_pelayanan;
+                        $stok_keluar->obats_no_obat = $request->obatsdua_no_obat;
+                        $stok_keluar->stok = $request->stokdua;
+                        $stok_keluar->save();
                     }
                 }
 
@@ -146,6 +162,11 @@ class FarmasiPasienController extends Controller
                     } else {
                         $obattiga->stok_baru += $request->stoktiga;
                         $obattiga->save();
+
+                        $stok_keluar->tanggal_keluar = $request->tanggal_pelayanan;
+                        $stok_keluar->obats_no_obat = $request->obatstiga_no_obat;
+                        $stok_keluar->stok = $request->stoktiga;
+                        $stok_keluar->save();
                     }
                 }
 
@@ -155,23 +176,15 @@ class FarmasiPasienController extends Controller
                     } else {
                         $obatempat->stok_baru += $request->stokempat;
                         $obatempat->save();
+
+                        $stok_keluar->tanggal_keluar = $request->tanggal_pelayanan;
+                        $stok_keluar->obats_no_obat = $request->obatsempat_no_obat;
+                        $stok_keluar->stok = $request->stokempat;
+                        $stok_keluar->save();
                     }
                 }
-
             });
             /** TRANSACTION */
-
-            $stok_keluar = new ObatKeluar();
-            $stok_keluar->tanggal_keluar = $request->tanggal_pelayanan;
-            $stok_keluar->obats_no_obat = $request->obats_no_obat;
-            $stok_keluar->stok += $request->stok;
-            $stok_keluar->save();
-
-            // $obat_keluar = new ObatKeluar();
-            // $obat_keluar->tanggal_keluar = $request->tanggal_pelayanan;
-            // $obat_keluar->obats_no_obat = $request->obats_no_obat;
-            // $obat_keluar->stok = $request->stok;
-            // $obat_keluar->save();
 
             FarmasiPasien::create($validatedData);
             if (auth()->user()->type == 'admin') {
@@ -248,11 +261,12 @@ class FarmasiPasienController extends Controller
         $farmasis = FarmasiPasien::with('users', 'obats', 'kajian_pasiens', 'pasiens', 'unit_pelayanans', 'pelayanan_pasiens')->whereBetween('tanggal_pelayanan', [$tanggal_awal, $tanggal_akhir])->get();
         // dd($farmasis);
         $date = Carbon::now()->translatedFormat('d F Y H:i:s');
+        $title = 'Laporan Farmasi';
         $tanggal_awal = $tanggal_awal;
         $newTanggalAwal = Carbon::createFromFormat('Y-m-d', $tanggal_awal)->format('d-m-Y');
         $tanggal_akhir = $tanggal_akhir;
         $newTanggalAkhir = Carbon::createFromFormat('Y-m-d', $tanggal_akhir)->format('d-m-Y');
-        $pdf = Pdf::loadView('admin.farmasi.pdf', compact('farmasis', 'date', 'newTanggalAwal', 'newTanggalAkhir'))->setPaper('legal', 'landscape');
+        $pdf = Pdf::loadView('admin.farmasi.pdf', compact('farmasis', 'title', 'date', 'newTanggalAwal', 'newTanggalAkhir'))->setPaper('legal', 'landscape');
         return $pdf->stream('Laporan-Farmasi.pdf');
     }
 }

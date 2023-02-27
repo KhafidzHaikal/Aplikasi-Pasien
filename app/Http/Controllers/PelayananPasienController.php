@@ -121,12 +121,13 @@ class PelayananPasienController extends Controller
         // dd($tanggal_awal, $tanggal_akhir);
         $pelayanan_pasiens = PelayananPasien::with('users', 'kajian_pasiens', 'icds', 'pasiens')->whereBetween('tanggal_pemeriksaan', [$tanggal_awal, $tanggal_akhir])->get();
         $date = Carbon::now()->translatedFormat('d F Y');
+        $title = 'Laporan Poli Puskesmas';
         $tanggal_awal = $tanggal_awal;
         $newTanggalAwal = Carbon::createFromFormat('Y-m-d', $tanggal_awal)->translatedFormat('d F Y');
         $tanggal_akhir = $tanggal_akhir;
         $newTanggalAkhir = Carbon::createFromFormat('Y-m-d', $tanggal_akhir)->translatedFormat('d F Y');
         // dd($pelayanan_pasiens);
-        $pdf = Pdf::loadView('admin.poli.report', compact('pelayanan_pasiens', 'date', 'newTanggalAwal', 'newTanggalAkhir'))->setPaper('legal', 'landscape');
+        $pdf = Pdf::loadView('admin.poli.report', compact('pelayanan_pasiens', 'title', 'date', 'newTanggalAwal', 'newTanggalAkhir'))->setPaper('legal', 'landscape');
         return $pdf->stream('Laporan-Pelayanan-Pasien.pdf');
     }
 }

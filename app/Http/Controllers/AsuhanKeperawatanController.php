@@ -188,8 +188,8 @@ class AsuhanKeperawatanController extends Controller
 
     public function pdf(AsuhanKeperawatan $askep)
     {
-        $date = Carbon::now()->translatedFormat('d F Y');
-        $pdf = Pdf::loadView('asuhan_keperawatan.print', ['askep' => ($askep), 'date' => $date])->setPaper('a4');
+        $date = Carbon::now()->translatedFormat('d F Y H:i:s');
+        $pdf = Pdf::loadView('asuhan_keperawatan.print', ['askep' => ($askep), 'date' => $date, 'title' => 'Asuhan Keperawatan'])->setPaper('a4');
         // return $pdf->download('pasienPDF.pdf');
         return $pdf->stream('Asuhan-Keperawatan.pdf');
     }
@@ -199,12 +199,13 @@ class AsuhanKeperawatanController extends Controller
         // dd($tanggal_awal, $tanggal_akhir);
         $askeps = AsuhanKeperawatan::with('pelayanan_pasiens','diagnosas','users','unit_pelayanans', 'icds', 'kajian_pasiens')->whereBetween('tanggal_pengkajian', [$tanggal_awal, $tanggal_akhir])->get();
         $date = Carbon::now()->translatedFormat('d F Y');
+        $title = 'Laporan Asuhan Keperawatan';
         $tanggal_awal = $tanggal_awal;
         $newTanggalAwal = Carbon::createFromFormat('Y-m-d', $tanggal_awal)->translatedFormat('d F Y');
         $tanggal_akhir = $tanggal_akhir;
         $newTanggalAkhir = Carbon::createFromFormat('Y-m-d', $tanggal_akhir)->translatedFormat('d F Y');
         // dd($pasiens);
-        $pdf = Pdf::loadView('asuhan_keperawatan.pdf', compact('askeps', 'date', 'newTanggalAwal', 'newTanggalAkhir'))->setPaper('legal', 'landscape');
+        $pdf = Pdf::loadView('asuhan_keperawatan.pdf', compact('askeps', 'title', 'date', 'newTanggalAwal', 'newTanggalAkhir'))->setPaper('legal', 'landscape');
         return $pdf->stream('Laporan-Askep.pdf');
     }
 }

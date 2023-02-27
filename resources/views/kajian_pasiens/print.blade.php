@@ -2,14 +2,38 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{{ $title }}</title>
+    <!-- Favicon icon -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+    {{-- <link rel="stylesheet" href="css/pdf.css"> --}}
     <link rel="stylesheet" href="css/pdf-kajian.css">
-    <title>Kajian Pasien</title>
 </head>
 
 <body>
+    <style>
+        .kop-surat div{
+            line-height: 10%
+        }
+    </style>
+    <div class="kop-surat">
+        <img class="pemkab" src="{{ public_path('img/pemkab.png') }}" style="width: 6em; height: 6em">
+        <div>
+            <h3>PEMERINTAH KABUPATEN CIREBON</h3>
+            <h3>DINAS KESEHATAN KABUPATEN CIREBON</h3>
+            <h1>UPTD PUSKESMAS PANGURAGAN</h1>
+            <p>Jln. Nyimas Gandasari No 85 Panguragan Kulon</p>
+            <p>Kec. Panguragan Kab. Cirebon Telp. (0231) 88350109 Email : pkm.panguragancirebonkab.go.id 45163</p>
+        </div>
+        <img class="puskesmas" src="{{ public_path('img/puskesmas.png') }}" style="width: 6em; height: 6em">
+        <div class="line-2"></div>
+        <div class="line-3"></div>
+    </div>
     <h1 style="text-align: center">IDENTITAS PASIEN</h1>
     <hr>
     <div class="header-left">
@@ -19,13 +43,13 @@
                 {{ $kajianPasien->pasiens->no_rm }}</p>
             <p><strong>Nama Penderita</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ $kajianPasien->pasiens->name }}</p>
             <p><strong>Tanggal Lahir</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
-                {{ $kajianPasien->pasiens->tanggal_lahir->format('d-m-Y') }}</p>
+                {{ $kajianPasien->pasiens->tanggal_lahir->translatedFormat('d F Y') }}</p>
         </div>
     </div>
     <div class="header-right">
         <div style="display: block">
             <p><strong>Tanggal Kunjungan</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
-                {{ $kajianPasien->tanggal_pemeriksaan->format('d-m-Y') }}</p>
+                {{ $kajianPasien->tanggal_pemeriksaan->translatedFormat('d F Y') }}</p>
             <p><strong>Nama Kepala Keluarga</strong>&nbsp;&nbsp;&nbsp;: {{ $kajianPasien->pasiens->nama_kk }}</p>
             <p><strong>Nama
                     Petugas</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:

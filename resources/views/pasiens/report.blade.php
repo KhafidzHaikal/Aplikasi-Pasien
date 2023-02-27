@@ -1,21 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('components.pdf')
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Laporan Pasien</title>
-    <!-- Favicon icon -->
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="css/pdf.css">
-</head>
-
-<body>
-    {{-- <img src="{{ public_path('pemkab.png') }}" alt="" srcset="Pemkab" style="width: 200px; height: 200px"> --}}
+@section('body')
     <h2>LAPORAN PENDAFTARAN PASIEN</h2>
     <br>
     <p style="position:absolute;left:0">Tanggal Cetak : {{ $date }}</p>
@@ -54,6 +39,4 @@
             @endforeach
         </tbody>
     </table>
-</body>
-
-</html>
+@endsection

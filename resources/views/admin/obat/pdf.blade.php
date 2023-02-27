@@ -1,20 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('components.pdf')
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Laporan Obat</title>
-    <!-- Favicon icon -->
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="css/pdf.css">
-</head>
-
-<body>
+@section('body')
     <h2>LAPORAN OBAT DI PUSKESMAS</h2>
     <br>
     <p style="position:absolute;left:0">Tanggal Cetak : {{ $date }}</p>
@@ -57,7 +43,7 @@
                     <td rowspan="">{{ $obat_masuk->obats->stok_lama }}</td>
                     {{-- <td>{{ $obat_masuk->total }}</td> --}}
 
-                    <td>{{ $date }}</td>
+                    <td>{{ $obat_masuk->tanggal_masuk->translatedFormat('d F Y') }}</td>
                     <td>{{ $obat_masuk->obats->name }}</td>
                     <td>{{ $obat_masuk->obats->sediaan }}</td>
                     <td>{{ $obat_masuk->obats->stok_baru }}</td>
@@ -66,13 +52,11 @@
                     <td>@currency($obat_masuk->obats->jumlah_sisa_obat)</td>
                 </tr>
                 {{-- @if ($obat_masuk->obats->count())
-                    <tr>
-                        <td colspan="16" style="background-color: #e3e3e3"></td>
-                    </tr>
-                @endif --}}
+                <tr>
+                    <td colspan="16" style="background-color: #e3e3e3"></td>
+                </tr>
+            @endif --}}
             @endforeach
         </tbody>
     </table>
-</body>
-
-</html>
+@endsection

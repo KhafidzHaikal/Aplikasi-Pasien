@@ -207,11 +207,13 @@ class ObatController extends Controller
         $obat_past = Obat::whereBetween('tanggal_masuk', [$tanggal_awal, $tanggal_akhir])->get();
         // dd($obats->total_obat);
         $date = Carbon::now()->translatedFormat('d F Y H:i:s');
+        $title = 'Laporan Obat';
         $tanggal_awal = $tanggal_awal;
         $newTanggalAwal = Carbon::createFromFormat('Y-m-d', $tanggal_awal)->translatedFormat('d F Y');
         $tanggal_akhir = $tanggal_akhir;
         $newTanggalAkhir = Carbon::createFromFormat('Y-m-d', $tanggal_akhir)->translatedFormat('d F Y');
-        $pdf = Pdf::loadView('admin.obat.pdf', compact('obats', 'obat_past', 'date', 'newTanggalAwal', 'newTanggalAkhir'))->setPaper('legal', 'landscape');
+        $pdf = Pdf::loadView('admin.obat.pdf', compact('obats', 'title', 'obat_past', 'date', 'newTanggalAwal', 'newTanggalAkhir'))->setPaper('legal', 'landscape');
         return $pdf->stream('Laporan-Obat.pdf');
+        // return $pdf->download('obat.pdf');
     }
 }

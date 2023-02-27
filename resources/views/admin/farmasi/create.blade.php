@@ -87,14 +87,6 @@
                                                 <td class="d-flex">
                                                     <a href={{ route('admin-farmasi.periksa', $pelayanan_pasien->id) }}
                                                         class="btn btn-warning mr-2"><i class="bi bi-search"></i> Layani</a>
-                                                    <form action={{ route('admin-farmasi.status', $pelayanan_pasien->id) }}
-                                                        method="POST">
-                                                        @method('put')
-                                                        @csrf
-                                                        <input type="hidden" name="status" value="2">
-                                                        <button class="btn btn-danger" type="submit"><i
-                                                                class="bi bi-check-square"></i> Selesai</button>
-                                                    </form>
                                                 </td>
                                             </tr>
                                         @elseif ($pelayanan_pasien->status == 'sudah ditebus')

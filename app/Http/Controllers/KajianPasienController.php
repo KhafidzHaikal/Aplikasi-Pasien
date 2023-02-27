@@ -193,7 +193,7 @@ class KajianPasienController extends Controller
     public function pdf(KajianPasien $kajianPasien)
     {
         // dd($kajianPasien);
-        $pdf = Pdf::loadView('kajian_pasiens.print', ['kajianPasien' => ($kajianPasien)])->setPaper('a4');
+        $pdf = Pdf::loadView('kajian_pasiens.print', ['kajianPasien' => ($kajianPasien), 'title' => 'Kajian Pasien'])->setPaper('a4');
         // return $pdf->download('pasienPDF.pdf');
         return $pdf->stream('kajian-pasienPDF.pdf');
     }

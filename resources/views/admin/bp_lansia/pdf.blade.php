@@ -1,20 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('components.pdf')
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Laporan Pasien BP Lansia</title>
-    <!-- Favicon icon -->
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="css/pdf.css">
-</head>
-
-<body>
+@section('body')
     <h2>LAPORAN KUNJUNGAN PASIEN DI PUSKESMAS</h2>
     <br>
     <h2 class="mb-4" style="margin-top:-1.5rem">POLI/UNIT PELAYANAN LANSIA</h2>
@@ -56,6 +42,4 @@
             @endforeach
         </tbody>
     </table>
-</body>
-
-</html>
+@endsection

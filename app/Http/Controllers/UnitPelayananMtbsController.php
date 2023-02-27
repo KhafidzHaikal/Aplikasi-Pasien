@@ -244,12 +244,13 @@ class UnitPelayananMtbsController extends Controller
         // dd($tanggal_awal, $tanggal_akhir);
         $pelayanan_pasiens = PelayananPasien::where('unit_pelayanans_id', '=', 5)->with('users', 'kajian_pasiens', 'icds', 'pasiens')->whereBetween('tanggal_pemeriksaan', [$tanggal_awal, $tanggal_akhir])->get();
         $date = Carbon::now()->translatedFormat('d F Y H:i:s');
+        $title = 'Laporan Pasien Poli MTBS';
         $tanggal_awal = $tanggal_awal;
         $newTanggalAwal = Carbon::createFromFormat('Y-m-d', $tanggal_awal)->translatedFormat('d F Y');
         $tanggal_akhir = $tanggal_akhir;
         $newTanggalAkhir = Carbon::createFromFormat('Y-m-d', $tanggal_akhir)->translatedFormat('d F Y');
         // dd($pelayanan_pasiens);
-        $pdf = Pdf::loadView('admin.poli_mtbs.pdf', compact('pelayanan_pasiens', 'date', 'newTanggalAwal', 'newTanggalAkhir'))->setPaper('legal', 'landscape');
+        $pdf = Pdf::loadView('admin.poli_mtbs.pdf', compact('pelayanan_pasiens', 'title', 'date', 'newTanggalAwal', 'newTanggalAkhir'))->setPaper('legal', 'landscape');
         return $pdf->stream('Laporan-Poli-Mtbs.pdf');
     }
 }

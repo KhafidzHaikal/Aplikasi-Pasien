@@ -75,7 +75,7 @@ td {
     border: 0;
 }
 
-.body-table-implementasi div{
+.body-table-implementasi div {
     position: relative;
     top: -3em;
 }
@@ -110,7 +110,7 @@ thead {
 .gejala-td ul li {
     list-style: none;
     position: relative;
-    left: -40px;
+    left: -30px;
 }
 
 .tabel-data-penunjang {
@@ -120,4 +120,47 @@ thead {
 .table-askep {
     position: relative;
     width: 100%;
+}
+
+.kop-surat .pemkab {
+    position: absolute;
+}
+
+.kop-surat .puskesmas {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.kop-surat div {
+    line-height: 70%;
+    text-align: center;
+}
+
+.kop-surat div p {
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.kop-surat div h3 {
+    font-weight: 400;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 13px;
+}
+
+.kop-surat div h1 {
+    letter-spacing: 0.1rem;
+    font-weight: 800;
+    font-size: 17px;
+    margin-bottom: 1rem;
+}
+
+.line-2 {
+    border-top: 1px solid black;
+    margin-bottom: 0.1rem;
+}
+
+.line-3 {
+    border-top: 3px solid black;
+    margin-bottom: 1rem;
 }
