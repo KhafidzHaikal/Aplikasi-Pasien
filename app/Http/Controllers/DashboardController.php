@@ -23,8 +23,8 @@ class DashboardController extends Controller
             'kia' => $this->jumlahKia(),
             'mtbs' => $this->jumlahMtbs(),
             'konseling' => $this->jumlahKonseling(),
-            'obat' => $this->jumlahFarmasi(),
-            'farmasi' => $this->jumlahObat(),
+            'farmasi' => $this->jumlahFarmasi(),
+            'obat' => $this->jumlahObat(),
         ]);
     }
 

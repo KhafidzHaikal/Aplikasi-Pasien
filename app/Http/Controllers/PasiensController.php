@@ -154,6 +154,7 @@ class PasiensController extends Controller
 
     public function pdf(Pasiens $pasien)
     {
+        $paper = array(0,0,284,425);
         $pdf = Pdf::loadView('pasiens.print', ['pasien' => ($pasien)])->setPaper('a4');
         // return $pdf->download('pasienPDF.pdf');
         return $pdf->stream('pasienPDF.pdf');

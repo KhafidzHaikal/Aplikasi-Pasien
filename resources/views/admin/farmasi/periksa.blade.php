@@ -199,7 +199,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Obat</label>
                                     <div class="col-sm-5">
-                                        <select class="form-control" name="obatstiga_no_obat" id="icd">
+                                        <select class="form-control" name="obatstiga_no_obat" id="obattiga">
                                             <option selected> --- Pilih Obat --- </option>
                                             @foreach ($obats as $obat)
                                                 @if (old('obatstiga_no_obat') == $obat->no_obat)
@@ -237,7 +237,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Obat</label>
                                     <div class="col-sm-5">
-                                        <select class="form-control" name="obatsempat_no_obat" id="icd">
+                                        <select class="form-control" name="obatsempat_no_obat" id="obatempat">
                                             <option selected> --- Pilih Obat --- </option>
                                             @foreach ($obats as $obat)
                                                 @if (old('obatsempat_no_obat') == $obat->no_obat)

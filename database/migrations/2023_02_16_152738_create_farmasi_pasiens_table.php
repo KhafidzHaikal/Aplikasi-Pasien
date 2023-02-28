@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->date('tanggal_pelayanan');
             $table->string('pelayanan_pasiens_id');
-            $table->string('obats_no_obat');
-            $table->integer('stok');
-            $table->string('dosis');
+            $table->string('obats_no_obat')->nullable();
+            $table->integer('stok')->nullable();
+            $table->string('dosis')->nullable();
             $table->string('obatssatu_no_obat')->nullable();
             $table->integer('stoksatu')->nullable();
             $table->string('dosissatu')->nullable();
@@ -36,10 +36,10 @@ return new class extends Migration
             
             $table->foreign('pelayanan_pasiens_id')->references('id')->on('pelayanan_pasiens')->onDelete('cascade');
             $table->foreign('obats_no_obat')->references('no_obat')->on('obats')->onDelete('cascade');
-            $table->foreign('obatssatu_no_obat')->nullable()->constrained()->references('no_obat')->on('obats')->onDelete('cascade');
-            $table->foreign('obatsdua_no_obat')->nullable()->constrained()->references('no_obat')->on('obats')->onDelete('cascade');
-            $table->foreign('obatstiga_no_obat')->nullable()->constrained()->references('no_obat')->on('obats')->onDelete('cascade');
-            $table->foreign('obatsempat_no_obat')->nullable()->constrained()->references('no_obat')->on('obats')->onDelete('cascade');
+            $table->foreign('obatssatu_no_obat')->references('no_obat')->on('obats')->onDelete('cascade');
+            $table->foreign('obatsdua_no_obat')->references('no_obat')->on('obats')->onDelete('cascade');
+            $table->foreign('obatstiga_no_obat')->references('no_obat')->on('obats')->onDelete('cascade');
+            $table->foreign('obatsempat_no_obat')->references('no_obat')->on('obats')->onDelete('cascade');
         });
     }
 

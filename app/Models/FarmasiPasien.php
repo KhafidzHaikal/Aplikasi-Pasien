@@ -15,6 +15,23 @@ class FarmasiPasien extends Model
 
     protected $dates = ['tanggal_pelayanan'];
 
+    public function obatssatu()
+    {
+        return $this->belongsTo(Obat::class, 'obatssatu_no_obat');
+    }
+    public function obatsdua()
+    {
+        return $this->belongsTo(Obat::class, 'obatsdua_no_obat');
+    }
+    public function obatstiga()
+    {
+        return $this->belongsTo(Obat::class, 'obatstiga_no_obat');
+    }
+    public function obatsempat()
+    {
+        return $this->belongsTo(Obat::class, 'obatsempat_no_obat');
+    }
+
     public function obats()
     {
         return $this->belongsTo(Obat::class);

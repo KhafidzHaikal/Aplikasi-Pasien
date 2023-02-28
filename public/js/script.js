@@ -24,6 +24,12 @@ $(document).ready(function () {
 $(document).ready(function () {
     $('#obatdua').select2();
 });
+$(document).ready(function () {
+    $('#obattiga').select2();
+});
+$(document).ready(function () {
+    $('#obatempat').select2();
+});
 
 $(document).ready(function () {
     $('#noPasienSelect').select2({

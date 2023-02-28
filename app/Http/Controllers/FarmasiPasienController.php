@@ -111,8 +111,20 @@ class FarmasiPasienController extends Controller
                 'obats_no_obat'  => 'required',
                 'dosis'  => 'required',
                 'stok'  => 'required',
+                'obatssatu_no_obat'  => 'nullable',
+                'dosissatu'  => 'nullable',
+                'stoksatu'  => 'nullable',
+                'obatsdua_no_obat'  => 'nullable',
+                'dosisdua'  => 'nullable',
+                'stokdua'  => 'nullable',
+                'obatstiga_no_obat'  => 'nullable',
+                'dosistiga'  => 'nullable',
+                'stoktiga'  => 'nullable',
+                'obatsempat_no_obat'  => 'nullable',
+                'dosisempat'  => 'nullable',
+                'stokempat'  => 'nullable',
             ]);
-
+            // dd($obat);
             $pelayanan_pasien = PelayananPasien::find($request->pelayanan_pasiens_id);
             $pelayanan_pasien->status = 2;
             $pelayanan_pasien->update();
@@ -260,13 +272,14 @@ class FarmasiPasienController extends Controller
         // dd($tanggal_awal, $tanggal_akhir);
         $farmasis = FarmasiPasien::with('users', 'obats', 'kajian_pasiens', 'pasiens', 'unit_pelayanans', 'pelayanan_pasiens')->whereBetween('tanggal_pelayanan', [$tanggal_awal, $tanggal_akhir])->get();
         // dd($farmasis);
+        $obats = Obat::all();
         $date = Carbon::now()->translatedFormat('d F Y H:i:s');
         $title = 'Laporan Farmasi';
         $tanggal_awal = $tanggal_awal;
-        $newTanggalAwal = Carbon::createFromFormat('Y-m-d', $tanggal_awal)->format('d-m-Y');
+        $newTanggalAwal = Carbon::createFromFormat('Y-m-d', $tanggal_awal)->translatedFormat('d F Y');
         $tanggal_akhir = $tanggal_akhir;
-        $newTanggalAkhir = Carbon::createFromFormat('Y-m-d', $tanggal_akhir)->format('d-m-Y');
-        $pdf = Pdf::loadView('admin.farmasi.pdf', compact('farmasis', 'title', 'date', 'newTanggalAwal', 'newTanggalAkhir'))->setPaper('legal', 'landscape');
+        $newTanggalAkhir = Carbon::createFromFormat('Y-m-d', $tanggal_akhir)->translatedFormat('d F Y');
+        $pdf = Pdf::loadView('admin.farmasi.pdf', compact('farmasis', 'title', 'obats', 'date', 'newTanggalAwal', 'newTanggalAkhir'))->setPaper('legal', 'landscape');
         return $pdf->stream('Laporan-Farmasi.pdf');
     }
 }
