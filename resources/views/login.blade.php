@@ -8,7 +8,14 @@
     <title>Login </title>
     <!-- Favicon icon -->
     <link href="/css/style.css" rel="stylesheet">
-
+    <style>
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-top: 2rem; 
+        }
+    </style>
 </head>
 
 <body class="h-100">
@@ -19,8 +26,12 @@
                     <div class="authincation-content">
                         <div class="row no-gutters">
                             <div class="col-xl-12">
+                                <div class="d-flex flex-wrap justify-content-md-around mt-4 align-items-center">
+                                    <img src="/img/pemkab.png" style="width: 8em; height: 8em; margin-bottom:-2rem">
+                                    <h3>APLIKASI PUSKESMAS</h3>
+                                    <img src="/img/puskesmas.png" style="width: 8em; height: 8em; margin-bottom:-2rem">
+                                </div>
                                 <div class="auth-form">
-                                    <h4 class="text-center mb-4">Login</h4>
                                     <form action={{ route('login.store') }} method="POST">
                                         @csrf
                                         <div class="form-group">
@@ -35,9 +46,9 @@
                                             <button type="submit" class="btn btn-primary btn-block">Login</button>
                                         </div>
                                     </form>
-                                    <div class="new-account mt-3">
+                                    {{-- <div class="new-account mt-3">
                                         <p>Jika Belum Mempunyai Akun Silakan <a class="text-primary" href="/register">Register</a></p>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>

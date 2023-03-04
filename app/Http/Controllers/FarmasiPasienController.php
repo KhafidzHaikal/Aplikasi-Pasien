@@ -108,50 +108,62 @@ class FarmasiPasienController extends Controller
         if ($obat->stok_lama < $request->stok) {
             return back()->withErrors(['Stok Obat Tidak Cukup']);
         } else {
-            // $request->validate([
-            //     'pelayanan_pasiens_id' => 'required',
-            //     'users_id' => 'required',
-            //     'tanggal_pelayanan' => 'required',
-            //     'obats_no_obat'  => 'required',
-            //     'dosis'  => 'required',
-            //     'stok'  => 'required',
-            // ]);
+            $rules = [
+                'pelayanan_pasiens_id' => 'required',
+                'users_id' => 'required',
+                'tanggal_pelayanan' => 'required',
+                'obats_no_obat'  => 'required',
+                'dosis'  => 'required',
+                'stok'  => 'required',
+                'obatssatu_no_obat'  => 'nullable',
+                'dosissatu'  => 'nullable',
+                'stoksatu'  => 'nullable',
+                'obatsdua_no_obat'  => 'nullable',
+                'dosisdua'  => 'nullable',
+                'stokdua'  => 'nullable',
+                'obatstiga_no_obat'  => 'nullable',
+                'dosistiga'  => 'nullable',
+                'stoktiga'  => 'nullable',
+                'obatsempat_no_obat'  => 'nullable',
+                'dosisempat'  => 'nullable',
+                'stokempat'  => 'nullable',
+            ];
 
-            $farmasi = new FarmasiPasien();
-            $farmasi->pelayanan_pasiens_id = $request->pelayanan_pasiens_id;
-            $farmasi->users_id = $request->users_id;
-            $farmasi->tanggal_pelayanan = $request->tanggal_pelayanan;
-            $farmasi->obats_no_obat = $request->obats_no_obat;
-            $farmasi->dosis = $request->dosis;
-            $farmasi->stok = $request->stok;
-            if ($request->obatssatu_no_obat != null) {
-                $farmasi->obatssatu_no_obat = $request->obatssatu_no_obat;
-                $farmasi->dosissatu = $request->dosissatu;
-                $farmasi->stoksatu = $request->stoksatu;
-                if ($request->obatsdua_no_obat != null) {
-                    $farmasi->obatsdua_no_obat = $request->obatsdua_no_obat;
-                    $farmasi->dosisdua = $request->dosisdua;
-                    $farmasi->stokdua = $request->stokdua;
-                    if ($request->obatstiga_no_obat != null) {
-                        $farmasi->obatstiga_no_obat = $request->obatstiga_no_obat;
-                        $farmasi->dosistiga = $request->dosistiga;
-                        $farmasi->stoktiga = $request->stoktiga;
-                        if ($request->obatsempat_no_obat != null) {
-                            $farmasi->obatsempat_no_obat = $request->obatsempat_no_obat;
-                            $farmasi->dosisempat = $request->dosisempat;
-                            $farmasi->stokempat = $request->stokempat;
-                        } else {
-                            $farmasi->obatsempat_no_obat = $request->get('obatsempat_no_obat', null);
-                        }
-                    } else {
-                        $farmasi->obatstiga_no_obat = $request->get('obatstiga_no_obat', null);
-                    }
-                } else {
-                    $farmasi->obatsdua_no_obat = $request->get('obatsdua_no_obat', null);
-                }
-            }
-            // dd($farmasi->obatstiga_no_obat);
-            $farmasi->save();
+            // $farmasi = new FarmasiPasien();
+            // $farmasi->pelayanan_pasiens_id = $request->pelayanan_pasiens_id;
+            // $farmasi->users_id = $request->users_id;
+            // $farmasi->tanggal_pelayanan = $request->tanggal_pelayanan;
+            // $farmasi->obats_no_obat = $request->obats_no_obat;
+            // $farmasi->dosis = $request->dosis;
+            // $farmasi->stok = $request->stok;
+            // if ($request->obatssatu_no_obat != null) {
+            //     $farmasi->obatssatu_no_obat = $request->obatssatu_no_obat;
+            //     $farmasi->dosissatu = $request->dosissatu;
+            //     $farmasi->stoksatu = $request->stoksatu;
+            //     if ($request->obatsdua_no_obat != null) {
+            //         $farmasi->obatsdua_no_obat = $request->obatsdua_no_obat;
+            //         $farmasi->dosisdua = $request->dosisdua;
+            //         $farmasi->stokdua = $request->stokdua;
+            //         if ($request->obatstiga_no_obat != null) {
+            //             $farmasi->obatstiga_no_obat = $request->obatstiga_no_obat;
+            //             $farmasi->dosistiga = $request->dosistiga;
+            //             $farmasi->stoktiga = $request->stoktiga;
+            //             if ($request->obatsempat_no_obat != null) {
+            //                 $farmasi->obatsempat_no_obat = $request->obatsempat_no_obat;
+            //                 $farmasi->dosisempat = $request->dosisempat;
+            //                 $farmasi->stokempat = $request->stokempat;
+            //             } else {
+            //                 $farmasi->obatsempat_no_obat = $request->get('obatsempat_no_obat', null);
+            //             }
+            //         } else {
+            //             $farmasi->obatstiga_no_obat = $request->get('obatstiga_no_obat', null);
+            //         }
+            //     } else {
+            //         $farmasi->obatsdua_no_obat = $request->get('obatsdua_no_obat', null);
+            //     }
+            // }
+            // // dd($farmasi->obatstiga_no_obat);
+            // $farmasi->save();
             // dd($obat);
             $pelayanan_pasien = PelayananPasien::find($request->pelayanan_pasiens_id);
             $pelayanan_pasien->status = 2;
@@ -225,8 +237,10 @@ class FarmasiPasienController extends Controller
                 }
             });
             /** TRANSACTION */
-            // $validatedData = $request->validate($rules);
-            // FarmasiPasien::create($validatedData);
+
+            $validatedData = $request->validate($rules);
+            FarmasiPasien::create($validatedData);
+            
             if (auth()->user()->type == 'admin') {
                 return redirect()->route('admin-farmasi.index')->with('success', 'Pasien Berhasil Ditambahkan');
             } else {
