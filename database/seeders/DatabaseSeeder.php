@@ -4,12 +4,13 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\KajianPasien;
 use App\Models\Obat;
-use App\Models\Pasiens;
-use App\Models\PelayananPasien;
-use App\Models\UnitPelayanan;
 use App\Models\User;
+use Ramsey\Uuid\Uuid;
+use App\Models\Pasiens;
+use App\Models\KajianPasien;
+use App\Models\UnitPelayanan;
+use App\Models\PelayananPasien;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -23,15 +24,15 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // User::factory(100)->create();
-        Pasiens::factory(50)->create();
-        KajianPasien::factory(50)->create();
+        // Pasiens::factory(50)->create();
+        // KajianPasien::factory(50)->create();
         $this->call(IcdSeeder::class);
         $this->call(DiagnosaSeeder::class);
-        PelayananPasien::factory(30)->create();
-        Obat::factory(10)->create();
-
+        // PelayananPasien::factory(30)->create();
+        // Obat::factory(10)->create();
 
         User::create([
+            'id' => Uuid::uuid4()->getHex(),
             'username' => 'Haikal',
             'name' => 'Muhamad Khafidz Haikal',
             'type' => '0',
@@ -39,6 +40,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('111111')
         ]);
         User::create([
+            'id' => Uuid::uuid4()->getHex(),
             'username' => 'Nurse',
             'name' => 'Nurse',
             'type' => '1',
@@ -46,6 +48,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('111111')
         ]);
         User::create([
+            'id' => Uuid::uuid4()->getHex(),
             'username' => 'BP Umum',
             'name' => 'BP UMUM',
             'type' => '2',
@@ -53,6 +56,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('111111')
         ]);
         User::create([
+            'id' => Uuid::uuid4()->getHex(),
             'username' => 'BP GIGI',
             'name' => 'BP GIGI',
             'type' => '3',
@@ -60,6 +64,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('111111')
         ]);
         User::create([
+            'id' => Uuid::uuid4()->getHex(),
             'username' => 'BP LANSIA',
             'name' => 'BP LANSIA',
             'type' => '4',
@@ -67,6 +72,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('111111')
         ]);
         User::create([
+            'id' => Uuid::uuid4()->getHex(),
             'username' => 'KIA',
             'name' => 'KIA',
             'type' => '5',
@@ -74,6 +80,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('111111')
         ]);
         User::create([
+            'id' => Uuid::uuid4()->getHex(),
             'username' => 'MTBS',
             'name' => 'MTBS',
             'type' => '6',
@@ -81,6 +88,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('111111')
         ]);
         User::create([
+            'id' => Uuid::uuid4()->getHex(),
             'username' => 'Konseling',
             'name' => 'Konseling',
             'type' => '7',
@@ -88,6 +96,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('111111')
         ]);
         User::create([
+            'id' => Uuid::uuid4()->getHex(),
             'username' => 'Farmasi',
             'name' => 'Farmasi',
             'type' => '8',

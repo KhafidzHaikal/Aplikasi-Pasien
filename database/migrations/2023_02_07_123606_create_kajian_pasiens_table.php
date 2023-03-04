@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('id', 32)->primary();
             $table->string('pasiens_no_rm');
             $table->date('tanggal_pemeriksaan');
-            $table->foreignId('users_id');
+            $table->string('users_id',32);
             $table->string('tensi', 10);
             $table->mediumInteger('nadi');
             $table->mediumInteger('resp');
@@ -50,7 +50,9 @@ return new class extends Migration
             $table->string('usg');
             $table->foreignId('unit_pelayanans_id');
             $table->tinyInteger('status');
-            $table->foreign('pasiens_no_rm')->references('no_rm')->on('pasiens')->onDelete('cascade');
+
+            $table->foreign('pasiens_no_rm')->references('no_rm')->on('pasiens')->onDelete('CASCADE');
+            $table->foreign('users_id')->references('id')->on('users')->onDelete('CASCADE');
             $table->timestamps();
         });
     }

@@ -74,7 +74,7 @@
                                             @foreach ($perawats as $perawat)
                                                 @if ($perawat->type == 'bp-gigi')
                                                     @if (old('users_id') === $perawat->id)
-                                                        <option value="{{ $perawat->id }}">{{ $perawat->name }}
+                                                        <option value="{{ $perawat->id }}" selected>{{ $perawat->name }}
                                                         </option>
                                                     @else
                                                         <option value="{{ $perawat->id }}">{{ $perawat->name }}
@@ -137,7 +137,7 @@
                                             <option selected> --- Pilih ICD --- </option>
                                             @foreach ($icds as $icd)
                                                 @if (old('icds_kode_icd') === $icd->kode_icd)
-                                                    <option value="{{ $icd->kode_icd }}">{{ $icd->kode_icd }} - {{ $icd->nama_icd }}
+                                                    <option value="{{ $icd->kode_icd }}" selected>{{ $icd->kode_icd }} - {{ $icd->nama_icd }}
                                                     </option>
                                                 @else
                                                     <option value="{{ $icd->kode_icd }}">{{ $icd->kode_icd }} - {{ $icd->nama_icd }}

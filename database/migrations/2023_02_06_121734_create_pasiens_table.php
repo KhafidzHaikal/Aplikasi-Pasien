@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('pasiens', function (Blueprint $table) {
             $table->string('no_rm', 50)->primary();
             $table->date('tanggal_kunjungan');
-            $table->foreignId('users_id');
+            $table->string('users_id',32);
             $table->string('name', 100);
             $table->date('tanggal_lahir');
             $table->string('jenis_kelamin', 50);
@@ -30,6 +30,8 @@ return new class extends Migration
             $table->string('pembiayaan', 50);
             $table->string('status_kunjungan', 30);
             $table->string('alergi_obat');
+
+            $table->foreign('users_id')->references('id')->on('users')->onDelete('CASCADE');
             $table->timestamps();
         });
     }

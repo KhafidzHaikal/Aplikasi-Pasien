@@ -4,24 +4,25 @@
     <div class="row page-titles mx-0">
         <div class="col-sm-6 p-md-0">
             <div class="welcome-text">
-                <h4>Obat</h4>
+                <h4>Aplikasi Pelayanan Pasien Farmasi</h4>
             </div>
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Layanan Obat</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Pelayanan Pasien</a></li>
             </ol>
         </div>
     </div>
-    <a class="btn btn-primary col-2 mb-xl-4" style="color:#ffff" href={{ route('obat.create') }}><i class="bi bi-person-add mr-2"></i> Tambah Obat</a>
-    <a class="btn btn-warning col-2 mb-xl-4" style="color:#ffff" href={{ route('obat.addStok') }}><i class="bi bi-person-add mr-2"></i> Tambah Stok</a>
-    <button type="button" class="btn btn-danger mb-xl-4" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="bi bi-printer"></i>
+    <a class="btn btn-primary col-2 mb-xl-4" style="color:#ffff" href={{ route('farmasi.create') }}><i
+            class="bi bi-person-add mr-2"></i> Tambah Pasien</a>
+    <button type="button" class="btn btn-danger mb-xl-4" data-toggle="modal" data-target=".bd-example-modal-lg"><i
+            class="bi bi-printer"></i>
         Print Laporan</button>
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Laporan Obat</h5>
+                    <h5 class="modal-title">Laporan Farmasi</h5>
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                     </button>
                 </div>
@@ -46,7 +47,9 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <a target="_blank" onclick="this.href='/print-laporan-obat/'+document.getElementById('tanggal_awal').value+ '/' +document.getElementById('tanggal_akhir').value" class="btn btn-primary">Cetak</a>
+                    <a target="_blank"
+                        onclick="this.href='/print-laporan-farmasi/'+document.getElementById('tanggal_awal').value+ '/' +document.getElementById('tanggal_akhir').value"
+                        class="btn btn-primary">Cetak</a>
                 </div>
             </div>
         </div>
@@ -55,7 +58,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Tabel Obat</h4>
+                    <h4 class="card-title">Tabel Pelayanan Pasien</h4>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -63,36 +66,43 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Tanggal Masuk Obat</th>
-                                    <th>Nama Obat</th>
-                                    <th>Sediaan</th>
-                                    <th>Tanggal Kadaluarsa</th>
-                                    <th>Harga</th>
-                                    <th>Stok Awal</th>
-                                    <th>Stok Digunakan</th>
-                                    <th>Stok</th>
+                                    <th>Nama Petugas</th>
+                                    <th>Poli</th>
+                                    <th>No Registrasi</th>
+                                    <th>Nama</th>
+                                    <th>NIK</th>
+                                    <th>Obat</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($obats as $obat)
+                                @foreach ($farmasis as $farmasi)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $obat->tanggal_masuk->translatedFormat('d F Y') }}</td>
-                                        <td>{{ $obat->name }}</td>
-                                        <td>{{ $obat->sediaan }}</td>
-                                        <td>{{ $obat->tanggal_kadaluarsa->translatedFormat('d F Y') }}</td>
-                                        <td>@currency($obat->harga)</td>
-                                        <td>{{ $obat->stok_lama }}</td>
-                                        <td>{{ $obat->stok_baru }}</td>
-                                        <td>{{ $obat->total_stok }}</td>
+                                        <td>{{ $farmasi->pelayanan_pasiens->users->name }}</td>
+                                        <td>{{ $farmasi->pelayanan_pasiens->unit_pelayanans->name }}</td>
+                                        <td>{{ $farmasi->pelayanan_pasiens->kajian_pasiens->pasiens->no_rm }}</td>
+                                        <td>{{ $farmasi->pelayanan_pasiens->kajian_pasiens->pasiens->name }}</td>
+                                        <td>{{ $farmasi->pelayanan_pasiens->kajian_pasiens->pasiens->nik }}</td>
+                                        <td>
+                                            @php
+                                                $obat = json_decode($farmasi->obats_id);
+                                            @endphp
+                                            @if (is_array($obat) || is_object($obat))
+                                                @foreach ($obat as $item)
+                                                    {{ $item }}, 
+                                                @endforeach
+                                            @else
+                                                {{ $farmasi->obats->name }}
+                                            @endif
+                                        </td>
                                         <td class="d-flex">
-                                            <a href={{ route('obat.edit', $obat->no_obat ) }} class="btn btn-warning mr-2"><i class="bi bi-pencil-square"></i></a>
-                                            <form action={{ route('obat.destroy', $obat->no_obat) }} method="POST">
+                                            <a href={{ route('farmasi.show', $farmasi->id) }}
+                                                class="btn btn-info mr-2"><i class="bi bi-info-circle"></i></a>
+                                            <form action={{ route('farmasi.destroy', $farmasi->id) }} method="POST">
                                                 @method('delete')
                                                 @csrf
-                                                <button class="btn btn-danger"><i
-                                                        class="bi bi-trash"></i></button>
+                                                <button class="btn btn-danger"><i class="bi bi-trash"></i></button>
                                             </form>
                                         </td>
                                     </tr>
@@ -101,20 +111,18 @@
                             <tfoot>
                                 <tr>
                                     <th>No</th>
-                                    <th>Tanggal Masuk Obat</th>
-                                    <th>Nama Obat</th>
-                                    <th>Sediaan</th>
-                                    <th>Tanggal Kadaluarsa</th>
-                                    <th>Harga</th>
-                                    <th>Stok Awal</th>
-                                    <th>Stok Digunakan</th>
-                                    <th>Stok</th>
+                                    <th>Nama Petugas</th>
+                                    <th>Poli</th>
+                                    <th>No Registrasi</th>
+                                    <th>Nama</th>
+                                    <th>NIK</th>
+                                    <th>Obat</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
                         </table>
                     </div>
-                    
+
                 </div>
             </div>
         </div>

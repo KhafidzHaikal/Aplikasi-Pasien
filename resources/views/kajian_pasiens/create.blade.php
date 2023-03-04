@@ -62,7 +62,7 @@
                                             @foreach ($perawats as $user)
                                                 @if ($user->type == 'nurse')
                                                     @if (old('users_id') === $user->id)
-                                                        <option value="{{ $user->id }}">{{ $user->name }}
+                                                        <option value="{{ $user->id }}" selected>{{ $user->name }}
                                                         </option>
                                                     @else
                                                         <option value="{{ $user->id }}">{{ $user->name }}
@@ -1283,8 +1283,8 @@
                                         <select class="form-control" name="unit_pelayanans_id" id="noPerawatSelect">
                                             <option selected> --- Pilih Poli ---- </option>
                                             @foreach ($unit_pelayanans as $unit_pelayanan)
-                                                @if (old('unit_pelayanans_id') === $unit_pelayanan->id)
-                                                    <option value="{{ $unit_pelayanan->id }}">
+                                                @if (old('unit_pelayanans_id') == $unit_pelayanan->id)
+                                                    <option value="{{ $unit_pelayanan->id }}" selected>
                                                         {{ $unit_pelayanan->name }}
                                                     </option>
                                                 @else

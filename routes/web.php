@@ -209,7 +209,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/print-laporan-poli-mtbs/{tanggal_awal}/{tanggal_akhir}', [UnitPelayananMtbsController::class, 'print'])->name('admin-bp-gigi.print');
     Route::get('/print-laporan-poli-konseling/{tanggal_awal}/{tanggal_akhir}', [UnitPelayananKonselingController::class, 'print'])->name('admin-bp-gigi.print');
     Route::get('/print-laporan-obat/{tanggal_awal}/{tanggal_akhir}', [ObatController::class, 'print'])->name('admin-obat.print');
-    Route::get('/print-laporan-obat/{tanggal_awal}/{tanggal_akhir}', [ObatController::class, 'print'])->name('admin-obat.print');
     Route::get('/print-laporan-farmasi/{tanggal_awal}/{tanggal_akhir}', [FarmasiPasienController::class, 'print'])->name('admin-farmasi.print');
 
     Route::middleware(['user-access:bp-umum'])->group(function () {
@@ -305,6 +304,20 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/{obat}/edit', [ObatController::class, 'edit'])->name('obat.edit');
             Route::put('/{obat}', [ObatController::class, 'update'])->name('obat.update');
             Route::delete('/{obat}', [ObatController::class, 'destroy'])->name('obat.destroy');
+            Route::get('/obat/add-stok', [ObatMasukController::class, 'create'])->name('obat.addStok');
+            Route::post('/obat/add-stok', [ObatMasukController::class, 'store'])->name('obat.storeStok');
+        });
+
+        Route::prefix('farmasi')->group(function () {
+            Route::get('/', [FarmasiPasienController::class, 'index'])->name('farmasi.index');
+            Route::get('/create', [FarmasiPasienController::class, 'create'])->name('farmasi.create');
+            Route::put('/create/{pelayanan_pasien}', [FarmasiPasienController::class, 'status'])->name('farmasi.status');
+            Route::get('/create/{pelayanan_pasien}/periksa', [FarmasiPasienController::class, 'periksa'])->name('farmasi.periksa');
+            Route::post('/create/{pelayanan_pasien}/periksa', [FarmasiPasienController::class, 'store'])->name('farmasi.store');
+            Route::get('/{farmasi}', [FarmasiPasienController::class, 'show'])->name('farmasi.show');
+            Route::get('/{farmasi}/edit', [FarmasiPasienController::class, 'edit'])->name('farmasi.edit');
+            Route::put('/{farmasi}', [FarmasiPasienController::class, 'update'])->name('farmasi.update');
+            Route::delete('/{farmasi}', [FarmasiPasienController::class, 'destroy'])->name('farmasi.destroy');
         });
     });
 });

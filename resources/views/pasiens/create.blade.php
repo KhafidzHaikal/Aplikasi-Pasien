@@ -55,7 +55,7 @@
                                             @foreach ($petugas as $user)
                                                 @if ($user->type == 'nurse')
                                                     @if (old('users_id') === $user->id)
-                                                        <option value="{{ $user->id }}">{{ $user->name }}
+                                                        <option value="{{ $user->id }}" selected>{{ $user->name }}
                                                         </option>
                                                     @else
                                                         <option value="{{ $user->id }}">{{ $user->name }}
@@ -218,7 +218,7 @@
                                             <option value="ya">Ya</option>
                                             <option value="Tidak">Tidak</option>
                                         </select>
-                                        <input style="display: none" id="amount_keluhan" class="form-control"
+                                        <input style="display: none; background-color:rgb(255, 0, 0); color:white; margin-top:0.5rem" id="amount_keluhan" class="form-control"
                                             disabled="disabled" name="alergi_obat" value="{{ old('alergi_obat') }}">
                                     </div>
                                 </div>

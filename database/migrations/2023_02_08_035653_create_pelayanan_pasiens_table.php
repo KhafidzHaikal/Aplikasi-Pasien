@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('id', 32)->primary();
             $table->string('kajian_pasiens_id');
             $table->date('tanggal_pemeriksaan');
-            $table->foreignId('users_id');
+            $table->string('users_id',32);
             $table->text('keluhan_utama');
             $table->string('rps');
             $table->string('rpo');
@@ -31,8 +31,9 @@ return new class extends Migration
             $table->tinyInteger('statusAskep');
 
             // $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('kajian_pasiens_id')->references('id')->on('kajian_pasiens')->onDelete('cascade');
+            $table->foreign('kajian_pasiens_id')->references('id')->on('kajian_pasiens')->onDelete('CASCADE');
             $table->foreign('icds_kode_icd')->references('kode_icd')->on('icds');
+            $table->foreign('users_id')->references('id')->on('users')->onDelete('CASCADE');
             $table->timestamps();
         });
     }

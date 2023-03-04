@@ -3,7 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-Use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use App\Models\KajianPasien;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\UnitPelayananBpUmum;
@@ -20,7 +20,21 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
+    protected $table = 'users';
+
+    protected $primaryKey = 'id';
+
+    public $incrementing = false;
+
+    protected $casts = [
+        'id' => 'string',
+    ];
+
+    protected $keyType = 'string';
+
     protected $fillable = [
+        'id',
         'username',
         'name',
         'email',
@@ -35,15 +49,6 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-    ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
     ];
 
     protected function type(): Attribute
@@ -72,5 +77,4 @@ class User extends Authenticatable
     {
         return $this->belongsTo(AsuhanKeperawatan::class);
     }
-
 }

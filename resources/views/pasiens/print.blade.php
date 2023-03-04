@@ -50,7 +50,7 @@
             </tr>
             <tr>
                 <th style="width: 30%">Tanggal Kunjungan</th>
-                <td> {{ $pasien->tanggal_kunjungan->format('d-m-Y') }}</td>
+                <td> {{ $pasien->tanggal_kunjungan->translatedFormat('d F Y') }}</td>
             </tr>
             <tr>
                 <th style="width: 30%">Nama Petugas</th>
@@ -69,7 +69,7 @@
             </tr>
             <tr>
                 <th style="width: 30%">Tanggal Lahir</th>
-                <td> {{ $pasien->tanggal_lahir->format('d-m-Y') }}</td>
+                <td> {{ $pasien->tanggal_lahir->translatedFormat('d F Y') }}</td>
             </tr>
             <tr>
                 <th style="width: 30%">Jenis Kelamin</th>

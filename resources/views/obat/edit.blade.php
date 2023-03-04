@@ -19,7 +19,7 @@
             <div class="card">
                 <div class="card-body">
                     {{-- Start Form --}}
-                    <form action={{ route('obat.update', $obat->id) }} method="POST">
+                    <form action={{ route('obat.update', $obat->no_obat) }} method="POST">
                         @method('put')
                         @csrf
                         <div class="card-header">
@@ -86,14 +86,23 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Stok</label>
+                                    <label class="col-sm-3 col-form-label">Sumber Dana</label>
                                     <div class="col-sm-5">
                                         <div class="input-group mb-3">
-                                            <input type="number" class="form-control" name="stok"
-                                                value="{{ old('stok', $obat->stok) }}" required>
+                                            <input type="text" class="form-control" name="sumber_dana"
+                                                value="{{ old('sumber_dana', $obat->sumber_dana) }}" required>
                                         </div>
                                     </div>
                                 </div>
+                                {{-- <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Stok</label>
+                                    <div class="col-sm-5">
+                                        <div class="input-group mb-3">
+                                            <input type="number" class="form-control" name="stok_lama"
+                                                value="{{ old('stok_lama') }}" required>
+                                        </div>
+                                    </div>
+                                </div> --}}
                             </div>
                         </div>
                         <div class="card-body">

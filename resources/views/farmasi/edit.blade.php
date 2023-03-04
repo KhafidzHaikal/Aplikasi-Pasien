@@ -9,8 +9,8 @@
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href={{ route('admin-bp-gigi.index') }}>Pelayanan Pasien</a></li>
-                <li class="breadcrumb-item"><a href={{ route('admin-bp-gigi.create') }}>Kajian Pasien</a></li>
+                <li class="breadcrumb-item"><a href={{ route('farmasi.index') }}>Pelayanan Pasien</a></li>
+                <li class="breadcrumb-item"><a href={{ route('farmasi.create') }}>Kajian Pasien</a></li>
                 <li class="breadcrumb-item active"><a href="javascript:void(0)">Periksa Pasien</a></li>
             </ol>
         </div>
@@ -20,7 +20,7 @@
             <div class="card">
                 <div class="card-body">
                     {{-- Start Form --}}
-                    <form action={{ route('admin-bp-gigi.update', $pelayanan_pasiens->id) }} method="POST">
+                    <form action={{ route('farmasi.update', $pelayanan_pasiens->id) }} method="POST">
                         @method('put')
                         @csrf
                         {{-- Start Administrasi Form --}}

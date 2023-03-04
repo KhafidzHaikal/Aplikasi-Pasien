@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,7 +20,7 @@ class PasiensFactory extends Factory
         return [
             'no_rm' => $this->faker->randomNumber(6, true),
             'tanggal_kunjungan' => $this->faker->dateTimeBetween('-1 week', '+1 days'),
-            'users_id' => mt_rand(2,2),
+            'users_id' => $this->faker->randomElement(User::pluck('id')),
             'name' => $this->faker->name(),
             'tanggal_lahir' => $this->faker->unixTime(),
             'jenis_kelamin' => $this->faker->title(),

@@ -36,13 +36,14 @@ td, th {
   border: 1px solid #000000;
   padding: 0.5rem;
   text-align: center;
-  vertical-align: top;
+  /* vertical-align: top; */
 }
 
 td {
   text-align: left;
   word-spacing: 0px;
   vertical-align: top;
+  text-align: center;
 }
 
 table {

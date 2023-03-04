@@ -27,6 +27,13 @@
                         <div class="card-body">
                             <div class="basic-form">
                                 <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Kode Obat</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control" name="no_obat"
+                                            value="{{ old('no_obat') }}" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Tanggal Masuk Obat</label>
                                     <div class="col-sm-5">
                                         <input type="date" class="form-control" name="tanggal_masuk"
@@ -38,7 +45,7 @@
                                     <div class="col-sm-5">
                                         <div class="input-group mb-3">
                                             <input type="text" class="form-control" name="name"
-                                            value="{{ old('name') }}" required>
+                                                value="{{ old('name') }}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -55,10 +62,10 @@
                                                 @if (old('sediaan') == 'Capsul') {{ 'selected' }} @endif>Capsul</option>
                                             <option value="Supp"
                                                 @if (old('sediaan') == 'Supp') {{ 'selected' }} @endif>Supp</option>
-                                            <option value="Pil"
-                                                @if (old('sediaan') == 'Pil') {{ 'selected' }} @endif>Pil</option>
-                                            <option value="Injeksi"
-                                                @if (old('sediaan') == 'Injeksi') {{ 'selected' }} @endif>Injeksi
+                                            <option value="Ampul"
+                                                @if (old('sediaan') == 'Ampul') {{ 'selected' }} @endif>Ampul</option>
+                                            <option value="Vial"
+                                                @if (old('sediaan') == 'Vial') {{ 'selected' }} @endif>Vial
                                             </option>
                                             <option value="Puyer"
                                                 @if (old('sediaan') == 'Puyer') {{ 'selected' }} @endif>Puyer</option>
@@ -88,11 +95,37 @@
                                     <label class="col-sm-3 col-form-label">Stok</label>
                                     <div class="col-sm-5">
                                         <div class="input-group mb-3">
-                                            <input type="number" class="form-control" name="stok"
-                                                value="{{ old('stok') }}" required>
+                                            <input type="number" class="form-control" name="stok_lama"
+                                                value="{{ old('stok_lama') }}" required>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Sumber Dana</label>
+                                    <div class="col-sm-5">
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control" name="sumber_dana"
+                                                value="{{ old('sumber_dana') }}" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row" hidden>
+                                    <label class="col-sm-3 col-form-label">Stok Baru</label>
+                                    <div class="col-sm-5">
+                                        <div class="input-group mb-3">
+                                            <input type="number" class="form-control" name="stok_baru" value="0"
+                                                required>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- <div class="form-group row" hidden>
+                                    <label class="col-sm-3 col-form-label">No Obat</label>
+                                    <div class="col-sm-5">
+                                        <div class="input-group mb-3">
+                                            <input type="number" class="form-control" name="no_obat" >
+                                        </div>
+                                    </div>
+                                </div> --}}
                             </div>
                         </div>
                         <div class="card-body">

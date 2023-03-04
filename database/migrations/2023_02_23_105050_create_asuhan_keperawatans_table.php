@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('id', 32)->primary();
             $table->string('pelayanan_pasiens_id');
             $table->date('tanggal_pengkajian');
-            $table->foreignId('users_id');
+            $table->string('users_id',32);
             $table->string('data_obyektif');
             $table->string('data_subyektif');
             $table->string('hasil_penunjang');
@@ -30,8 +30,9 @@ return new class extends Migration
             $table->string('assesment');
             $table->string('planning');
 
-            $table->foreign('pelayanan_pasiens_id')->references('id')->on('pelayanan_pasiens')->onDelete('cascade');
-            $table->foreign('diagnosas_kode_sdki')->references('kode_sdki')->on('diagnosas')->onDelete('cascade');
+            $table->foreign('users_id')->references('id')->on('users')->onDelete('CASCADE');
+            $table->foreign('pelayanan_pasiens_id')->references('id')->on('pelayanan_pasiens')->onDelete('CASCADE');
+            $table->foreign('diagnosas_kode_sdki')->references('kode_sdki')->on('diagnosas')->onDelete('CASCADE');
             $table->timestamps();
         });
     }

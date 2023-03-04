@@ -89,12 +89,12 @@
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                             class="bi bi-prescription2"></i><span class="nav-text">Pelayanan Farmasi</span></a>
                     <ul aria-expanded="false">
-                        <li><a href="">Tebus Obat</a></li>
+                        <li><a href={{ route('farmasi.index') }}>Tebus Obat</a></li>
                     </ul>
                 </li>
                 <li class="nav-label">Obat</li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                            class="bi bi-prescription2"></i><span class="nav-text">Manage Obat</span></a>
+                            class="bi bi-kanban-fill"></i><span class="nav-text">Manage Obat</span></a>
                     <ul aria-expanded="false">
                         <li><a href={{ route('obat.index') }}>Obat</a></li>
                     </ul>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Ramsey\Uuid\Uuid;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -42,7 +43,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        $validatedData = $request->validate([
+        $request->validate([
             'username' => 'required',
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
@@ -50,8 +51,16 @@ class UserController extends Controller
             'password' => 'required|min:6|max:20|confirmed',
         ]);
         
-        $validatedData['password'] = Hash::make($validatedData['password']);
-        User::create($validatedData);
+        $user = new User();
+        $user->id = Uuid::uuid4()->getHex();
+        $user->username = $request->username;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->type = $request->type;
+        $user->password = Hash::make($request->password);
+        $user->save();
+        // $validatedData['password'] = Hash::make($validatedData['password']);
+        // User::create($validatedData);
         return redirect()->route('users.index')->with('success','User Berhasil Ditambahkan');
     }
 

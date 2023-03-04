@@ -24,7 +24,7 @@ class PelayananPasienFactory extends Factory
             'id' => Uuid::uuid4()->getHex(),
             'kajian_pasiens_id' => $this->faker->randomElement(KajianPasien::pluck('id')),
             'tanggal_pemeriksaan' => $this->faker->dateTimeBetween('-1 week', '+1 days'),
-            'users_id' => mt_rand(2, 6),
+            'users_id' => $this->faker->randomElement(User::pluck('id')),
             'keluhan_utama' => $this->faker->sentence(6),
             'rps' => $this->faker->sentence(3, 20),
             'rpo' => $this->faker->sentence(3, 20),
