@@ -10,7 +10,6 @@
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href={{ route('farmasi.index') }}>Pelayanan Pasien</a></li>
-                <li class="breadcrumb-item"><a href={{ route('farmasi.create') }}>Kajian Pasien</a></li>
                 <li class="breadcrumb-item active"><a href="javascript:void(0)">Periksa Pasien</a></li>
             </ol>
         </div>
@@ -105,7 +104,7 @@
                                     <label class="col-sm-3 col-form-label">Obat</label>
                                     <div class="col-sm-5">
                                         <select class="form-control" name="obats_no_obat" id="icd">
-                                            <option selected> --- Pilih Obat --- </option>
+                                            <option value=""> --- Pilih Obat --- </option>
                                             @foreach ($obats as $obat)
                                                 @if (old('obats_no_obat') == $obat->no_obat)
                                                     <option value="{{ $obat->no_obat }}" selected>{{ $obat->name }}
@@ -144,7 +143,7 @@
                                     <label class="col-sm-3 col-form-label">Obat</label>
                                     <div class="col-sm-5">
                                         <select class="form-control" name="obatssatu_no_obat" id="obatsatu">
-                                            <option selected> --- Pilih Obat --- </option>
+                                            <option value=""> --- Pilih Obat --- </option>
                                             @foreach ($obats as $obat)
                                                 @if (old('obatssatu_no_obat') == $obat->no_obat)
                                                     <option value="{{ $obat->no_obat }}" selected>{{ $obat->name }}
@@ -182,7 +181,7 @@
                                     <label class="col-sm-3 col-form-label">Obat</label>
                                     <div class="col-sm-5">
                                         <select class="form-control" name="obatsdua_no_obat" id="obatdua">
-                                            <option selected> --- Pilih Obat --- </option>
+                                            <option value=""> --- Pilih Obat --- </option>
                                             @foreach ($obats as $obat)
                                                 @if (old('obatsdua_no_obat') == $obat->no_obat)
                                                     <option value="{{ $obat->no_obat }}" selected>{{ $obat->name }}
@@ -220,7 +219,7 @@
                                     <label class="col-sm-3 col-form-label">Obat</label>
                                     <div class="col-sm-5">
                                         <select class="form-control" name="obatstiga_no_obat" id="obattiga">
-                                            <option selected> --- Pilih Obat --- </option>
+                                            <option value=""> --- Pilih Obat --- </option>
                                             @foreach ($obats as $obat)
                                                 @if (old('obatstiga_no_obat') == $obat->no_obat)
                                                     <option value="{{ $obat->no_obat }}" selected>{{ $obat->name }}
@@ -258,7 +257,7 @@
                                     <label class="col-sm-3 col-form-label">Obat</label>
                                     <div class="col-sm-5">
                                         <select class="form-control" name="obatsempat_no_obat" id="obatempat">
-                                            <option selected> --- Pilih Obat --- </option>
+                                            <option value=""> --- Pilih Obat --- </option>
                                             @foreach ($obats as $obat)
                                                 @if (old('obatsempat_no_obat') == $obat->no_obat)
                                                     <option value="{{ $obat->no_obat }}" selected>{{ $obat->name }}

@@ -58,8 +58,6 @@
                                                     @endif
                                                 </td>
                                                 <td class="d-flex">
-                                                    {{-- <a href={{ route('admin-farmasi.periksa', $pelayanan_pasien->id) }}
-                                                        class="badge badge-warning mr-2"><i class="bi bi-search"></i></a> --}}
                                                     <form action={{ route('admin-farmasi.status', $pelayanan_pasien->id) }}
                                                         method="POST">
                                                         @method('put')

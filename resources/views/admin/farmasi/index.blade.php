@@ -97,8 +97,6 @@
                                             @endif
                                         </td>
                                         <td class="d-flex">
-                                            {{-- <a href={{ route('admin-farmasi.show', $farmasi->id) }}
-                                                class="btn btn-info mr-2"><i class="bi bi-info-circle"></i></a> --}}
                                             <form action={{ route('admin-farmasi.destroy', $farmasi->id) }} method="POST">
                                                 @method('delete')
                                                 @csrf
