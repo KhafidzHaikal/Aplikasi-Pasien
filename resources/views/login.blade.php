@@ -15,6 +15,14 @@
             text-align: center;
             margin-top: 2rem; 
         }
+        label {
+            display: flex;
+            justify-content: center;
+        }
+
+        input {
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -28,7 +36,7 @@
                             <div class="col-xl-12">
                                 <div class="d-flex flex-wrap justify-content-md-around mt-4 align-items-center">
                                     <img src="/img/pemkab.png" style="width: 8em; height: 8em; margin-bottom:-2rem">
-                                    <h3>APLIKASI PUSKESMAS</h3>
+                                    <h3>LOGIN</h3>
                                     <img src="/img/puskesmas.png" style="width: 8em; height: 8em; margin-bottom:-2rem">
                                 </div>
                                 <div class="auth-form">

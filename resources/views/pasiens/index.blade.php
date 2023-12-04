@@ -86,13 +86,15 @@
                                         <td class="d-flex">
                                             <a href={{ route('pasiens.edit', $pasien->no_rm) }}
                                                 class="btn btn-warning mr-2"><i class="bi bi-pencil-square"></i></a>
-                                            <a href={{ route('pasiens.show', $pasien->no_rm) }}
-                                                class="btn btn-info mr-2"><i class="bi bi-info-circle"></i></a>
+                                            <a href={{ route('pasiens.show', $pasien->no_rm) }} class="btn btn-info mr-2"><i
+                                                    class="bi bi-info-circle"></i></a>
                                             @if (!$pasien->kajian_pasiens->count() > 0)
                                                 <form action={{ route('pasiens.destroy', $pasien->no_rm) }} method="POST">
                                                     @method('delete')
                                                     @csrf
-                                                    <button class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                                                    <input name="_method" type="hidden" value="DELETE">
+                                                    <button type="submit" class="btn btn-danger show-alert-delete-box" data-toggle="tooltip"
+                                                        title='Delete'><i class="bi bi-trash"></i></button>
                                                 </form>
                                             @endif
                                         </td>
@@ -116,4 +118,28 @@
             </div>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
+    <script type="text/javascript">
+        $('.show-alert-delete-box').click(function(event) {
+            var form = $(this).closest("form");
+            var name = $(this).data("name");
+            event.preventDefault();
+            swal({
+                title: "Anda Yakin Menghapus Pasien?",
+                text: "Data Akan Dihapus Secara Permanen",
+                icon: "warning",
+                type: "warning",
+                buttons: ["Cancel", "Yes"],
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Data Terhapus'
+            }).then((willDelete) => {
+                if (willDelete) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
 @endsection

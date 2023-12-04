@@ -74,7 +74,7 @@
                 <td>{{ $askep->tanggal_pengkajian->translatedFormat('d F Y') }}</td>
                 <td>
                     Data Subyektif : <p>{{ $askep->data_subyektif }}</p>
-                    Data Obyektid : <p>{{ $askep->data_obyektif }}</p>
+                    Data Obyektif : <p>{{ $askep->data_obyektif }}</p>
                     Hasil : <p>{{ $askep->hasil_penunjang }}</p>
                 </td>
                 <td>{{ $askep->diagnosas->kode_sdki }} - {{ $askep->diagnosas->nama_sdki }}</td>

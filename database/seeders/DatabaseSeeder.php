@@ -23,14 +23,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // User::factory(100)->create();
-        // Pasiens::factory(50)->create();
-        // KajianPasien::factory(50)->create();
-        $this->call(IcdSeeder::class);
-        $this->call(DiagnosaSeeder::class);
-        // PelayananPasien::factory(30)->create();
-        // Obat::factory(10)->create();
-
         User::create([
             'id' => Uuid::uuid4()->getHex(),
             'username' => 'Haikal',
@@ -103,7 +95,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'Far@gmail.com',
             'password' => Hash::make('111111')
         ]);
-                
+
 
         UnitPelayanan::create([
             'name' => 'BP Umum',
@@ -123,5 +115,12 @@ class DatabaseSeeder extends Seeder
         UnitPelayanan::create([
             'name' => 'Konseling'
         ]);
+        // User::factory(50)->create();
+        Pasiens::factory(50)->create();
+        KajianPasien::factory(50)->create();
+        $this->call(IcdSeeder::class);
+        $this->call(DiagnosaSeeder::class);
+        PelayananPasien::factory(30)->create();
+        Obat::factory(10)->create();
     }
 }
