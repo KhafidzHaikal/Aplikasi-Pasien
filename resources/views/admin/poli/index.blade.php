@@ -95,7 +95,6 @@
                             </tfoot>
                         </table>
                     </div>
-
                 </div>
             </div>
         </div>

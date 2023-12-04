@@ -131,6 +131,8 @@
     {{-- Livewire Script --}}
     @livewireScripts
 
+    
+
 </body>
 
 </html>
