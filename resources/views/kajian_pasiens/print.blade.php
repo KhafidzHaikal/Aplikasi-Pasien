@@ -322,7 +322,7 @@
         </tbody>
     </table>
     
-    <h1 style="text-align: center">HASIL PEMERIKSAAN PENUNJANG</h1>
+    <h1 style="text-align: center; margin-top:100px">HASIL PEMERIKSAAN PENUNJANG</h1>
     <hr>
     <table style="width:100%">
         <thead>

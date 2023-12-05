@@ -214,7 +214,7 @@
                                     <label class="col-sm-3 col-form-label">Alergi Obat</label>
                                     <div class="col-sm-5">
                                         <select name="alergi_obat" id="keluhan" class="form-control">
-                                            <option> ---Ada Alergi Obat---</option>
+                                            <option> --- Ada Alergi Obat ---</option>
                                             <option value="ya">Ya</option>
                                             <option value="Tidak">Tidak</option>
                                         </select>

@@ -67,7 +67,7 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Tanggal Awal</label>
                             <div class="col-sm-5">
-                                <input type="date" class="form-control" id="tanggal_awal" required>
+                                <input type="date" class="form-control" id="tanggal_awal_keluar" required>
                             </div>
                         </div>
                     </div>
@@ -75,14 +75,14 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Tanggal Akhir</label>
                             <div class="col-sm-5">
-                                <input type="date" class="form-control" id="tanggal_akhir" required>
+                                <input type="date" class="form-control" id="tanggal_akhir_keluar" required>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <a target="_blank" onclick="this.href='/print-laporan-obat-keluar/'+document.getElementById('tanggal_awal').value+ '/' +document.getElementById('tanggal_akhir').value" class="btn btn-primary">Cetak</a>
+                    <a target="_blank" onclick="this.href='/print-laporan-obat-keluar/'+document.getElementById('tanggal_awal_keluar').value+ '/' +document.getElementById('tanggal_akhir_keluar').value" class="btn btn-primary">Cetak</a>
                 </div>
             </div>
         </div>

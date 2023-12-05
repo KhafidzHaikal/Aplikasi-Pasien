@@ -209,7 +209,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/print-laporan-poli-mtbs/{tanggal_awal}/{tanggal_akhir}', [UnitPelayananMtbsController::class, 'print'])->name('admin-bp-gigi.print');
     Route::get('/print-laporan-poli-konseling/{tanggal_awal}/{tanggal_akhir}', [UnitPelayananKonselingController::class, 'print'])->name('admin-bp-gigi.print');
     Route::get('/print-laporan-obat/{tanggal_awal}/{tanggal_akhir}', [ObatController::class, 'print'])->name('admin-obat.print');
-    Route::get('/print-laporan-obat-keluar/{tanggal_awal}/{tanggal_akhir}', [ObatController::class, 'obat_keluar'])->name('admin-obat.obat');
+    Route::get('/print-laporan-obat-keluar/{tanggal_awal_keluar}/{tanggal_akhir_keluar}', [ObatController::class, 'obat_keluar'])->name('admin-obat.obat');
     Route::get('/print-laporan-farmasi/{tanggal_awal}/{tanggal_akhir}', [FarmasiPasienController::class, 'print'])->name('admin-farmasi.print');
 
     Route::middleware(['user-access:bp-umum'])->group(function () {

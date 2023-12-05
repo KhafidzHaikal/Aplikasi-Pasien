@@ -177,8 +177,6 @@ class ObatController extends Controller
         ]);
     }
 
-
-
     /**
      * Remove the specified resource from storage.
      *
@@ -205,8 +203,9 @@ class ObatController extends Controller
     {
         // dd($tanggal_awal, $tanggal_akhir);
         $obats = ObatMasuk::with('obats')->whereBetween('tanggal_masuk', [$tanggal_awal, $tanggal_akhir])->get();
+        // dd($obats);
         $obat_past = Obat::whereBetween('tanggal_masuk', [$tanggal_awal, $tanggal_akhir])->get();
-        // dd($obats->total_obat);
+        // dd($obat_past);
         $date = Carbon::now()->translatedFormat('d F Y H:i:s');
         $title = 'Laporan Obat';
         $tanggal_awal = $tanggal_awal;
@@ -218,17 +217,17 @@ class ObatController extends Controller
         // return $pdf->download('obat.pdf');
     }
 
-    public function obat_keluar($tanggal_awal, $tanggal_akhir)
+    public function obat_keluar($tanggal_awal_keluar, $tanggal_akhir_keluar)
     {
         // dd($tanggal_awal, $tanggal_akhir);
-        $obats = ObatKeluar::with('obats')->whereBetween('tanggal_keluar', [$tanggal_awal, $tanggal_akhir])->get();
-        // dd($obats->total_obat);
+        $obats = ObatKeluar::with('obats')->whereBetween('tanggal_keluar', [$tanggal_awal_keluar, $tanggal_akhir_keluar])->get();
+        dd($obats);
         $date = Carbon::now()->translatedFormat('d F Y H:i:s');
         $title = 'Laporan Obat';
-        $tanggal_awal = $tanggal_awal;
-        $newTanggalAwal = Carbon::createFromFormat('Y-m-d', $tanggal_awal)->translatedFormat('d F Y');
-        $tanggal_akhir = $tanggal_akhir;
-        $newTanggalAkhir = Carbon::createFromFormat('Y-m-d', $tanggal_akhir)->translatedFormat('d F Y');
+        $tanggal_awal_keluar = $tanggal_awal_keluar;
+        $newTanggalAwal = Carbon::createFromFormat('Y-m-d', $tanggal_awal_keluar)->translatedFormat('d F Y');
+        $tanggal_akhir_keluar = $tanggal_akhir_keluar;
+        $newTanggalAkhir = Carbon::createFromFormat('Y-m-d', $tanggal_akhir_keluar)->translatedFormat('d F Y');
         $pdf = Pdf::loadView('admin.obat.obatKeluar', compact('obats', 'title', 'date', 'newTanggalAwal', 'newTanggalAkhir'))->setPaper('legal', 'landscape');
         return $pdf->stream('Laporan-Obat.pdf');
         // return $pdf->download('obat.pdf');

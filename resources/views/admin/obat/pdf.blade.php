@@ -5,7 +5,7 @@
     <br>
     <p style="position:absolute;left:0">Tanggal Cetak : {{ $date }}</p>
     <p style="position:absolute;right:0">Periode Tanggal {{ $newTanggalAwal }} s/d Tanggal {{ $newTanggalAkhir }}</p>
-    <table class="mt-5">
+    <table style="margin-top:5%">
         <thead>
             <th rowspan="2">No</th>
             <th colspan="7">Penerimaan Obat</th>

@@ -51,6 +51,7 @@ class ObatMasukController extends Controller
 
         $obat = Obat::find($request->obats_no_obat);
         $obat->stok_lama += $request->stok;
+        // dd($obat);
         // dd($obat->stok_lama);
         $obat->save();
 
