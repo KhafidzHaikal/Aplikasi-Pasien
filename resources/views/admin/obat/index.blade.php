@@ -13,9 +13,12 @@
             </ol>
         </div>
     </div>
-    <a class="btn btn-primary col-2 mb-xl-4" style="color:#ffff" href={{ route('admin-obat.create') }}><i class="bi bi-person-add mr-2"></i> Tambah Obat</a>
-    <a class="btn btn-warning col-2 mb-xl-4" style="color:#ffff" href={{ route('admin-obat.addStok') }}><i class="bi bi-person-add mr-2"></i> Tambah Stok</a>
-    <button type="button" class="btn btn-danger mb-xl-4" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="bi bi-printer"></i>
+    <a class="btn btn-primary col-2 mb-xl-4" style="color:#ffff" href={{ route('admin-obat.create') }}><i
+            class="bi bi-person-add mr-2"></i> Tambah Obat</a>
+    <a class="btn btn-warning col-2 mb-xl-4" style="color:#ffff" href={{ route('admin-obat.addStok') }}><i
+            class="bi bi-person-add mr-2"></i> Tambah Stok</a>
+    <button type="button" class="btn btn-danger mb-xl-4" data-toggle="modal" data-target=".bd-example-modal-lg"><i
+            class="bi bi-printer"></i>
         Cetak Data Obat</button>
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -46,15 +49,20 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <a target="_blank" onclick="this.href='/print-laporan-obat/'+document.getElementById('tanggal_awal').value+ '/' +document.getElementById('tanggal_akhir').value" class="btn btn-primary">Cetak</a>
+                    <a target="_blank"
+                        onclick="this.href='/print-laporan-obat/'+document.getElementById('tanggal_awal').value+ '/' +document.getElementById('tanggal_akhir').value"
+                        class="btn btn-primary">Cetak</a>
                 </div>
             </div>
         </div>
     </div>
-    <button type="button" class="btn btn-danger mb-xl-4" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="bi bi-printer"></i>
+    <button type="button" class="btn btn-info mb-xl-4" data-toggle="modal" data-target="#myModal"><i
+            class="bi bi-printer"></i>
         Cetak Obat Keluar</button>
-    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Laporan Obat Keluar</h5>
@@ -82,9 +90,12 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <a target="_blank" onclick="this.href='/print-laporan-obat-keluar/'+document.getElementById('tanggal_awal_keluar').value+ '/' +document.getElementById('tanggal_akhir_keluar').value" class="btn btn-primary">Cetak</a>
+                    <a target="_blank"
+                        onclick="this.href='/print-laporan-obat-keluar/'+document.getElementById('tanggal_awal_keluar').value+ '/' +document.getElementById('tanggal_akhir_keluar').value"
+                        class="btn btn-primary">Cetak</a>
                 </div>
             </div>
+
         </div>
     </div>
     <div class="row">
@@ -123,7 +134,8 @@
                                         <td>{{ $obat->stok_baru }}</td>
                                         <td>{{ $obat->total_stok }}</td>
                                         <td class="d-flex">
-                                            <a href={{ route('admin-obat.edit', $obat->no_obat ) }} class="btn btn-warning mr-2"><i class="bi bi-pencil-square"></i></a>
+                                            <a href={{ route('admin-obat.edit', $obat->no_obat) }}
+                                                class="btn btn-warning mr-2"><i class="bi bi-pencil-square"></i></a>
                                             <form action={{ route('admin-obat.destroy', $obat->no_obat) }} method="POST">
                                                 @method('delete')
                                                 @csrf
@@ -151,7 +163,7 @@
                                 </tr>
                             </tfoot>
                         </table>
-                    </div>                  
+                    </div>
                 </div>
             </div>
         </div>

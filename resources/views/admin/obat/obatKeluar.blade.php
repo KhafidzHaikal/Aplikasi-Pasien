@@ -10,8 +10,8 @@
             <th rowspan="2">No</th>
             <th colspan="7">Penerimaan Obat</th>
             <th rowspan="2">Total Stok</th>
-            <th colspan="5">Pengeluaran Obat</th>
-            <th colspan="2">Sisa Obat</th>
+            {{-- <th colspan="5">Pengeluaran Obat</th>
+            <th colspan="2">Sisa Obat</th> --}}
         </thead>
         <thead>
             <th>Tanggal</th>
@@ -21,13 +21,13 @@
             <th>Jumlah</th>
             <th>Harga</th>
             <th>Total (Rp)</th>
-            <th>Tanggal</th>
+            {{-- <th>Tanggal</th>
             <th>Nama Obat</th>
             <th>Satuan</th>
             <th>Jumlah</th>
             <th>Harga</th>
             <th>Jumlah</th>
-            <th>Harga</th>
+            <th>Harga</th> --}}
         </thead>
         <tbody>
             @foreach ($obats as $obat_masuk)

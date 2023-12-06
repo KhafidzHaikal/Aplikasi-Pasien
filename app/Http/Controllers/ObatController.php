@@ -221,7 +221,7 @@ class ObatController extends Controller
     {
         // dd($tanggal_awal, $tanggal_akhir);
         $obats = ObatKeluar::with('obats')->whereBetween('tanggal_keluar', [$tanggal_awal_keluar, $tanggal_akhir_keluar])->get();
-        dd($obats);
+        // dd($obats);
         $date = Carbon::now()->translatedFormat('d F Y H:i:s');
         $title = 'Laporan Obat';
         $tanggal_awal_keluar = $tanggal_awal_keluar;
