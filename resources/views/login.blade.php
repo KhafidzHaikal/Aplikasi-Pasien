@@ -23,6 +23,19 @@
         input {
             text-align: center;
         }
+        @media (max-width: 768px) {
+            img{
+                display: none;
+            }
+            h3{
+                text-align: center;
+                margin-left: 50px;
+            }
+            h4{
+                text-align: center;
+                margin-left: 50px;
+            }
+        }
     </style>
 </head>
 
@@ -36,7 +49,7 @@
                             <div class="col-xl-12">
                                 <div class="d-flex flex-wrap justify-content-md-around mt-4 align-items-center">
                                     <img src="/img/pemkab.png" style="width: 8em; height: 8em; margin-bottom:-2rem">
-                                    <div>
+                                    <div class="text">
                                         <h3>Selamat Datang</h3>
                                         <h4>PUSKESMAS PANGURAGAN</h4>
                                     </div>

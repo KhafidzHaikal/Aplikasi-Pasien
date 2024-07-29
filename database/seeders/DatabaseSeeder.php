@@ -116,11 +116,11 @@ class DatabaseSeeder extends Seeder
             'name' => 'Konseling'
         ]);
         // User::factory(50)->create();
-        Pasiens::factory(50)->create();
-        KajianPasien::factory(50)->create();
+        // Pasiens::factory(50)->create();
+        // KajianPasien::factory(50)->create();
         $this->call(IcdSeeder::class);
         $this->call(DiagnosaSeeder::class);
-        PelayananPasien::factory(30)->create();
-        Obat::factory(10)->create();
+        // PelayananPasien::factory(30)->create();
+        // Obat::factory(10)->create();
     }
 }

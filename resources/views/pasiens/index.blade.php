@@ -1,6 +1,13 @@
 @extends('components.index')
 
 @section('body')
+    <style>
+        @media (max-width: 768px) {
+            .btn-primary{
+                width: 100px;
+            }
+        }
+    </style>
     <div class="row page-titles mx-0">
         <div class="col-sm-6 p-md-0">
             <div class="welcome-text">
@@ -93,8 +100,9 @@
                                                     @method('delete')
                                                     @csrf
                                                     <input name="_method" type="hidden" value="DELETE">
-                                                    <button type="submit" class="btn btn-danger show-alert-delete-box" data-toggle="tooltip"
-                                                        title='Delete'><i class="bi bi-trash"></i></button>
+                                                    <button type="submit" class="btn btn-danger show-alert-delete-box"
+                                                        data-toggle="tooltip" title='Delete'><i
+                                                            class="bi bi-trash"></i></button>
                                                 </form>
                                             @endif
                                         </td>
